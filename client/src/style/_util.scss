@@ -1,0 +1,90 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family:'gilroy'
+}
+html,body{
+    width:100%;
+    height:100%;
+}
+
+:root{
+    --white:#fff;
+    --black:#000;
+    --bg:rgb(255, 255, 255);
+    --border:#fff;
+--text:#222;
+--clr1:#eaece6;
+--clr2:#2f3e46;
+--clr3:#73f38f;
+--clr4:#354f52;
+}
+
+$colors:(
+    'white':var(--white),
+    'black':var(--black),
+    'bg':var(--bg),
+    'border':var(--border),
+    'text':var(--text),
+    'clr1':var(--clr1),
+    'clr2':var(--clr2),
+    'clr3':var(--clr3),
+    'clr4':var(--clr4)
+);
+@function colors($color){
+    @return map-get($colors,$color);
+
+  
+}
+@mixin mobile($mobile){
+    @media(max-width:$mobile){
+        @content;
+    }
+}
+$font-size:(
+    'xs':.6em,
+    'cT':.8em,
+    's':1em,
+    'm':1.2em,
+    "l":1.5em,
+    // "cH":1.6em,
+    "xl":2em,
+);
+@function fontSize($size){
+    @return map-get($font-size,$size)
+}
+$fSize:13px;
+$heading:"Montserrat";
+
+$font-weight:(
+    'xs':100,
+    's':300,
+    'm':400,
+    'l':700,
+    'xl':800
+);
+@function fontWeight($weight){
+@return map-get($font-weight, $weight );
+};
+@media (max-width:1200px) {
+    $fSize:12px
+}
+.cursor{
+    cursor: pointer;
+}
+.sliderL{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 1s;
+}
+.sliderR{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 1s;
+}
+// @media (max-width:1000px) {
+//     $fSize:10px
+// }

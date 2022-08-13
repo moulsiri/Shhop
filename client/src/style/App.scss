@@ -1,0 +1,457 @@
+@import './_util.scss';
+.App{
+    background-color: colors(bg);
+    // background-color: red;
+    
+}
+nav{
+    height:15vh;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.11);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:0 2rem;
+    @include mobile(500px){
+        padding: 0 1em;
+    }
+    @include mobile(600px){
+        height: 10vh;
+    }
+
+    #nlft{
+        display:flex;
+        align-items: center;
+        width: 40vw;
+        height: inherit;
+        justify-content: space-between;
+        font-size: $fSize;
+        @include mobile(1150px){
+            width: 50vw;
+        }
+        @include mobile(1000px){
+            justify-content: flex-start;
+        }
+        @include mobile(900px){
+            width: 40vw;
+        }
+        @include mobile(700px){
+            width: 20vw;
+        }
+      
+       
+       
+        #logo h3{
+            color:colors(clr4);
+            font-size: fontSize(xl);
+            @include mobile(600px){
+                font-size: fontSize(l);
+            }
+            @include mobile(300px){
+                font-size: fontSize(m);
+            }
+        }
+
+        #nlinks {
+            @include mobile(1000px){
+                display: none;
+            }
+            a{
+            text-decoration: none;
+            color:colors(text);
+            margin-left: 1em;
+            font-size: fontSize(s);
+            letter-spacing: .1em;
+            // background-color: lightgreen; 
+        }
+    }
+    #nSelect{
+        display: none;
+        @include mobile(1000px){
+            margin-left: 2em;
+            background-color: colors(clr1);
+            height:30%;
+            width: 20vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 2em;
+        }
+        @include mobile(700px){
+            display: none;
+        }
+    
+        select{
+        // A reset of styles, including removing the default dropdown arrow
+        appearance: none;
+        // Additional resets for further consistency
+        background-color:transparent;
+        font-size: fontSize(m);
+        border: none;
+        padding: 0 1em;
+        margin: 0;
+        width: 60%;
+        font-family: inherit;
+        cursor: inherit;
+         line-height: inherit;
+         outline: none;
+         @include mobile(1700px){
+            font-size: fontSize(s);
+        }
+        }
+        i{
+            font-size: fontSize(xl);
+        }
+    }
+        //  background-color: lightgreen; 
+    
+    }
+    #nrt{
+        // background-color: lightgoldenrodyellow; 
+        display: flex;
+        align-items:center;
+        justify-content: space-between;
+        width: 40vw;
+        height: inherit;
+        padding: 0 2em;
+        font-size: $fSize;
+        @include mobile(1000px){
+            width: 50vw;
+        }
+        @include mobile(900px){
+            width: 60vw;
+        }
+        @include mobile(800px){
+            width: 80vw;
+        }
+        @include mobile(700px){
+            width: 90vw;
+        }
+        @include mobile(500px){
+            padding: 0 1em;
+        }
+        #nicons {
+        i{
+            margin-left: 2em;
+            color: colors(clr4);
+            font-size: fontSize(m);
+            cursor: pointer;
+
+            &:last-child{
+                display: none;
+                @include mobile(700px){
+                    display: initial;
+                }
+                @include mobile(340px){
+                    display: initial;
+                }
+            }
+            @include mobile(700px){
+                margin-left: 1em;
+            }
+            @include mobile(340px){
+                display: none;
+            }
+        }
+    }
+        #nsrch{
+                width: 20vw;
+                /* background-color: lightcoral; */
+                background-color: colors(clr1);
+                height: 30%;
+                display:flex;
+                justify-content: space-between;
+                align-items: center;
+                border-radius: 1em;
+                padding: 0 1em;
+                @include mobile(800px){
+                    width: 30vw;
+                }
+                @include mobile(500px){
+                    width: 40vw;
+                }
+                @include mobile(340px){
+                    width:50vw;
+                }
+                i{
+                    color:colors(clr2);
+                }
+                form{
+                    width: 90%;
+                    input{
+                        width: 100%;
+                        border:none;
+                        background-color: transparent;
+                        border-bottom: 3px solid colors(border);
+                        outline: none;
+                    
+                    }
+                
+                }
+        }
+     
+    }
+    #ldToggle{
+        height: 30%;
+        width: 5vw;
+        background-color: colors(clr1);
+        border-radius:2em;
+        // display: flex;
+        // align-items: center;
+        // justify-content: flex-start;
+        padding: 0 .3em;
+        .tBtn{
+            width: 1.5em;
+            height: 1.5em;
+            border-radius:50%;
+            background-color: colors(border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px colors(clr3);
+            }
+            @include mobile(800px){
+                width: 8vw;
+            }
+            @include mobile(500px){
+                width: 10vw;
+            }
+            @include mobile(450px){
+                display: none;
+            }
+    }
+    #cart{
+        position:relative;
+    cursor: pointer;
+
+    }
+    #cart span{
+        display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fontSize(xl);
+    height: fontSize(xl);
+    position: absolute;
+    right: -8px;
+    background-color: colors(clr3);
+    padding: .4em;
+    color:#fff;
+    bottom:-8px;
+    font-size: .5em;
+    border-radius: 50%;
+    }
+}
+
+.card{
+    width:20vmax;
+    height: 20vmax;
+    position:relative;
+    background-color: colors('white');
+    box-shadow:0 0 10px rgba(0, 0, 0, 0.137);
+    margin:0 auto;
+    margin-top:2em;
+    font-size: $fSize;
+    .cImg{
+        width: 65%;
+        height:80%;
+        position: absolute;
+        top:50%;
+        transform: translate(0%,-50%);
+
+        img{
+            width:100%;
+            height:100%;
+            object-fit: cover;
+
+        }
+        .cTag{
+            position:absolute;
+            top:-5%;
+            left:0%;
+            background-color: #E26849;
+            padding: .3em .5em;
+            p{
+                font-weight: fontWeight(l);
+                text-transform: uppercase;
+                letter-spacing: .1em;
+                color:#fff;
+                font-size: fontSize(cT);
+            }
+        }
+    }
+    .cHead{
+        width:60%;
+        height:30%;
+        background-color: colors('white');
+        position:absolute;
+        right:0%;
+        top:15%;
+        padding-left: .3em;
+        // background-color: red;
+        h1{
+            font-size: fontSize(l);
+            font-weight: fontWeight(m);
+            text-transform: uppercase;
+            margin-top: .5em;
+        }
+        p{
+            text-transform: uppercase;
+            font-size: fontSize(xs);
+            font-weight: fontWeight(l);
+            color:#669C96;
+            margin-top: .6em;
+            letter-spacing: .1em;
+
+        }
+        .cStar{
+            background-color: #FEEFDE;
+            width: 60%;
+            display: flex;
+            align-items: center;
+            margin-top: .3em;
+
+
+            padding:0 .2em;
+            border-radius: 1em;
+            i{
+                color:#E26849;
+            }
+        }
+    }
+    .cAction{
+        width: 35%;
+        height: 35%;
+        // background-color: yellow;
+        position:absolute;
+        right:0%;
+        bottom:15%;
+        display: flex;
+        flex-direction: column;
+        justify-content:space-between;
+        .cPrice{
+            // background-color: red;
+            height: 45%;
+            display: flex;
+            align-items: flex-end;
+            padding: 0 .3em;
+            span{
+                display: inline-block;
+                position:absolute;
+                top:-10%;
+                left:-10%;
+                font-size: fontSize(xl);
+                font-weight: fontWeight(s);
+                letter-spacing: .1em;
+            }
+            h6{
+                font-size: fontSize(l);
+                color:#669C96;
+                letter-spacing: .1em;
+            }
+        
+
+        }
+        .cDis{
+            display: flex;
+            // background-color: yellow;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 .3em;
+            align-items: center;
+            h4{
+                position:relative;
+                font-size: fontSize(s);
+                letter-spacing: .1em;
+                color:#669C96;
+                font-weight: fontWeight(s);
+
+                // background-color: blue;
+
+                span{
+                    width: 110%;
+                    height: .05em;
+                    background-color: colors('black');
+                    display:inline-block;
+                    position: absolute;
+                    left:0%;
+                    top:50%;
+                    transform: translate(0,-50%);
+                }
+            }
+            h5{
+                color:#E26849;
+                letter-spacing: .1em;
+            }
+
+        }
+        .cNote{
+            p{
+                font-style: italic;
+                font-size: fontSize(xs);
+                padding: 0 .3em;
+            }
+
+        }
+        .cBtn{
+            position:absolute;
+            right: -20%;
+            bottom:-25%;
+            width:4em;
+            height: 4em;
+            background-color: #669C96;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color:#fff;
+            i{
+                font-size: 2em;
+                // font-weight: 800;
+            cursor: pointer;
+
+            }
+            #cAdd{
+                position:absolute;
+                left:-10%;
+                bottom:-10%;
+                font-size: 2.5em;
+                color:#ffffff;
+                font-weight: 800;
+            cursor: pointer;
+
+
+
+            }
+            #cDelete{
+                position:absolute;
+                right:-10%;
+                top:-10%;
+                background-color: #fff;
+                font-size: 1.1em;
+                padding: .5em;
+                border-radius: 50%;
+                color:#669C96;
+            cursor: pointer;
+
+            }
+
+        }
+    }
+}
+
+.cardContainer{
+    width:90vw;
+    // background-color: rgb(241, 136, 136);
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    margin:0 auto;
+
+    
+}
+#loader{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    width:10vmax;
+}

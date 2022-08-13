@@ -1,0 +1,173 @@
+@import './util';
+
+
+.cart{
+    height: 100vh;
+    position: fixed;
+    width: 100vw;
+    z-index: 99;    
+    backdrop-filter: blur(1px);
+    background-color: rgba(0, 0, 0, 0.158);
+    display: none;
+    .cartContainer{
+        height: inherit;
+        width:0%;
+        background-color: #fff;
+        transition: width cubic-bezier(0.075, 0.82, 0.165, 1) 1s;
+        .addedCard{
+            width: 40%;
+            height: 100vh;
+            // background-color: rgb(241, 165, 165);
+            border:1px solid rgb(146, 146, 146);
+            display: flex;
+            align-items: center;
+            padding-top:1em;
+            flex-direction: column;
+
+        }
+        
+    }
+}
+.cartCard{
+    width: 20vmax;
+    background-color: #fff;
+    height: 13vmax;
+    position: relative;
+    margin-top: 1em;
+
+    .cCImg{
+        height: 60%;
+        width: inherit;
+        background-color: black;
+        box-shadow: 0 0px 8px rgba(0, 0, 0, 0.164);
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 50% 75%;
+        }
+
+    }
+    .cCHead{
+        position: absolute;
+        height: 55%;
+        width: 65%;
+        bottom:0%;
+        background-color: rgb(255, 255, 255);
+        h1{
+            font-size: fontSize(l);
+            font-weight: fontWeight(m);
+            text-transform: uppercase;
+            margin-top: .5em;
+        }
+        .cStar{
+            background-color: #FEEFDE;
+            width: 60%;
+            display: flex;
+            align-items: center;
+            margin-top: .3em;
+
+
+            padding:0 .2em;
+            border-radius: 1em;
+            i{
+                color:#E26849;
+            }
+        }
+        .ccPrice{
+            display: flex;
+            .cDis{
+                display: flex;
+                // background-color: yellow;
+                display: flex;
+                justify-content: space-between;
+                padding: 0 .3em;
+                align-items: center;
+                flex-direction: column;
+                h4{
+                    position:relative;
+                    font-size: fontSize(s);
+                    letter-spacing: .1em;
+                    color:#669C96;
+                    font-weight: fontWeight(s);
+    
+                    // background-color: blue;
+    
+                    span{
+                        width: 110%;
+                        height: .05em;
+                        background-color: colors('black');
+                        display:inline-block;
+                        position: absolute;
+                        left:0%;
+                        top:50%;
+                        transform: translate(0,-50%);
+                    }
+                }
+                h5{
+                    color:#E26849;
+                    letter-spacing: .1em;
+                }
+    
+            }
+        }
+
+    }
+    .cCNote{
+        position: absolute;
+        height:calc(100% - 55%);
+        width: calc(100% - 65%);
+        bottom:0%;
+        right: 0%;
+        // background-color: rgb(131, 131, 131);
+        .cFreq{
+            display:flex;
+
+            position:absolute;
+            left:-30%;
+            bottom:0%;
+            width: 100%;
+            background-color: #669C96;
+            justify-content:space-between;
+            align-items:center;
+            padding:.2em;
+            border-radius:2em;
+            color:#fff;
+            p{
+                font-size: .8em;
+            }
+            #cAdd{
+                cursor: pointer;
+                font-size: .8em;
+            }
+            #cDelete{
+                cursor:pointer;
+                font-size: .8em;
+
+            }
+        }
+
+    }
+}
+#cartClose{
+    position:absolute;
+    top:5%;
+    right:5%;
+    transform: translate(-50%,50%);
+    cursor: pointer;
+    font-size: fontSize(l);
+    color:#fff;
+}
+.Btn{
+    position:absolute;
+    padding:1em 2em;
+    border:none;
+    background-color: #669C96;
+    color:#fff;
+    top:10%;
+    left:50%;
+    cursor: pointer;
+    &:hover{
+        background-color: #E26849;
+    }
+}

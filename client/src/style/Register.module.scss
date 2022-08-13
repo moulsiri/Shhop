@@ -1,0 +1,96 @@
+@import './util';
+
+.register{
+    width:100vw;
+    height: 100vh;
+    background-image: url('../asset/bg.png');
+    background-position: center;
+    background-size: cover;
+
+    
+}
+.overlay{
+    width:100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.356);
+}
+
+.auth{
+    width: 30vmax;
+    height: 40vmax;
+    background-color: #fff;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.fElm{
+    width:60%;
+    height: 5vh;
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+    margin-top: 1em;
+   
+    input{
+        width:90%;
+        border:none;
+        height: 95%;
+    border-bottom:1px solid #669C96;
+    outline: none;
+    &::placeholder{
+        color:#000;
+    }
+
+    }
+    i{
+        color:#E26849;
+    }
+    p{
+        font-size: fontSize(xs);
+        font-style: italic;
+        letter-spacing: .1em;
+        text-align: center;
+        width: 100%;
+        cursor: pointer;
+    }
+    h1{
+        font-size: fontSize(l);
+        font-family: $heading;
+        letter-spacing: .1em;
+        font-weight: fontWeight(m);
+        text-align: center;
+        width: 100%;
+    }
+    button{
+        width:3em;
+        height: 3em;
+        border:none;
+        border-radius: 50%;
+        background-color: #E26849;
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+        align-items:center;
+        i{
+            color:#fff;
+        }
+    }
+  
+}
+#fBtn{
+    justify-content: flex-end;
+    // background-color: red;
+}
+.authForm{
+    width: 100%;
+    // background-color: yellow;
+    display: flex;
+    align-items: center;
+    flex-direction:column;
+
+}
