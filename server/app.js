@@ -35,7 +35,13 @@ app.use('/',mainRouter);
 app.use('/api/v1/products',taskRouter);
 app.use('/api/v1/userInfo',userInfo);
 
+//Have Node serve the files for our built React app
+app.use(express.static(path.resolve(__dirname,'../client/build')));
 
+// app other get requests not handled before with return our React app
+app.get('*',(req,res)=>{
+    res.sendFile(path.resolve(__dirname,'../client/build','index.html'));
+})
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);
 
