@@ -1,16 +1,16 @@
 // import './App.css';
 import { useState } from 'react';
-import {BrowserRouter,Routes,Route,Link} from "react-router-dom"; 
+import {Routes,Route} from "react-router-dom"; 
 import './style/App.scss';
 import 'remixicon/fonts/remixicon.css';
 import Register from './components/Register';
 import Main from './components/Main';
+
+import Context from './Context';
 // import CardContainer from './components/CardContainer';
 function App() {
   const[themeFlag,setTheme]=useState(true);
-  const[isLoggedIn,setIsLoggedIn]=useState(false);
- 
-  
+  const [price,setPrice]=useState(0);
 
   let themeHandler=(e)=>{
     setTheme(!themeFlag);
@@ -45,22 +45,22 @@ function App() {
     );
   }
   return (
-     <BrowserRouter>
-    <div className="App">
-      {/* <Link to="/">
-      <Main setIsLoggedIn={setIsLoggedIn} themeFlag={themeFlag} themeHandler={themeHandler}/>
-      </Link> */}
+ 
+      <div className="App">
+        <Context value={{price,setPrice}}>
       <Routes>
-        <Route path="/" element={isLoggedIn?<Main setIsLoggedIn={setIsLoggedIn} themeFlag={themeFlag} themeHandler={themeHandler}/>:<Register setIsLoggedIn={setIsLoggedIn}/>}>
+        <Route path="/" element={<Register/>}/>
+        <Route path="/profile" element={<Main themeFlag={themeFlag} themeHandler={themeHandler}/>}/>
 
-        </Route>
+    
       </Routes>
 
-     
+      </Context>
      
     </div>
-     </BrowserRouter>
-
+ 
+    
+   
      
   );
 }

@@ -1,16 +1,25 @@
 import React from 'react'
 import css from '../style/Register.module.scss';
 import axios from 'axios'
-const Login = ({rToggle,setRToggle,logInInfo,setlogInInfo,isLoggedIn,setIsLoggedIn}) => {
+import { useNavigate } from 'react-router-dom';
+const Login = ({rToggle,setRToggle,logInInfo,setlogInInfo}) => {
+  let Navigate=useNavigate();
   const getData=(e)=>{
     setlogInInfo({...logInInfo,[e.target.name]:e.target.value});
   }
-  const submitionHandler=(e)=>{
+  const submitionHandler=async (e)=>{
     e.preventDefault();
-    axios.post('/login',logInInfo)
-    .then(res=>res.status===200?setIsLoggedIn(true):setIsLoggedIn(false)).catch(err=>{
-        console.log(err);
-    })
+    try{
+      let lData=await axios.post('/login',logInInfo);
+      if(lData.status===200){
+        Navigate("/profile");
+      }else{
+        Navigate("/");
+      }
+    }catch(e){
+      console.log(e);
+    }
+   
   }
     
   return (

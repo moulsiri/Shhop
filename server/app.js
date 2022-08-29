@@ -9,6 +9,7 @@ const connectDB=require('./database/connect');
 const taskRouter=require('./routes/Productroute');
 const mainRouter=require('./routes/mainRoute');
 const userInfo=require('./routes/userInfo');
+const payment=require('./routes/payment');
 
 const users=require('./models/users');
 const passport=require('passport');
@@ -35,6 +36,7 @@ passport.deserializeUser(users.deserializeUser());
 app.use('/',mainRouter);
 app.use('/api/v1/products',taskRouter);
 app.use('/api/v1/userInfo',userInfo);
+app.use('/api/v1/rPayment',payment);
 
 //Have Node serve the files for our built React app
 app.use(express.static(path.resolve(__dirname,'../client/build')));

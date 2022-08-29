@@ -281,7 +281,7 @@ nav{
     .cHead{
         width:60%;
         height:30%;
-        background-color: colors('white');
+        background-color: colors(bg);
         position:absolute;
         right:0%;
         top:15%;
@@ -292,6 +292,7 @@ nav{
             font-weight: fontWeight(m);
             text-transform: uppercase;
             margin-top: .5em;
+            color:colors(text)
         }
         p{
             text-transform: uppercase;

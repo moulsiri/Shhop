@@ -18,7 +18,7 @@ const Cart = ({imageURL,name,price,discount,oldPrice,addedBy,userInfo, id}) => {
    
      addToggleHandler();
       
-    },[addedBy]);
+    });
     const addToggleHandler=()=>{
       if(userInfo){
         if(addedBy.map(obj => obj.username).indexOf(userInfo.username)!==-1){
@@ -54,7 +54,7 @@ const Cart = ({imageURL,name,price,discount,oldPrice,addedBy,userInfo, id}) => {
           <i className="ri-star-s-fill"></i><i className="ri-star-s-fill"></i><i className="ri-star-s-fill"></i><i className="ri-star-half-s-fill"></i><i className="ri-star-s-line"></i>
       </div>
   <div className={css.ccPrice}>
-    <h3><span>Rs</span>{price}</h3>
+    <h3>{price}</h3>
     <div className={css.cDis}>
           <h5>({discount}%)</h5>
           <h4>{oldPrice} <span></span></h4>
@@ -68,13 +68,13 @@ const Cart = ({imageURL,name,price,discount,oldPrice,addedBy,userInfo, id}) => {
 <div className={css.cCNote}>
   <div className={css.cFreq}>
     <div id={css.cAdd}>
-    <i class="ri-add-line" onClick={onAddToCartHandler}></i>
+    <i className="ri-add-line" onClick={onAddToCartHandler}></i>
     </div>
-    <p>
+  
     <p>{addedBy[addedBy.map(obj => obj.username).indexOf(userInfo.username)].count}</p>
-    </p>
+   
     <div id={css.cDelete}>
-    <i class="ri-delete-bin-line" onClick={cardDeleteHandler}></i>
+    <i className="ri-delete-bin-line" onClick={cardDeleteHandler}></i>
     </div>
 
   </div>
@@ -83,7 +83,7 @@ const Cart = ({imageURL,name,price,discount,oldPrice,addedBy,userInfo, id}) => {
 
 
 </div>
-: " "   
+: <div></div>  
 }
     </>
     

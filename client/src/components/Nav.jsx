@@ -1,19 +1,26 @@
 import { useState} from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
-
-const Nav = ({themeFlag,themeHandler,setIsLoggedIn,cardAdded,showCartHandler}) => {
+const Nav = ({themeFlag,themeHandler,cardAdded,showCartHandler}) => {
+  let Navigate=useNavigate();
     const [companyName]=useState("Shhop.");
   const [navigation]=useState(["Explore","Browse","Offers","Categories","New Arrivals"]);
   const [icons]=useState(["ri-shopping-cart-fill cursor","ri-logout-circle-line","ri-menu-3-line cursor"]);
 
-  const onLogout=()=>{
-    axios.get('/logout').then((res)=>{
-      console.log(res);
-    }).catch((err)=>{
-      console.log(err)
-    })
+  const onLogout=async ()=>{
+    try{
+      let lData=await axios.get('/logout')
+      if(lData.status===200){
+         Navigate("/")
+      }else{
+        Navigate("/profile")
+      }
+
+    }catch(e){
+      console.log(e);
+    }
   }
  
   
