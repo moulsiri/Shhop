@@ -1,0 +1,19 @@
+{
+    "name":"Green Safari",
+    "category":"shoes",
+    "description":"comfortable and primium quality shoes",
+    "oldPrice":5000,
+    "discount":35,
+    "tags":"branded bestSeller",
+    "Note":"get free delivery in 2 days",
+    "image":"https://images.unsplash.com/photo-1560343090-f0409e92791a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80",
+    "Stock":6
+
+
+}
+
+
+password encrypt kar rahe hain save hone se pahle
+
+ager product cart database base se delete hogya tb bhi cart m rahega agr added h toh .......:P yh bug h
+

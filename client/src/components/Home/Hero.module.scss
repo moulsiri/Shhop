@@ -1,0 +1,70 @@
+@import '../util';
+main{
+    width: 100%;
+    min-height: 100vh;
+    background-color:colors('background') ;
+}
+
+.logo{
+    color:colors('logo');
+    font-family:$primaryFont;
+    font-weight: 600;
+    letter-spacing:1px;
+    font-size: 2em;
+    margin-bottom: 1em;
+    span{
+        color:var(--actionClr2)
+    }
+    cursor: pointer;
+}
+
+.OrderPage{
+    width:100%;
+    min-height:100vh;
+    margin:0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em 0;
+    background-color: colors('background');
+    .stepsPage{
+        width: 80%;
+        margin-top: 2em;
+        min-height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        // background-color: rgb(215, 215, 243);
+        position: relative;
+        .stepBack{
+            left:10%;
+            position: absolute;
+            bottom:5%;
+            padding:.5em 2em;
+            color:#fff;
+            background-color: colors(actionClr2);
+            border:none;
+            letter-spacing: 1px;
+            font-size: 1em;
+            border-radius: 1em;
+            cursor: pointer;
+
+        }
+        .stepNext{
+            right:10%;
+            position: absolute;
+            bottom:5%;
+            padding:.5em 2em;
+            color:#fff;
+            background-color: colors(actionClr2);
+            border:none;
+            letter-spacing: 1px;
+            font-size: 1em;
+            border-radius: 1em;
+            cursor: pointer;
+
+        }
+    }
+
+}
