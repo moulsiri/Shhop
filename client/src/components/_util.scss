@@ -16,7 +16,7 @@ html,body{
     --secText:#565656;
     --primText:#222222;
     --logo:#669C96;
-    --lightHover:#F7F9F4;
+    --lightHover:#d8fad8;
     
     --actionClr1:#669C96;
     --actionClr2:#E26849;
@@ -55,10 +55,11 @@ $colors:(
 $primaryFont:"Montserrat";
 $HeadingFont:'Greyst';
 
-@mixin flex($justify:space-between,$align:center) {
+@mixin flex($justify:space-between,$align:center,$direction:row) {
     display:flex;
     justify-content: $justify;
     align-items:$align;
+    flex-direction: $direction;
 
 }
 @mixin mobile($mobile){

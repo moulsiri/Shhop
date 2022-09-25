@@ -18,7 +18,6 @@ const HomeLayout = ({cardData,heading,boxStyle,rightSide}) => {
         <div className={css.hText}>
         
           <div>
-          {boxStyle==="CartFlex"?<Link to="/" style={{textDecoration: 'none'}}><h3 className={css.logo}>Home</h3></Link>:""}
           {boxStyle==="grid"?<h1>Welcome</h1>:""}
           <h3>{heading} <span>.</span></h3>
 

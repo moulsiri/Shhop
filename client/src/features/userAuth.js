@@ -4,7 +4,8 @@ const initialState={
     loading:false,
     user:{},
     isAuthenticated:false,
-    error:null
+    error:null,
+    admin:false,
 }
 export const userAuthSlice=createSlice({
     name:'user',
@@ -20,12 +21,16 @@ export const userAuthSlice=createSlice({
             state.isAuthenticated=true;
             state.user=action.payload;
             state.error=null;
+            state.admin=action.payload.role==='admin'?true:false;
+
         },
         registerFail:(state,action)=>{
             state.loading=false;
             state.isAuthenticated=false;
             state.user=null;
             state.error=action.payload;
+            state.admin=false;
+
         },
 
         //login user
@@ -38,12 +43,15 @@ export const userAuthSlice=createSlice({
             state.user=action.payload;
             state.isAuthenticated=true;
             state.error=null;
+            state.admin=action.payload.role==='admin'?true:false;
+
         },
         loginFail:(state,action)=>{
             state.loading=false;
             state.isAuthenticated=false;
             state.error=action.payload;
             state.user=null;
+            state.admin=false;
         },
 
         //logout
@@ -60,13 +68,15 @@ export const userAuthSlice=createSlice({
         loadUserSuccess:(state,action)=>{
             state.loading=false;
             state.user=action.payload;
-            state.isAuthenticated=true
+            state.isAuthenticated=true;
+            state.admin=action.payload.role==='admin'?true:false;
         },
         loadUserFail:(state,action)=>{
             state.loading=false;
             state.isAuthenticated=false;
             state.error=action.payload;
             state.user=null;
+            state.admin=false;
         },
 
         //clear Errors

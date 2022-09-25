@@ -36,11 +36,11 @@ app.use('/api/v1/payment',paymentRoute);
 //     res.send('hello world!');
 // })
 // console.log(__dirname)
-app.use(express.static(path.join(__dirname,"../client/build")));
+// app.use(express.static(path.join(__dirname,"../client/build")));
 
-app.get("*",(req,res)=>{
-    res.sendFile(path.resolve(__dirname,"../client/build/index.html"))
-})
+// app.get("*",(req,res)=>{
+//     res.sendFile(path.resolve(__dirname,"../client/build/index.html"))
+// })
 
 const port=process.env.PORT || 3020;
 const start=async()=>{

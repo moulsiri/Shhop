@@ -2,7 +2,6 @@ import {useState,useEffect} from 'react'
 import css from '../styles/Order.module.scss'
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import { createTheme, ThemeProvider} from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import {useDispatch,useSelector} from 'react-redux';
 import {addShipInfo} from '../../../features/OrderSLice';
@@ -11,16 +10,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import { useAlert } from 'react-alert';
 import CircularProgress from '@mui/material/CircularProgress';
 
-const theme = createTheme({
-    palette: {
-      primary: {
-        main: '#669C96',
-      },
-      secondary:{
-        main:"#E26849",
-      }
-    },
-  });
+
 const ShippingForm = ({setActiveStep}) => {
 
   const alert=useAlert();
@@ -59,7 +49,7 @@ const ShippingForm = ({setActiveStep}) => {
     }
   return (
     <div className={css.ShipForm}>
-        <ThemeProvider theme={theme}>
+     
           {
             (loading)? <CircularProgress/>
             :  <Box
@@ -160,7 +150,7 @@ const ShippingForm = ({setActiveStep}) => {
             </Box> 
           }
           
-        </ThemeProvider>
+
       
     </div>
   )

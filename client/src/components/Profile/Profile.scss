@@ -1,0 +1,13 @@
+@import '../util';
+
+.content{
+    width:100%;
+    min-height: 100vh;
+    padding-top: 10vh;
+    h1{
+        margin-top: 1em;
+        font-family:$HeadingFont;
+        margin-left: 1em;
+        font-weight: 100;
+    }
+}

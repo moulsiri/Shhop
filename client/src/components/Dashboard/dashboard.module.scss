@@ -1,0 +1,17 @@
+@import '../util';
+
+.logo{
+    color:colors('logo');
+    font-family:$primaryFont;
+    font-weight: 600;
+    letter-spacing:1px;
+    font-size: 2em;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top:10%;
+    span{
+        color:var(--actionClr2)
+    }
+    cursor: pointer;
+}
