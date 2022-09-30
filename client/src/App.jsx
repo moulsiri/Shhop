@@ -12,7 +12,6 @@ import { transitions, positions, Provider as AlertProvider } from 'react-alert'
 import AlertTemplate from 'react-alert-template-mui'
 import { createTheme, ThemeProvider} from '@mui/material/styles';
 
-import NavBar from './components/NavBar/NavBar';
 
 import HomeLayout from './components/Elements/MainElements/HomeLayout';
 import ProductCard from './components/Elements/MainElements/ProductCard';
@@ -23,10 +22,17 @@ import TrendingPage from './components/Home/TrendingPage';
 import UserOrders from './components/Elements/UserOrders/UserOrders';
 import ProfilePage from './components/Profile/ProfilePage';
 import WishList from './components/Elements/WishList/WishList';
-import Dashboard from './components/Dashboard/Dashboard';
 
-import ProtectedRoute from './components/utils/ProtectedRoute';
 
+import ProtectedRoute from './components/utils/ProtectedRoute'
+import {store} from './store';
+import ErrorPage from './components/utils/ErrorPage';
+
+import AdminPanel from './components/Dashboard/AdminPanel';
+import AdminProducts from './components/Dashboard/AdminProducts/AdminProducts';
+import Dashboard from './components/Dashboard/AdminDashboard/Dashboard';
+import AdminOrder from './components/Dashboard/AdminOrder/AdminOrder';
+import AdminUsers from './components/Dashboard/AdminUsers/AdminUsers';
 
 
 
@@ -59,10 +65,8 @@ function App() {
 
  
   useEffect((e)=>{
-   dispatch(getUserDataAsync());
-  //  dispatch(getProductsAsync());
-
-  },[dispatch])
+   store.dispatch(getUserDataAsync());
+  },[])
   return (
     <div className="App">
         <ThemeProvider theme={MUItheme}>
@@ -77,20 +81,24 @@ function App() {
              <Route path="browse" element={<BrowsePage/>}/>
              <Route path="trending" element={<TrendingPage/>}/>
              <Route path="about" element={<AboutPage/>}/>
-             <Route path="profile" element={<ProtectedRoute value={isAuthenticated}><ProfilePage/></ProtectedRoute>}/>
-             <Route path="myOrders" element={<ProtectedRoute value={isAuthenticated}><UserOrders/></ProtectedRoute>}/>
-             <Route path="wishlist" element={<WishList/>}/>
+             <Route path="profile" element={<ProtectedRoute><ProfilePage/></ProtectedRoute>}/>
+             <Route path="myOrders" element={<ProtectedRoute><UserOrders/></ProtectedRoute>}/>
+             <Route path="wishlist" element={<ProtectedRoute><WishList/></ProtectedRoute>}/>
 
             
 
         </Route>
-        <Route exact path="/order" element={<OrderPage></OrderPage>}/>
-        <Route exact path="/auth" element={<ProtectedRoute value={!isAuthenticated}><Register/></ProtectedRoute>}/>
-        <Route exact path="/dashboard" element={<ProtectedRoute value={admin}>
-          <Dashboard/>
-          </ProtectedRoute>}/>
-       
+        <Route exact path="/order" element={<ProtectedRoute><OrderPage/></ProtectedRoute>}/>
+        <Route exact path="/auth" element={<Register/>}/>
+        <Route exact path="admin/dashboard" element={<ProtectedRoute adminCheck={true}><AdminPanel/></ProtectedRoute>}>
+          <Route index element={<ProtectedRoute adminCheck={true}><Dashboard/></ProtectedRoute>}></Route>
+          <Route path="products" element={<ProtectedRoute adminCheck={true}><AdminProducts/></ProtectedRoute>}></Route>
+          <Route path="orders" element={<ProtectedRoute adminCheck={true}><AdminOrder/></ProtectedRoute>}></Route>
+          <Route path="users" element={<ProtectedRoute adminCheck={true}><AdminUsers/></ProtectedRoute>}></Route>
+        </Route>
+        <Route path="*" element={<ErrorPage></ErrorPage>}></Route>
         </Routes>
+    
         </AlertProvider>
         </ThemeProvider>
 

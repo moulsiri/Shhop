@@ -14,7 +14,6 @@ export const userAuthSlice=createSlice({
         //regist user
         registerRequest:(state,action)=>{
             state.loading=true;
-            state.isAuthenticated=false;
         },
         registerSuccess:(state,action)=>{
             state.loading=false;
@@ -36,7 +35,6 @@ export const userAuthSlice=createSlice({
         //login user
         loginRequest:(state,action)=>{
             state.loading=true;
-            state.isAuthenticated=false;
         },
         loginSuccess:(state,action)=>{
             state.loading=false;
@@ -63,7 +61,6 @@ export const userAuthSlice=createSlice({
         //loading user data
         loadUserRequest:(state,action)=>{
             state.loading=true;
-            state.isAuthenticated=false;
         },
         loadUserSuccess:(state,action)=>{
             state.loading=false;

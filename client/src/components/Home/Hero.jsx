@@ -11,10 +11,11 @@ import Footer from '../Footer.jsx/Footer';
 import MobileNav from '../NavBar/MobileNav';
 
 
+
 const Hero = () => {
   const {products,loading}=useSelector((store)=>store.products);
   const {user}=useSelector((store)=>store.user);
- 
+
   return (
     <>
     <main>

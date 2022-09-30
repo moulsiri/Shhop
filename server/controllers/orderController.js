@@ -30,3 +30,25 @@ res.status(201).json({
   }
   
 };
+
+//get all orders created by a perticular user
+export const getUserOrders=async(req,res,next)=>{
+  try{
+    const order= await Order.find({user:req.user._id});
+    res.status(200).json({data:order});
+
+  }catch(err){
+    res.status(400).json({message:err.message})
+  }
+}
+
+//get all orders for admin
+export const getOrdersForAdmin=async(req,res,next)=>{
+  try{
+    let data=await Order.find();
+    res.status(200).json({data});
+
+  }catch(err){
+    res.status(400).json({message:err.message})
+  }
+}

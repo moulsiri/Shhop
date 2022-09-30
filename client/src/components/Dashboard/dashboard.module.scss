@@ -1,15 +1,16 @@
 @import '../util';
 
 .logo{
-    color:colors('logo');
+    color:#fff;
     font-family:$primaryFont;
     font-weight: 600;
     letter-spacing:1px;
-    font-size: 2em;
-    position: absolute;
-    transform: translate(-50%,-50%);
-    left: 50%;
-    top:10%;
+    font-size: 3em;
+    
+      @include mobile(900px){
+        font-size: 2em;
+      }
+  
     span{
         color:var(--actionClr2)
     }

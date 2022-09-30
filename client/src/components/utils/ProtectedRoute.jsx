@@ -1,10 +1,16 @@
-import React from 'react'
-import {Navigate} from 'react-router-dom'
-const ProtectedRoute = ({value,children}) => {
-  if(!value){
-    return <Navigate to='/' replace/>
-  }
-  return children
+import {Navigate} from 'react-router-dom';
+import {useSelector} from 'react-redux';
+
+
+const ProtectedRoute = ({ adminCheck,children}) => {
+const {isAuthenticated,admin}=useSelector((store)=>store.user);
+if(!isAuthenticated){
+  return <Navigate to="/login"></Navigate>
+}
+if(adminCheck && !admin){
+  return <Navigate to="/"></Navigate>
+}
+return children;
 }
 
 export default ProtectedRoute

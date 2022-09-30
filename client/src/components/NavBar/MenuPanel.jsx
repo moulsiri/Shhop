@@ -91,7 +91,7 @@ const MenuPanel = ({setMToggle}) => {
     </NavLink>
   {
     (admin)
-    ? <NavLink to={`/dashboard` } style={{textDecoration:'none'}} onClick={()=>{setMToggle(false)}} >
+    ? <NavLink to={`admin/dashboard` } style={{textDecoration:'none'}} onClick={()=>{setMToggle(false)}} >
     <div 
     className='mText' 
     onMouseEnter={  mouseEnter}
