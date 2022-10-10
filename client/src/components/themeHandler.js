@@ -28,7 +28,7 @@ export const themeHandler=(themeFlag)=>{
     );
     root?.style.setProperty(
       "--lightHover",
-      themeFlag===true ? "#F7F9F4":"#212121"
+      themeFlag===true ? "#f0f3f0":"#212121"
     );
 
 }
