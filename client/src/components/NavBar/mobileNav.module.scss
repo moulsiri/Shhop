@@ -30,5 +30,6 @@
     }
     @include mobile(813px){
         display:flex;
+        background-color:colors(cards);
     }
 }

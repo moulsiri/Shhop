@@ -21,7 +21,6 @@ import BrowsePage from './components/Home/BrowsePage';
 import TrendingPage from './components/Home/TrendingPage';
 import UserOrders from './components/Elements/UserOrders/UserOrders';
 import ProfilePage from './components/Profile/ProfilePage';
-import WishList from './components/Elements/WishList/WishList';
 
 
 import ProtectedRoute from './components/utils/ProtectedRoute'
@@ -83,7 +82,6 @@ function App() {
              <Route path="about" element={<AboutPage/>}/>
              <Route path="profile" element={<ProtectedRoute><ProfilePage/></ProtectedRoute>}/>
              <Route path="myOrders" element={<ProtectedRoute><UserOrders/></ProtectedRoute>}/>
-             <Route path="wishlist" element={<ProtectedRoute><WishList/></ProtectedRoute>}/>
 
             
 

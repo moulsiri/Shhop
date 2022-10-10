@@ -1,6 +1,7 @@
 import User from '../models/userModel.js';
 import {sendToken} from '../utils/jwtToken.js'
 import crypto from 'crypto';
+import { nanoid } from 'nanoid';
 //Register a User
 export const registerUser=async(req,res,next)=>{
     try{
@@ -156,4 +157,47 @@ export const updateUserPassword=async (req,res,next)=>{
 
 
 
+}
+
+//update userprofile by image url
+export const updateAvatarByLink=async (req,res,next)=>{
+    try{
+        // console.log(req.body);
+        const user=await User.findById(req.user.id);
+        let updateData={
+            public_id:nanoid(),
+            url:req.body.url,
+        }
+        user.avatar=updateData;
+        await user.save();
+        res.status(200).json({
+            success:true,
+        })
+
+    }catch(err){
+        res.status(404).json({
+            message:err.message
+        })
+    }
+}
+
+//update userdetails 
+export const updateDetails=async (req,res,next)=>{
+    try{
+        const {username,email,name}=req.body;
+        const user=await User.findById(req.user.id);
+        user.username=username;
+        user.email=email;
+        user.name=name;
+        await user.save();
+        res.status(200).json({
+            success:true,
+        })
+
+    }catch(err){
+        res.status(404).json({
+            message:err.message
+        })
+
+    }
 }

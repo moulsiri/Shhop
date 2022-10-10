@@ -15,12 +15,15 @@ export const fetchProducts=(page=1,range=[0,25000],category=null)=>{
     headers: { 'Content-Type': 'multipart/form-data' },
     })
 };
-
+//getting user orders
+export const fetchMyOrders=()=>axios.get('/api/v1/order/userOrders')
 
 // ORDER CREATION 
-export const createRazorpayOrderId=(price)=>axios.post('/api/v1/payment/order',{price});
 export const createOrder=(data)=>axios.post('/api/v1/order',data)
 
+export const createRazorpayOrderId=(price)=>axios.post('/api/v1/payment/order',{price});
+
+//user authentication
 export const getUserData=()=>axios.get('/api/v1/user/details');
 export const logOut=()=>axios.get("/api/v1/user/logout");
 export const loginUser=(user)=>axios.post(`/api/v1/user/login`,user,{headers});

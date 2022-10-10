@@ -4,6 +4,8 @@ import productSlice from './features/productSlice';
 import userAuth from './features/userAuth';
 import cartSlice from './features/cartSlice';
 import orderSlice from './features/OrderSLice';
+import DetailsUpdate from './features/DetailsUpdate';
+import myOrderSlice from './features/myOrderSlice';
 
 import storage from 'redux-persist/lib/storage';
 import {persistReducer,persistStore} from 'redux-persist';
@@ -23,6 +25,8 @@ export const store=configureStore({
         user:persistedReducer,
         cartData:cartSlice,
         orderData:orderSlice,
+        detailsUpdateStatus:DetailsUpdate,
+        myOrders:myOrderSlice
     },
     middleware:[thunk]
 })

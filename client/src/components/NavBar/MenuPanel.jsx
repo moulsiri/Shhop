@@ -79,16 +79,6 @@ const MenuPanel = ({setMToggle}) => {
           <h5 id="2">cart</h5>
         </div>
     </NavLink>
-    <NavLink to={`/wishlist` } style={{textDecoration:'none'}} onClick={()=>{setMToggle(false)}} >
-           <div 
-           className='mText'
-            onMouseEnter={ mouseEnter}
-            onMouseLeave={mouseLeave}
-           >
-          <h1  id="3">wishlist</h1>
-          <h5  id="3">wishlist</h5>
-        </div>
-    </NavLink>
   {
     (admin)
     ? <NavLink to={`admin/dashboard` } style={{textDecoration:'none'}} onClick={()=>{setMToggle(false)}} >
