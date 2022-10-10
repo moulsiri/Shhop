@@ -4,12 +4,9 @@ import './footer.scss'
 const Footer = () => {
   return (
     <div className='footer'>
-     <div id="fOvly">
-
-     </div>
      <h1 className='logo'>Shhop<span>.</span></h1>
      <h3>&#169; 2022 Shhop.com | All rights reserved</h3>
-     <h2>done by Moulsiri 😁</h2>
+     <h2>done by Moulsiri ✌</h2>
     </div>
   )
 }

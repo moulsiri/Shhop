@@ -36,11 +36,11 @@ const AdminPanel = () => {
                </div>
               </NavLink>
               <NavLink to="/admin/dashboard/orders" style={({isActive})=>(navActiveHandler(isActive))}> <div className="dashLink">
-            <h3>Orders</h3> <i class="ri-arrow-right-s-line"></i>
+            <h3>Orders</h3> <i className="ri-arrow-right-s-line"></i>
             </div></NavLink>
             <NavLink to="/admin/dashboard/users" style={({isActive})=>(navActiveHandler(isActive))}>
             <div className="dashLink">
-            <h3>Users</h3> <i class="ri-arrow-right-s-line"></i>
+            <h3>Users</h3> <i className="ri-arrow-right-s-line"></i>
             </div>
               </NavLink>
            

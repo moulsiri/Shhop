@@ -1,9 +1,8 @@
 import React from 'react'
-
+import './browse.scss'
 const BrowsePage = () => {
   return (
-    <div className="content">
-      <h1>Soon it will display categories</h1>
+    <div id="browse">
     </div>
   )
 }

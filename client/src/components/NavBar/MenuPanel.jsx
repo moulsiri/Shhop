@@ -44,7 +44,7 @@ const MenuPanel = ({setMToggle}) => {
     <i className="ri-close-line" id={css.mClose} onClick={()=>{setMToggle(false)}}></i>
     <div id={css.mElmContainer}  ref={mElmRef}>
       {
-        [1,2,3,4,5,6].map((e)=> {return <div key={e} className="gsapAnim"/>})
+        [1,2,3,4,5].map((e)=> {return <div key={e} className="gsapAnim"/>})
       }
     </div>
     <div id={css.menuContent}>
@@ -84,11 +84,11 @@ const MenuPanel = ({setMToggle}) => {
     ? <NavLink to={`admin/dashboard` } style={{textDecoration:'none'}} onClick={()=>{setMToggle(false)}} >
     <div 
     className='mText' 
-    onMouseEnter={  mouseEnter}
+    onMouseEnter={ mouseEnter}
     onMouseLeave={mouseLeave}
     >
-   <h1  id="4">dashboard</h1>
-   <h5  id="4">dashboard</h5>
+   <h1  id="3">dashboard</h1>
+   <h5  id="3">dashboard</h5>
  </div>
 </NavLink>
 :" "

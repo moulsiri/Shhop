@@ -11,6 +11,7 @@ import { updateUserDetails } from '../../asyncActions/detailsUpdateStatusAction'
 import { getUserDataAsync } from '../../asyncActions/userAction';
 import { useAlert } from 'react-alert';
 import { clearErrorAsync } from '../../asyncActions/detailsUpdateStatusAction';
+import { updateStatusReset } from '../../features/DetailsUpdate';
 
 const style = {
     position: 'absolute',
@@ -29,7 +30,7 @@ const EditDetails = ({open,setOpen}) => {
   const alert=useAlert();
   const dispatch=useDispatch();
     const {user}=useSelector((e)=>e.user);
-    const {loading,success,error }=useSelector((e)=>e.detailsUpdateStatus)
+    const {loading,success,error,successNote }=useSelector((e)=>e.detailsUpdateStatus)
     const [details,setDetail]=useState({
         username:user.username,
         email:user.email,
@@ -40,13 +41,22 @@ const EditDetails = ({open,setOpen}) => {
     useEffect((e)=>{
         if(success){
            dispatch(getUserDataAsync());
+           dispatch(updateStatusReset());
+           alert.success(successNote);
            setOpen(false);
         }
         if(error){
+          dispatch(clearErrorAsync());
           alert.error(error);
-          dispatch(clearErrorAsync);
         }
     },[success,error])
+
+    // useEffect((e)=>{
+    //   if(error){
+    //     alert.error(error);
+    //     dispatch(clearErrorAsync())
+    //   }
+    // },[error])
 
     const getValues=(e)=>{
       setDetail({...details,[e.target.name]:e.target.value});

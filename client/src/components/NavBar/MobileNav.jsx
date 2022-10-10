@@ -12,7 +12,7 @@ const MobileNav = () => {
             <i className="ri-home-2-line"></i></NavLink>
             <NavLink to="/browse" style={{textDecoration:'none'}}
               className={({isActive})=>isActive?css.active:css.inActive}>
-                <i className="ri-search-line"></i></NavLink>
+                <i className="ri-list-check-2"></i></NavLink>
             <NavLink to="/trending" style={{textDecoration:'none'}}
              className={({isActive})=>isActive?css.active:css.inActive} >
                 <i className="ri-fire-line"></i></NavLink>
