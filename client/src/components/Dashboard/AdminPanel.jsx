@@ -1,9 +1,19 @@
-import React from 'react'
+import {useEffect} from 'react'
 import './AdminPanel.scss';
 import css from './dashboard.module.scss';
+
+import {getProductsAsync} from '../../asyncActions/productAction';
+
 import { Link,NavLink } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 const AdminPanel = () => {
+
+  const dispatch=useDispatch();
+  useEffect((e)=>{
+    dispatch(getProductsAsync())
+  },[])
+
   const linkStyle={textDecoration: 'none',
                     width:'80%'}
   const navActiveHandler=(isActive)=>{
@@ -51,6 +61,7 @@ const AdminPanel = () => {
         
           </nav> 
            <div id="adminDashboard">
+            <h6>(Only for admin)</h6>
             <Outlet></Outlet>
           </div>
    </div>

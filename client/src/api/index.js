@@ -20,7 +20,6 @@ export const fetchMyOrders=()=>axios.get('/api/v1/order/userOrders')
 
 // ORDER CREATION 
 export const createOrder=(data)=>axios.post('/api/v1/order',data)
-
 export const createRazorpayOrderId=(price)=>axios.post('/api/v1/payment/order',{price});
 
 //user authentication

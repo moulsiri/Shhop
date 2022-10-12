@@ -8,6 +8,7 @@
     // background-color:colors('background');
     // background-color: yellow;
     padding-left: 20vmax;
+    padding-bottom: 10vh;
   
 }
 #AdminNav{
@@ -110,6 +111,17 @@
 }
 #adminDashboard{
     width:100%;
-    min-height:100vh;
+    min-height:inherit;
     background-color: colors('background');
+    padding: 0 3em;
+    // background-color: rgb(121, 50, 50);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h6{
+        font-weight: 400;
+        margin: 1em 0em;
+        font-size: 1.1em;
+        color:colors(secText);
+    }
 }
