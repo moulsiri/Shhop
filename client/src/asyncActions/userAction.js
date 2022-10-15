@@ -56,8 +56,9 @@ export const getUserDataAsync=()=>async(dispatch,getState)=>{
     try{
         dispatch(loadUserRequest());
         const fetch=await api.getUserData();
+        const {user}=fetch.data
         if(fetch.status===200){
-            dispatch(loadUserSuccess(fetch.data.user))
+            dispatch(loadUserSuccess(user))
         }else{
             console.log(fetch)
         }

@@ -1,7 +1,17 @@
 import React, { useEffect } from 'react'
 import css from '../styles/Elements.module.scss';
 import { useSelector,useDispatch } from 'react-redux';
-import {addToTheCart, removeFromTheCart} from "../../../features/cartSlice"
+import {addToTheCart, removeFromTheCart} from "../../../features/cartSlice";
+import ReactStars from 'react-rating-stars-component';
+
+const options={
+    edit:false,
+    color:'#d6ae2c8e',
+    activeColor:'#d6ae2c',
+    value:3.5,
+    isHalf:true,
+
+}
 const CartCard = ({data}) => {
     const {ProductData,Qty}=data;
     const {image,name,price,description,category}=ProductData;
@@ -41,7 +51,8 @@ const CartCard = ({data}) => {
                             <h6>{category} COLLECTION</h6>
                             <div>
                                 <div className={css.cStar}>
-                                    <i className="ri-star-s-fill"></i><i className="ri-star-s-fill"></i><i className="ri-star-s-fill"></i><i className="ri-star-half-s-fill"></i><i className="ri-star-s-line"></i>
+                                <ReactStars {...options}/>
+
                                 </div>
                                 <p>1 Review</p>
                             </div>

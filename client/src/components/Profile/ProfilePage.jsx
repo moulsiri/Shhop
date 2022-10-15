@@ -4,6 +4,7 @@ import {useSelector} from 'react-redux'
 import './Profile.scss'
 import EditDetails from './EditDetails';
 import ChangePassword from './ChangePassword';
+import ShipInfo from '../Elements/OrderInfo/ShipInfo'
 const ProfilePage = () => {
   const {user}=useSelector((s)=>s.user);
   const [detailModel,setDetailModel]=useState(false);
@@ -33,25 +34,28 @@ const ProfilePage = () => {
           <h1>PROFILE DETAILS</h1>
           <h4 onClick={()=>{setChngPass(true)}}>change password <span></span></h4>
           </div>
-          <div id="pDetails">
-            <div className="pElm">
-             <h4>Username</h4> <p>{user.username}</p>
+          <div id="uDetails">
+             <div id="pDetails">
+              <h4>User Details</h4>
+              <p>You can Edit your details</p>
+              <div>
+                 <div className="pElm">
+             <h6>Username:&nbsp; </h6> <p>{user.username}</p>
             </div>
             <div className="pElm">
-             <h4>Name</h4> <p>{user.name}</p>
+             <h6>Name:&nbsp; </h6> <p>{user.name}</p>
             </div>
             <div className="pElm">
-             <h4>Email</h4> <p>{user.email}</p>
+             <h6>Email:&nbsp; </h6> <p>{user.email}</p>
             </div>
-            {/* <div className="pElm">
-             <h4>Contact No.</h4> <p>+91 8358807540</p>
-            </div>
-            <div className="pElm">
-             <h4>Shipping Info</h4> <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti enim cum temporibus eius obcaecati accusamus</p>
-            </div> */}
+              </div>
+           
             <button onClick={()=>{setDetailModel(true)}}>Edit <i className="ri-edit-line"></i></button>
             
           </div>
+          <ShipInfo SubHeading={"Here's your Shipping details"}></ShipInfo>
+          </div>
+         
 
         </div>
 

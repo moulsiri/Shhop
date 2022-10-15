@@ -6,6 +6,7 @@ const initialState={
     isAuthenticated:false,
     error:null,
     admin:false,
+    isShipInfo:false,
 }
 export const userAuthSlice=createSlice({
     name:'user',

@@ -8,7 +8,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import {Link} from "react-router-dom";
 import { useState } from 'react';
 
-import ShippingForm from '../Elements/OrderInfo/ShippingForm';
+import ShippingForm from '../Elements/OrderInfo/OrderStepShipping';
 import PaymentForm from '../Elements/OrderInfo/PaymentForm';
 
 

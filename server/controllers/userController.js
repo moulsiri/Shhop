@@ -130,8 +130,9 @@ export const resetPassword=async(req,res,next)=>{
 //get user details
 export const getUserDetails=async(req,res,next)=>{
         const user=await User.findById(req.user.id);
+        let isShipInfo=user.shippingInfo.writtenBy;
         return res.status(200).json({success:true,
-        user});
+        user,isShipInfo});
     
    
 
@@ -198,6 +199,20 @@ export const updateDetails=async (req,res,next)=>{
         res.status(404).json({
             message:err.message
         })
+
+    }
+}
+
+//update ShipInfo
+export const updateShipInfo=async(req,res,next)=>{
+    try{
+        const user=await User.findById(req.user.id);
+        user.shippingInfo={...req.body,writtenBy:true};
+        await user.save();
+        res.status(200).json({success:true});
+
+    }catch(err){
+        res.status(400).json({success:false,message:err.message});
 
     }
 }

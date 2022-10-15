@@ -42,6 +42,24 @@ const userSchema=new mongoose.Schema({
         type:String,
         default:"user",
     },
+    shippingInfo:{
+        address:{type:String},
+        city:{type:String},
+        state:{
+            type:String
+        },
+        pinCode:{
+            type:Number
+        
+        },
+        phoneNo:{
+            type:Number
+        },
+        writtenBy:{
+            type:Boolean,
+            default:false
+        }
+    },
     resetPasswordToken:String,
     resetPasswordExpire:Date,
 

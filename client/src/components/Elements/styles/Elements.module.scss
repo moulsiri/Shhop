@@ -16,7 +16,9 @@
     }
     cursor: pointer;
 }
-
+#rndom{
+    color:#d6ae2c
+}
 .card{
     width:200px;
     height: 200px;
@@ -401,7 +403,7 @@
                 }
                 .cStar{
                     background-color: #fbc98d41;
-                    width: 40%;
+                    // width: 40%;
                     display: flex;
                     align-items: center;
                     margin-top: .2em;
@@ -409,10 +411,10 @@
         
                     padding:0 .2em;
                     border-radius: 1em;
-                    i{
-                        color:#d4af37;
-                        font-size: .6em;
-                    }
+                    // i{
+                    //     color:#d4af37;
+                    //     font-size: .6em;
+                    // }
                     @include mobile(600px){
                         width: 50%;
                     }
@@ -423,13 +425,15 @@
                 div{
                     display: flex;
                     justify-content: space-between;
-                    width: 50%;
+                    align-items: center;
+                    // width: 50%;
                     p{
                         font-size: .5em;
                         font-weight: 500;
                         color:colors(secText);
                         margin-top: .6em;
                         letter-spacing: .1em; 
+                        margin-left: 1em;
                     }
                     @include mobile(500px){
                         width: 70%;

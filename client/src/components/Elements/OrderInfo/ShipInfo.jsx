@@ -1,40 +1,52 @@
-import React from 'react'
+import React, { useState } from 'react'
 import css from '../styles/Order.module.scss';
 import {useSelector} from 'react-redux'
-const ShipInfo = () => {
-    const {shippingInfo}=useSelector((e)=>e.orderData);
-  return (
-    <div className={css.ShipInfo}>
+import ShipFormModel from '../../utils/Models/ShipFormModel';
+const ShipInfo = ({SubHeading}) => {
+
+    const {user}=useSelector((e)=>e.user);
+    const [toEdit,setToEdit]=useState(false);
+  return (<> 
+  <ShipFormModel open={toEdit} setOpen={setToEdit}></ShipFormModel>
+  <div className={css.ShipInfo}>
         <h4>Shipping Information</h4>
-        <p>You are eligible for free shipment</p>
-        <div>
+        <p>{SubHeading}</p>
+        {
+            (user.shippingInfo.writtenBy)
+            ? <div>
             <div className={css.sElm}>
                 <h6>Address:</h6>
-                <p>{shippingInfo?.address}</p>
+                <p>{user.shippingInfo?.address}</p>
 
             </div>
             <div className={css.sElm}>
                 <h6>City:</h6>
-                <p>{shippingInfo?.city}</p>
+                <p>{user.shippingInfo?.city}</p>
 
             </div>
             <div className={css.sElm}>
                 <h6>State:</h6>
-                <p>{shippingInfo?.state}</p>
+                <p>{user.shippingInfo?.state}</p>
 
             </div>
             <div className={css.sElm}>
                 <h6>Pincode:</h6>
-                <p>{shippingInfo?.pinCode}</p>
+                <p>{user.shippingInfo?.pinCode}</p>
 
             </div>
             <div className={css.sElm}>
                 <h6>Contact No. :</h6>
-                <p>{shippingInfo?.pinCode}</p>
+                <p>{user.shippingInfo?.phoneNo}</p>
 
             </div>
         </div>
+        :" "
+        }
+       
+        <button onClick={()=>{setToEdit(true)}}>{(user.shippingInfo.writtenBy)?"Edit":"Add"} Shipping Information <i className="ri-edit-line"></i></button>
     </div>
+  </>
+   
   )
 }
 

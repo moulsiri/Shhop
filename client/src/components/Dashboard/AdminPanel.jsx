@@ -14,8 +14,7 @@ const AdminPanel = () => {
     dispatch(getProductsAsync())
   },[])
 
-  const linkStyle={textDecoration: 'none',
-                    width:'80%'}
+  const linkStyle={textDecoration: 'none',width:'80%'}
   const navActiveHandler=(isActive)=>{
     return {
       textDecoration:'none',

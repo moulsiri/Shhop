@@ -1,13 +1,25 @@
 import { useState } from 'react';
 import css from '../styles/Elements.module.scss';
 import { useSelector,useDispatch } from 'react-redux';
-import {addToTheCart, removeFromTheCart} from '../../../features/cartSlice'
+import {addToTheCart, removeFromTheCart} from '../../../features/cartSlice';
+import ReactStars from 'react-rating-stars-component';
+
+const options={
+    edit:false,
+    color:'#d6ae2c8e',
+    activeColor:'#d6ae2c',
+    value:3.5,
+    isHalf:true,
+    size:10,
+
+}
 const ProductCard = ({data}) => {
     const dispatch=useDispatch();
     const {theme}=useSelector(state=>state.themeControl)
     const {cart} =useSelector(state=>state.cartData);
    const fTimeCart=(id,data)=>{
     dispatch(addToTheCart({productId:id,Qty:1,productData:data,pTotal:data.price}));
+    console.log(id)
    }
    const increaseQty=(id,data)=>{
     let prevQty=cart.find((elm)=>elm.productId===id).Qty
@@ -41,12 +53,10 @@ const ProductCard = ({data}) => {
     <div className={css.cHead}>
         <h1>{data?.name}</h1>
         <p>{data?.category} collection</p>
+       
         <div className={css.cStar}>
-            <i className="ri-star-s-fill"></i>
-            <i className="ri-star-s-fill"></i>
-            <i className="ri-star-s-fill"></i>
-            <i className="ri-star-half-s-fill"></i>
-            <i className="ri-star-s-line"></i>
+        <ReactStars {...options}/>
+            
         </div>
 
     </div>

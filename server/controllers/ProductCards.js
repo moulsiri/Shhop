@@ -45,3 +45,13 @@ export const getCards=async (req,res)=>{
         res.status(400).json({message:err.message})
     }
 }
+export const deleteCard=async(req,res)=>{
+    try{
+        let id=req.params.id;
+        let data=await ProductCard.findByIdAndDelete(id);
+        res.status(200).json({success:true,data})
+
+    }catch(err){
+        res.status(400).json({message:err.message})
+    }
+}

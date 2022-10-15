@@ -6,6 +6,7 @@ import {
 } from '../features/DetailsUpdate';
 
 import * as api from '../api/updateDetails';
+import { compareSync } from 'bcryptjs';
 
 export const updateUserDetails=(data)=>async (dispatch,getState)=>{
     try{
@@ -28,6 +29,21 @@ export const updatePassword=(data)=>async (dispatch)=>{
 
     }catch(err){
         dispatch(updateFail(err.response.data.message));
+    }
+}
+
+export const updateShippingInfo=(data)=>async (dispatch,getState)=>{
+    try{
+        dispatch(updateRequest());
+        // console.log(data)
+        let fetch=await api.updateShippingInfo(data);
+        let {user}=getState((e)=>e.user);
+        dispatch(updateSuccess(`Shipping information is successfully ${user.user.shippingInfo.writtenBy?"Edited":"Added"}!`))
+
+    }catch(err){
+        console.log(err)
+        dispatch(updateFail(err.message));
+
     }
 }
 

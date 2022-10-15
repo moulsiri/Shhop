@@ -49,9 +49,13 @@
                 @include mobile(550px){
                     font-size: 1.5em;
                 }
+                @include mobile(813px){
+                    margin-bottom: 1em;
+                }
             }
             @include mobile(813px){
                 justify-content: center;
+                align-items: flex-end;
             }
         }
     }
@@ -130,11 +134,12 @@
     }
     #pBottom{
         width: 100%;
-        height: 65vh;
+        min-height: 65vh;
         // background-color: red;
         display: flex;
         align-items: center;
         justify-content: flex-end;
+        padding-top: 1em;
         #profileDetails{
             width:80%;
             height: 85%;
@@ -190,42 +195,77 @@
                     }
                 }
             }
-            #pDetails{
+            #uDetails{
                 width:50%;
-                background-color: colors(card);
-                padding: 1em;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.219);
-                border-radius: 1em;
-                @include mobile(713px){
+                margin-top: 1em;
+                @include mobile(500px){
                     width: 80%;
-                    
+                margin-top: 2em;
+
                 }
 
-                .pElm{
-                    width: 100%;
-                    // background-color: violet;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-bottom: 1em;
-                    h4{
-                        color:colors(actionClr1)
-                    }
-                    p{
-                        width: 60%;
-                        color:colors(primText)
+            }
+            #pDetails{
+                width: 100%;
+                margin-bottom: 1em;
+                &>h4{
+                    font-family: $primaryFont;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                    color:colors(primText);
+            
+                }
+                &>p{
+                    font-style: italic;
+                    font-size: .9em;
+                    color:colors(secText);
+                    margin-top: 1em;
+                    margin-left: .5em;
+                }
+                &>div{
+                    background-color: colors(lightHover);
+                    margin-top: 1em;
+                    padding: .5em 1em;
+                    .pElm{
+                        width: 80%;
+                        margin-bottom: .5em;
+                        h6{
+                            color:colors(secText);
+                            font-size: .7em;
+                            font-weight: 600;
+                            margin-bottom:.2em;
+                            letter-spacing: 1px;
+                        }
+                        p{
+                            color:colors(primText);
+                            font-size: .8em;
+                        }
                     }
                 }
-                button{
-                    padding: 1em 2em;
-                    width: 8em;
-                    background-color: colors(actionClr2);
-                    color: #fff;
+                &>button{
                     border: none;
-                    border-radius: 1em;
-                    display: flex;
-                    justify-content: space-between;
+                    background-color: colors(actionClr2);
+                    color:#fff;
+                    padding:.5em 1em;
+                    border-radius: 2em;
                     cursor: pointer;
+                    position: relative;
+                    overflow: hidden;
+                    margin-top: 1em;
+                    &::after{
+                        content: "";
+                        position: absolute;
+                        width: 100%;
+                        height:100%;
+                        top:0;
+                        left: -100%;
+                        transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 1s;
+                        background-color: rgba(255, 255, 255, 0.096);
+                    }
+                    &:hover::after{
+                        left: 0;
+
+                    }
                 }
             }
 

@@ -116,7 +116,7 @@ const SuccessReset=()=>{
 
   return (
         <div className={css.PaymentForm}>
-        <ShipInfo></ShipInfo>
+        <ShipInfo SubHeading={'You are eligible for free shipment'}></ShipInfo>
         <OrderPlace></OrderPlace>
         <button className={css.oBtn} onClick={getPayment}>Finish Payment</button>
 
