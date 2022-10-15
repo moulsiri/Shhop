@@ -3,19 +3,21 @@ import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-import css from './Hero.module.scss';
+import css from './Order.module.scss';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import {Link} from "react-router-dom";
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 
-import ShippingForm from '../Elements/OrderInfo/OrderStepShipping';
-import PaymentForm from '../Elements/OrderInfo/PaymentForm';
+import ShippingForm from './OrderElements/OrderStepShipping';
+import PaymentForm from './OrderElements/PaymentForm';
 import { StepButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-
+import {useSelector}from 'react-redux';
 const OrderPage = () => {
+  const { started}=useSelector((s)=>s.orderData);
   const matches=useMediaQuery('(max-width:800px)')
   let [activeStep,setActiveStep]=useState(1);
+
   const Navigate=useNavigate();
   const HandleBack=()=>{
     let tmp=activeStep-1;
@@ -26,6 +28,11 @@ const OrderPage = () => {
        let tmp=activeStep+1;
        setActiveStep(tmp)
   }
+  useEffect((e)=>{
+    if(!started){
+      Navigate('/');
+    }
+  })
 
 
   return (

@@ -7,7 +7,7 @@ import {useSelector,useDispatch} from 'react-redux';
 import {getProductsAsync} from './asyncActions/productAction';
 import { getUserDataAsync } from './asyncActions/userAction';
 import CartPage from './components/Home/CartPage';
-import OrderPage from './components/Home/OrderPage';
+import OrderPage from './components/OrderPage/OrderPage';
 import { transitions, positions, Provider as AlertProvider } from 'react-alert'
 import AlertTemplate from 'react-alert-template-mui'
 import { createTheme, ThemeProvider} from '@mui/material/styles';

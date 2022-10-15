@@ -8,6 +8,8 @@ import {setTheme} from '../../features/themeSlice'
 import { useEffect } from 'react';
 import MenuPanel from './MenuPanel';
 
+import Modal from '@mui/material/Modal';
+
 const NavBar = () => {
     const {theme}=useSelector((store)=>store.themeControl);
     const {user,isAuthenticated}=useSelector((s)=>s.user);
@@ -29,9 +31,11 @@ const NavBar = () => {
     },[])
   return (
     <>
-    <div className={css.menu} style={(mToggle)?manu:{display:"none"}}>
-             {(mToggle)?<MenuPanel setMToggle={setMToggle}/>:" "}
-        </div>
+        <Modal
+    open={mToggle}
+    onClose={()=>{setMToggle(true)}}>
+<MenuPanel setMToggle={setMToggle}/>
+    </Modal>
         <nav>
     <div id={css.nlft}>
      <Link to="/" style={{textDecoration: 'none'}}><h3 className={css.logo}>Shhop<span>.</span></h3></Link>

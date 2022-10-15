@@ -1,7 +1,7 @@
 import React from 'react'
 import CartCard from '../Elements/MainElements/CartCard'
 import HomeLayout from '../Elements/MainElements/HomeLayout'
-import OrderPlace from '../Elements/OrderInfo/OrderPlace';
+import OrderPlace from '../OrderPage/OrderElements/OrderPlace';
 import { useSelector,useDispatch } from 'react-redux';
 const CartPage = () => {
   const {cart,cartCount} =useSelector(state=>state.cartData);

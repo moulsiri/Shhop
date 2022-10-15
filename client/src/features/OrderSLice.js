@@ -6,8 +6,8 @@ const initialState={
     loading:false,
     paymentPrograss:false,
     success:false,
-    shippingInfo:{},
     orderPlaced:false,
+    started:false,
 
 }
 export const orderSlice=createSlice({
@@ -16,6 +16,7 @@ export const orderSlice=createSlice({
     reducers:{
         getPaymentInfoRequest:(state,action)=>{
             state.loading=true;
+            state.started=true;
         },
         getPaymentInfo:(state,action)=>{
             state.paymentInfo={
@@ -36,10 +37,6 @@ export const orderSlice=createSlice({
             state.loading=false;
             state.error=action.payload;
             state.success=false
-        },
-
-        addShipInfo:(state,action)=>{
-            state.shippingInfo=action.payload
         },
 
         paymentRequest:(state,action)=>{
@@ -80,6 +77,7 @@ export const orderSlice=createSlice({
             state.success=false;
             state.loading=false;
             state.error=null;
+            state.started=false;
         }
     }
 })

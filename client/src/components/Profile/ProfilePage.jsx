@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux'
 import './Profile.scss'
 import EditDetails from './EditDetails';
 import ChangePassword from './ChangePassword';
-import ShipInfo from '../Elements/OrderInfo/ShipInfo'
+import ShipInfo from '../OrderPage/OrderElements/ShipInfo';
 const ProfilePage = () => {
   const {user}=useSelector((s)=>s.user);
   const [detailModel,setDetailModel]=useState(false);

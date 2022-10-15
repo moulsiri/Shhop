@@ -2,6 +2,7 @@ import {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { fetchUserOrders } from '../../../asyncActions/myOrders';
 import Skeleton from '@mui/material/Skeleton';
+import makeOrder from '../../../asset/makeOrder.png'
 
 import './uOrders.scss';
 import { styled } from '@mui/material/styles';
@@ -12,6 +13,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { LinearProgress } from '@mui/material';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -62,13 +64,22 @@ dispatch(fetchUserOrders());
     rows=myOrders.map((elm)=>createData(elm._id,elm.orderStatus,elm.orderItems.length,elm.paymentInfo.totalPrice))
     // console.log(rows)
   }
+  if(myOrders.length===0){
+    return <div class="uOrder">
+      <div id="noOrder">
+      <h1>No orders!</h1>
+      <img src={makeOrder} alt="" />
+      <p>add items to the cart and create your order!😀</p>
+      </div>
+    </div>
+  }
   return (
-    <div id="uOrder">
+    <div class="uOrder">
       <h1>Your Orders</h1>
       
       {
         (loading
-          ? <Skeleton variant="rectangular" width={500} height={300} />
+          ? <LinearProgress />
           :    <TableContainer component={Paper}>
       <Table sx={{ minWidth: 500 }} aria-label="customized table">
         <TableHead>
@@ -76,7 +87,7 @@ dispatch(fetchUserOrders());
             <StyledTableCell>Order Id</StyledTableCell>
             <StyledTableCell align="right">Status</StyledTableCell>
             <StyledTableCell align="right">Item Qty</StyledTableCell>
-            <StyledTableCell align="right">Amount</StyledTableCell>
+            <StyledTableCell align="right">Amount (inr)</StyledTableCell>
             {/* <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell> */}
           </TableRow>
         </TableHead>

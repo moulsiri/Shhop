@@ -6,15 +6,15 @@ const User = ({user,mToggle,setMToggle}) => {
  
   
 
-  useEffect((e)=>{
-    if(mToggle){
-      document.body.style.overflow = "hidden";
-    }else{
-      document.body.style.overflow='initial';
+  // useEffect((e)=>{
+  //   if(mToggle){
+  //     document.body.style.overflow = "hidden";
+  //   }else{
+  //     document.body.style.overflow='initial';
 
-    }
+  //   }
 
-  },[mToggle])
+  // },[mToggle])
 
   
 

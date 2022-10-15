@@ -48,9 +48,8 @@
 
 #menuContent{
     width:100%;
-    height:inherit;
+    height:100vh;
     position:absolute;
-    // background-color: yellow;
     top:0;
     @include flex(center,center);
   

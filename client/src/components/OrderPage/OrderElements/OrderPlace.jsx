@@ -1,5 +1,5 @@
 import React from 'react'
-import css from '../styles/Order.module.scss';
+import css from '../Order.module.scss'
 import { useSelector } from 'react-redux';
 import {Link} from 'react-router-dom'
 
