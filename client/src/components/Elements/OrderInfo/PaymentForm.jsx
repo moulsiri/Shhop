@@ -4,7 +4,7 @@ import ShipInfo from './ShipInfo';
 import css from '../styles/Elements.module.scss';
 import {useSelector,useDispatch} from 'react-redux'
 import axios from 'axios';
-import {getOrderPlaceAsync,clearErrorAsync,clearStatusAsync} from '../../../asyncActions/paymentAction';
+import {getOrderPlaceAsync,OrderClearErrorAsync,clearStatusAsync} from '../../../asyncActions/paymentAction';
 import { paymentStatusSuccess, paymentRequest,paymentFail} from '../../../features/OrderSLice';
 import {clearCart} from '../../../features/cartSlice';
 import { useNavigate } from 'react-router-dom';
@@ -14,27 +14,23 @@ import { useAlert } from 'react-alert';
 import Backdrop from '@mui/material/Backdrop';
 import OrderSuccess from './OrderSuccess';
 const PaymentForm = () => {
-   const {paymentInfo,shippingInfo,orderPlaced,error}=useSelector((s)=>s.orderData);
+   const {paymentInfo,orderPlaced,error}=useSelector((s)=>s.orderData);
+   const {user}=useSelector((s)=>s.user);
+   const {shippingInfo}=user;
    const cartData=useSelector((s)=>s.cartData);
    const dispatch=useDispatch();
    const navigate=useNavigate();
    const alert=useAlert();
-  //  const {user}=useSelector((s)=>s.user);
   useEffect(() => {
-    // console.log(cartData)
     loadScript("https://checkout.razorpay.com/v1/checkout.js");
 },[]);
 
 useEffect(()=>{
-   if(paymentInfo.status==="done"){
-    dispatch(getOrderPlaceAsync(getOrderData()));
-   }
-   
    if(error){
     alert.show(error)
-    dispatch(clearErrorAsync())
+    dispatch(OrderClearErrorAsync())
    }
-},[paymentInfo,orderPlaced,error])
+},[error])
 
 const getOrderData=()=>{
   let orderItems=cartData.cart.map((elm)=>{
@@ -87,6 +83,8 @@ const getPayment=()=>{
       let pData=await  axios.post("/api/v1/payment/verify", response, { headers });
       if(pData.data.signatureIsValid){
        dispatch(paymentStatusSuccess());
+       dispatch(getOrderPlaceAsync(getOrderData()));
+
      }else{
          alert("There is some problem in the payment.....");
          dispatch( paymentFail("Verification failed!"))
@@ -117,7 +115,8 @@ const SuccessReset=()=>{
   return (
         <div className={css.PaymentForm}>
         <ShipInfo SubHeading={'You are eligible for free shipment'}></ShipInfo>
-        <OrderPlace></OrderPlace>
+        {/* OrderSummary likhi hai isme */}
+        <OrderPlace></OrderPlace> 
         <button className={css.oBtn} onClick={getPayment}>Finish Payment</button>
 
         <Backdrop
@@ -125,8 +124,8 @@ const SuccessReset=()=>{
         open={orderPlaced}
         onClick={SuccessReset}
       >
-      <OrderSuccess></OrderSuccess>
-      </Backdrop>
+        <OrderSuccess></OrderSuccess>
+        </Backdrop>
         </div>
   )
 }

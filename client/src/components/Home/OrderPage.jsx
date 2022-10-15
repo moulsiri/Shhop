@@ -10,12 +10,13 @@ import { useState } from 'react';
 
 import ShippingForm from '../Elements/OrderInfo/OrderStepShipping';
 import PaymentForm from '../Elements/OrderInfo/PaymentForm';
-
+import { StepButton } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const OrderPage = () => {
   const matches=useMediaQuery('(max-width:800px)')
   let [activeStep,setActiveStep]=useState(1);
-
+  const Navigate=useNavigate();
   const HandleBack=()=>{
     let tmp=activeStep-1;
     setActiveStep(tmp)
@@ -38,9 +39,12 @@ const OrderPage = () => {
     }>
     <Stepper activeStep={activeStep} orientation={matches?"vertical":"horizontal"}>
     <Step>
-      <StepLabel>
+    <StepButton onClick={()=>Navigate('/cart')}>
+       <StepLabel>
         Order Requested
       </StepLabel>
+    </StepButton>
+     
     </Step>
     <Step>
       <StepLabel>

@@ -5,9 +5,14 @@ import { clearErrorAsync } from '../../../asyncActions/detailsUpdateStatusAction
 import { getUserDataAsync } from '../../../asyncActions/userAction';
 import { updateStatusReset } from '../../../features/DetailsUpdate';
 import ShipForm from '../../utils/Models/ShipForm';
-
+import {useAlert} from 'react-alert'
+import { OrderClearErrorAsync } from '../../../asyncActions/paymentAction';
+import { useNavigate } from 'react-router-dom';
 const ShippingForm = ({activeStep,setActiveStep}) => {
+  const Navigate=useNavigate();
+  const alert=useAlert();
   const {loading,success,error,successNote}=useSelector((s)=>s.detailsUpdateStatus);
+  const orderProcess=useSelector((s)=>s.orderData)
   const {user}=useSelector((s)=>s.user);
   const dispatch=useDispatch();
   const [shipData,setShipData]=useState(null)
@@ -37,6 +42,20 @@ const ShippingForm = ({activeStep,setActiveStep}) => {
    }
 
   },[success,error])
+
+
+  //Razorpay error ko yhan handle karenge
+  useEffect((e)=>{
+    if(orderProcess.error){
+       alert(orderProcess(orderProcess.error));
+       dispatch(OrderClearErrorAsync())
+       Navigate('/cart')
+    }
+
+  },[orderProcess.error])
+  if(orderProcess.loading){
+    return (<CircularProgress color="secondary"/>)
+  }
   return (
     <>
     <div>{

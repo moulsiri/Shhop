@@ -35,7 +35,7 @@ export const getOrderPlaceAsync=(data)=>async (dispatch)=>{
     }
 }
 
-export const clearErrorAsync=()=>(dispatch)=>{
+export const OrderClearErrorAsync=()=>(dispatch)=>{
     setTimeout((e)=>{
         dispatch(clearError());
     },2000)
