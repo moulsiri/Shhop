@@ -32,6 +32,7 @@ import AdminProducts from './components/Dashboard/AdminProducts/AdminProducts';
 import Dashboard from './components/Dashboard/AdminDashboard/Dashboard';
 import AdminOrder from './components/Dashboard/AdminOrder/AdminOrder';
 import AdminUsers from './components/Dashboard/AdminUsers/AdminUsers';
+import AdminEditProduct from './components/Dashboard/AdminProducts/AdminEditProduct';
 
 
 
@@ -90,7 +91,9 @@ function App() {
         <Route exact path="/auth" element={<Register/>}/>
         <Route exact path="admin/dashboard" element={<ProtectedRoute adminCheck={true}><AdminPanel/></ProtectedRoute>}>
           <Route index element={<ProtectedRoute adminCheck={true}><Dashboard/></ProtectedRoute>}></Route>
-          <Route path="products" element={<ProtectedRoute adminCheck={true}><AdminProducts/></ProtectedRoute>}></Route>
+          <Route path="products" element={<ProtectedRoute adminCheck={true}><AdminProducts/></ProtectedRoute>}>
+            <Route exact path=":id" element={<AdminEditProduct/>}></Route>
+          </Route>
           <Route path="orders" element={<ProtectedRoute adminCheck={true}><AdminOrder/></ProtectedRoute>}></Route>
           <Route path="users" element={<ProtectedRoute adminCheck={true}><AdminUsers/></ProtectedRoute>}></Route>
         </Route>

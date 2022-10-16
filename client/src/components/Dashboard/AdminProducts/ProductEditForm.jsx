@@ -1,86 +1,25 @@
-import {useState,useEffect} from 'react';
-import {useSelector,useDispatch} from 'react-redux';
+import React from 'react'
+
 
 import './adminProduct.scss';
-import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { Avatar, Button, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
-import { useAlert } from 'react-alert';
-
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 500,
-    height:600,
-    overflow:'auto',
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    p: 4,
-    display:'flex',
-    flexDirection:"column",
-    alignItems:'center',
-  };
-const AdminProductModel= ({open,setOpen,Heading,Item}) => {
-  const alert=useAlert();
-  const dispatch=useDispatch();
-    const {products }=useSelector((e)=>e.products)
-    const [details,setDetail]=useState({
-      _id:"",
-      name:"",
-      category:"",
-      price:"",
-      discount:"",
-      oldPrice:"",
-      Stock:"",
-      tags:[],
-      image:"",
-      Note:"",
-      description:"",
-  })
-    useEffect((e)=>{
-      if(Item!=='new'){
-        setDetail(products[Item]);
-      }else{
-        setDetail({
-          _id:"",
-          name:"",
-          category:"",
-          price:"",
-          discount:"",
-          oldPrice:"",
-          Stock:"",
-          tags:[],
-          image:"",
-          Note:"",
-          description:"",
-      })
-      }
-
-    },[Item])
-
-
-
+const ProductEditForm = ({details,work,setDetail}) => {
     const getValues=(e)=>{
       setDetail({...details,[e.target.name]:e.target.name==='tags'?e.target.value.split(" "):e.target.value});
     }
-
     const submitDetails=()=>{
       console.log(details)
     }
+
+    
   return (
-    <Modal
-    open={open}
-    onClose={()=>{setOpen(!open)}}>
-     <Box sx={style}>
-      <div id="pModelHeader">
-      <Typography color="secondary" variant="h6" component="h2">{Heading}</Typography>
-      {(Item!=='new')
+    <>
+     <div id="pModelHeader">
+      <Typography color="secondary" variant="h6" component="h2">{work} product! </Typography>
+      {(work!=='create')
         ?<Typography color="primary" variant="caption" component="p">Product id: {details._id}</Typography>
         :""}
       </div>  
@@ -204,19 +143,10 @@ const AdminProductModel= ({open,setOpen,Heading,Item}) => {
 
 
       </div>
-    
-
-    
-    
-   
-
-
      <Button variant="contained" color="secondary" style={{marginTop:"1em"}} onClick={submitDetails}>Submit</Button>
-     </Box>
-
-
-    </Modal>
+    
+    </>
   )
 }
 
-export default AdminProductModel
+export default ProductEditForm

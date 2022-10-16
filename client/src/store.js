@@ -10,6 +10,8 @@ import myOrderSlice from './features/myOrderSlice';
 import storage from 'redux-persist/lib/storage';
 import {persistReducer,persistStore} from 'redux-persist';
 import thunk from 'redux-thunk';
+import  adminProductSlice from './features/admin/adminProductSlice';
+import productDetailSlice from './features/productDetailSlice';
 
 const persistConfig={
     key:'root',
@@ -26,7 +28,10 @@ export const store=configureStore({
         cartData:cartSlice,
         orderData:orderSlice,
         detailsUpdateStatus:DetailsUpdate,
-        myOrders:myOrderSlice
+        myOrders:myOrderSlice,
+        productDetails:productDetailSlice,
+
+        adminProducts:adminProductSlice
     },
     middleware:[thunk]
 })

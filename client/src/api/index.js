@@ -15,6 +15,10 @@ export const fetchProducts=(page=1,range=[0,25000],category=null)=>{
     headers: { 'Content-Type': 'multipart/form-data' },
     })
 };
+//fetch single product
+export const fetchProductDetails=(id)=>axios.get(`/api/v1/products/details/${id}`);
+
+
 //getting user orders
 export const fetchMyOrders=()=>axios.get('/api/v1/order/userOrders')
 

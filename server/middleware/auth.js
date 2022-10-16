@@ -4,7 +4,7 @@ import User from '../models/userModel.js'
 export const isAuthenticatedUser=async (req,res,next)=>{
     try{
         const {token}=req.cookies;
-        // console.log(req.cookies)
+        
         if(!token){
            return res.status(401).json({message:"Please login to access these resources"})
         }else{
