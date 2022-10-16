@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import MenuPanel from './MenuPanel';
 
 import Modal from '@mui/material/Modal';
+import { Box } from '@mui/material';
 
 const NavBar = () => {
     const {theme}=useSelector((store)=>store.themeControl);
@@ -34,7 +35,9 @@ const NavBar = () => {
         <Modal
     open={mToggle}
     onClose={()=>{setMToggle(true)}}>
-<MenuPanel setMToggle={setMToggle}/>
+        <Box sx={{width:'100%'}}>
+            <MenuPanel setMToggle={setMToggle}/>
+        </Box>
     </Modal>
         <nav>
     <div id={css.nlft}>

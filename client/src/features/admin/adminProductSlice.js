@@ -22,7 +22,7 @@ export const adminProductSlice=createSlice({
             state.productsCount=action.payload.productsCount;
         },
         getAdminProductFail:(state,action)=>{
-            state.error=action.paylaod;
+            state.error=action.payload;
             state.loading=false;
         },
         clearErrors:(state)=>{

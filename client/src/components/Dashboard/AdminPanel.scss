@@ -9,6 +9,10 @@
     // background-color: yellow;
     padding-left: 20vmax;
     padding-bottom: 10vh;
+    // border:1px solid transparent;
+    @include mobile(700px){
+        padding-left: 0;
+    }
   
 }
 #AdminNav{
@@ -106,8 +110,21 @@
             
         }
     }
+    @include mobile(700px){
+        display: none;
+    }
    
    
+}
+
+#AdminMobNav{
+    position: fixed;
+    top:5%;
+    left: 5%;
+    display: none;
+    @include mobile(700px){
+        display: initial;
+    }
 }
 #adminDashboard{
     width:100%;
@@ -124,4 +141,25 @@
         font-size: 1.1em;
         color:colors(secText);
     }
+}
+.alogo{
+    color:colors(logo);
+    font-family:$primaryFont;
+    font-weight: 600;
+    letter-spacing:1px;
+    font-size: 3em;
+    display: none;
+      @include mobile(700px){
+         display: initial;
+        
+      }
+  
+    span{
+        color:var(--actionClr2)
+    }
+    cursor: pointer;
+}
+.linkStyle{
+    text-decoration: none;
+    color:colors(primText);
 }

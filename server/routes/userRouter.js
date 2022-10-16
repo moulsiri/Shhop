@@ -8,9 +8,13 @@ import { registerUser,
         updateUserPassword, 
         updateAvatarByLink, 
         updateDetails, 
-        updateShipInfo} from '../controllers/userController.js';
+        updateShipInfo,
+        getAllUsers,
+        getIndividualUser,
+        updateUserRole,
+        deleteUser} from '../controllers/userController.js';
         
-import { isAuthenticatedUser } from '../middleware/auth.js';
+import { authorizeRoles, isAuthenticatedUser } from '../middleware/auth.js';
 const router=express.Router();
 
 router.route("/register").post(registerUser);
@@ -23,4 +27,13 @@ router.route('/update/password').put(isAuthenticatedUser, updateUserPassword);
 router.route('/update/avatarViaLink').put(isAuthenticatedUser,updateAvatarByLink);
 router.route('/update/details').put(isAuthenticatedUser,updateDetails);
 router.route('/update/shipInfo').put(isAuthenticatedUser,updateShipInfo);
+
+
+
+router.route('/admin/allUsers').get(isAuthenticatedUser,authorizeRoles('admin'),getAllUsers);
+router.route('/admin/user/:id').get(isAuthenticatedUser,authorizeRoles('admin'),getIndividualUser);
+router.route('/admin/updateRole/:id').put(isAuthenticatedUser,authorizeRoles('admin'),updateUserRole);
+router.route('/admin/delete/user/:id').delete(isAuthenticatedUser,authorizeRoles('admin'),deleteUser);
+
 export default router;
+

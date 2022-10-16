@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import css from '../styles/Elements.module.scss';
+import  '../styles/MainElements.scss';
 import { useSelector,useDispatch } from 'react-redux';
 import {addToTheCart, removeFromTheCart} from '../../../features/cartSlice';
 import ReactStars from 'react-rating-stars-component';
@@ -19,13 +20,14 @@ const ProductCard = ({data}) => {
     const {cart} =useSelector(state=>state.cartData);
    const fTimeCart=(id,data)=>{
     dispatch(addToTheCart({productId:id,Qty:1,productData:data,pTotal:data.price}));
-    console.log(id)
    }
    const increaseQty=(id,data)=>{
     let prevQty=cart.find((elm)=>elm.productId===id).Qty
-    prevQty++
-    // console.log(prevQty)
-    dispatch(addToTheCart({productId:id,Qty:prevQty,pTotal:data.price*prevQty}));
+    if(prevQty<data.Stock){
+       prevQty++
+    dispatch(addToTheCart({productId:id,Qty:prevQty,pTotal:data.price*prevQty})); 
+    }
+    
 
    
    }
@@ -77,7 +79,8 @@ const ProductCard = ({data}) => {
             <i className="ri-add-line" id={css.authIndicator}></i>
         </div> */}
 
-        <div className={css.cBtn} >
+       {data?.Stock!==0
+        ?<div className={css.cBtn} >
             {(cart.find((e)=>(e.productId===data._id)))
             ? <div> <i className="ri-subtract-line" id={css.cDelete}onClick={()=>{decreaseQty(data?._id,data)}}></i>
             <p>{cart.find((e)=>(e.productId===data._id)).Qty}</p> <i className="ri-add-circle-fill" id={css.cAdd}  onClick={()=>{increaseQty(data?._id,data)}}></i></div> 
@@ -85,7 +88,10 @@ const ProductCard = ({data}) => {
             <i className="ri-add-line" id={css.authIndicator} onClick={()=>{fTimeCart(data?._id,data)}}></i> </>
         }     
         </div> 
-
+        : <div className="outOfStackTag">
+           <p>Out of Stock</p>
+        </div>
+}
     </div>
 </div>
   )

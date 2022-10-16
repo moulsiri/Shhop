@@ -65,7 +65,7 @@ dispatch(fetchUserOrders());
     // console.log(rows)
   }
   if(myOrders.length===0){
-    return <div class="uOrder">
+    return <div className="uOrder">
       <div id="noOrder">
       <h1>No orders!</h1>
       <img src={makeOrder} alt="" />
@@ -74,7 +74,7 @@ dispatch(fetchUserOrders());
     </div>
   }
   return (
-    <div class="uOrder">
+    <div className="uOrder">
       <h1>Your Orders</h1>
       
       {

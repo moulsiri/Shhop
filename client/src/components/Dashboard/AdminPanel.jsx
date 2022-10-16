@@ -1,6 +1,7 @@
 import {useEffect} from 'react'
 import './AdminPanel.scss';
 import css from './dashboard.module.scss';
+import AMobNav from './AMobNav';
 
 import {getProductsAsync} from '../../asyncActions/productAction';
 
@@ -28,6 +29,7 @@ const AdminPanel = () => {
   }
   return (
    <div id="AdminPanel">
+    <AMobNav/>
           <nav id="AdminNav">
             <div id="content">
             <Link to="/" style={{textDecoration: 'none'}}><h3 className={css.logo}>Shhop<span>.</span></h3></Link>
@@ -60,6 +62,7 @@ const AdminPanel = () => {
         
           </nav> 
            <div id="adminDashboard">
+           <Link to="/" style={{textDecoration: 'none'}}><h3 className='alogo'>Shhop<span>.</span></h3></Link>
             <h6>(Only for admin)</h6>
             <Outlet></Outlet>
           </div>

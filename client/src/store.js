@@ -12,6 +12,8 @@ import {persistReducer,persistStore} from 'redux-persist';
 import thunk from 'redux-thunk';
 import  adminProductSlice from './features/admin/adminProductSlice';
 import productDetailSlice from './features/productDetailSlice';
+import adminOrderSlice from './features/admin/adminOrderSlice';
+import adminUserSlice from './features/admin/adminUserSlice';
 
 const persistConfig={
     key:'root',
@@ -31,7 +33,9 @@ export const store=configureStore({
         myOrders:myOrderSlice,
         productDetails:productDetailSlice,
 
-        adminProducts:adminProductSlice
+        adminProducts:adminProductSlice,
+        adminOrders:adminOrderSlice,
+        adminUsers:adminUserSlice
     },
     middleware:[thunk]
 })

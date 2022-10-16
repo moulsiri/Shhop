@@ -12,10 +12,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Skeleton from '@mui/material/Skeleton';
 
 import { Link } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
+import { CircularProgress } from '@mui/material';
 
 // import AdminProductModel from './AdminProductModel';
 
@@ -94,14 +94,13 @@ const AdminProducts = () => {
   return (
     <>
     <Outlet></Outlet>
-    {/* <AdminProductModel open={isModel} Heading={modelHeading} setOpen={setIsModel} Item={itemNm}></AdminProductModel> */}
        <div id="aProduct">
       <h1>Product Lists</h1>
       <Link to="new"  style={linkStyle}><button>Create</button></Link>
     </div>
     {
       (loading
-        ? <Skeleton variant="rectangular" width={500} height={300} />
+        ? <CircularProgress />
         :    <TableContainer component={Paper}>
     <Table sx={{ minWidth: 500 }} aria-label="customized table">
       <TableHead>

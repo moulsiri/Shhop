@@ -216,3 +216,84 @@ export const updateShipInfo=async(req,res,next)=>{
 
     }
 }
+
+//get all user --admin
+export const getAllUsers=async (req,res,next)=>{
+    try{
+        const users=await User.find();
+        res.status(200).json({
+            success:true,
+            users,
+            totalUsers:users.length
+        })
+
+    }catch(err){
+        res.status(404).json({
+            message:err.message
+        })
+    }
+}
+
+//get individual user --admin
+export const getIndividualUser=async (req,res,next)=>{
+    try{
+      const user=await User.findById(req.params.id);
+    if(!user){
+        return res.status(404).json({message:`User does not exist with Id: ${req.params.id}`})
+    }
+    res.status(200).json({
+        success:true,
+        user,
+    });  
+    }catch(err){
+        res.status(404).json({
+            message:err.message
+        })
+    }
+    
+}
+
+//update user Role --admin
+export const updateUserRole=async(req,res,next)=>{
+    try{
+        const newData={
+            name:req.body.name,
+            email:req.body.email,
+            role:req.body.role,
+        }
+        await User.findByIdAndUpdate(req.params.id,newData,{
+            new:true,
+            runValidators:true,
+            useFindAndModify:false,
+        })
+        res.status(200).json({
+            success:true,
+        })
+
+    }catch(err){
+        res.status(404).json({
+            message:err.message
+        })
+    }
+}
+
+//delete User --admin
+export const deleteUser=async(req,res,next)=>{
+    try{
+
+        const user=await User.findById(req.params.id);
+        if(!user){
+            return res.status(400).json({message:`User does not exist with Id: ${req.params.id}`})
+        }
+        await user.remove();
+        res.status(200).json({
+            success:true,
+            message:"User Deleted Successfully"
+        })
+    }catch(err){
+        res.status(404).json({
+            message:err.message
+        })
+    }
+
+}
