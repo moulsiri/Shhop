@@ -163,3 +163,32 @@
     text-decoration: none;
     color:colors(primText);
 }
+
+.dashboard{
+    width: 100%;
+    min-height: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+#totalAmount{
+    width:100%;
+    padding: .5em 1em;
+    background-color:colors(hover);
+    color:#fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h2{
+        font-weight: 400;
+        color:colors(primText)
+
+    }
+
+}
+.numFormat{
+    color:colors(secText);
+    letter-spacing: .1em;
+}

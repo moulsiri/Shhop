@@ -1,4 +1,6 @@
 import {useState,useEffect} from 'react';
+import {NumericFormat} from "react-number-format";
+
 
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -41,7 +43,7 @@ const AdminOrderTable = ({rows}) => {
           <StyledTableCell align="right">Order Recieving Date</StyledTableCell>
           <StyledTableCell align="right">Quantity</StyledTableCell>
           <StyledTableCell align="right">Order Status</StyledTableCell>
-          <StyledTableCell align="right">Total Amount</StyledTableCell>
+          <StyledTableCell align="right">Total Amount (Inr)</StyledTableCell>
           <StyledTableCell align="right">Shipping Info</StyledTableCell>
 
         </TableRow>
@@ -56,7 +58,11 @@ const AdminOrderTable = ({rows}) => {
             <StyledTableCell align="right">{row.createdAt}</StyledTableCell>
             <StyledTableCell align="right">{row.Qty}</StyledTableCell>
             <StyledTableCell align="right">{row.orderStatus}</StyledTableCell>  
-            <StyledTableCell align="right">{row.totalPrice}</StyledTableCell>
+            <StyledTableCell align="right"> <NumericFormat
+    value={row.totalPrice}
+    displayType={"text"}
+    thousandSeparator={true}
+    className="numFormat"/></StyledTableCell>
             <StyledTableCell align="right">{row.shippingInfo.address} {row.shippingInfo.city},{row.shippingInfo.state},{row.shippingInfo.pinCode}</StyledTableCell>
           </StyledTableRow>
         ))}

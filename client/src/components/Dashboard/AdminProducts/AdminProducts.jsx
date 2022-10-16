@@ -1,8 +1,8 @@
 import {useState,useEffect} from 'react';
 import './adminProduct.scss';
+import {NumericFormat} from "react-number-format";
 
 import {useSelector, useDispatch} from 'react-redux';
-import { getAdminProductAsync } from '../../../asyncActions/admin/adminProductAction';
 
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -86,10 +86,7 @@ const AdminProducts = () => {
       ))
     // console.log(rows)
   }
-  useEffect((e)=>{
-    dispatch(getAdminProductAsync());
-  },[])
-
+ 
 
   return (
     <>
@@ -108,8 +105,8 @@ const AdminProducts = () => {
         <StyledTableCell>#</StyledTableCell>
           <StyledTableCell align="right">Product Id</StyledTableCell>
           <StyledTableCell align="right">Product Name</StyledTableCell>
-          <StyledTableCell align="right">Price</StyledTableCell>
-          <StyledTableCell align="right">Old Price</StyledTableCell>
+          <StyledTableCell align="right">Price (inr)</StyledTableCell>
+          <StyledTableCell align="right">Old Price (inr)</StyledTableCell>
           <StyledTableCell align="right">Discount(%)</StyledTableCell>
           <StyledTableCell align="right">Stock</StyledTableCell>
           <StyledTableCell align="right">Created At</StyledTableCell>
@@ -125,8 +122,16 @@ const AdminProducts = () => {
               {row.id}
             </StyledTableCell>
             <StyledTableCell align="right">{row.name}</StyledTableCell>
-            <StyledTableCell align="right">{row.price}</StyledTableCell>
-            <StyledTableCell align="right">{row.oldPrice}</StyledTableCell>  
+            <StyledTableCell align="right"><NumericFormat
+    value={row.price}
+    displayType={"text"}
+    thousandSeparator={true}
+    className="numFormat"/></StyledTableCell>
+            <StyledTableCell align="right"><NumericFormat
+    value={row.oldPrice}
+    displayType={"text"}
+    thousandSeparator={true}
+    className="numFormat"/></StyledTableCell>  
             <StyledTableCell align="right">{row.discount}</StyledTableCell>
             <StyledTableCell align="right">{row.stock}</StyledTableCell>
             <StyledTableCell align="right">{row.createdAt}</StyledTableCell>

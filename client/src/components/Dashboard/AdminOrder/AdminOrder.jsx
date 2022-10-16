@@ -1,6 +1,5 @@
 import {useEffect,useState} from 'react'
 import {useSelector,useDispatch} from 'react-redux';
-import {getAdminOrdersAsync} from '../../../asyncActions/admin/adminOrderAction';
 
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -27,9 +26,7 @@ const AdminOrder = () => {
   const {orders,loading,success}=useSelector((s)=>s.adminOrders);
   const dispatch=useDispatch();
   const [row,setRow]=useState(null);
-  useEffect(()=>{
-    dispatch(getAdminOrdersAsync());
-  },[])
+
 
   useEffect((e)=>{
       if(!loading && success){
@@ -56,6 +53,7 @@ const AdminOrder = () => {
     <>
     <div id="aOrderHeader">
       <h1>All Orders</h1>
+      
     </div>
     {
       (!loading && success && row)

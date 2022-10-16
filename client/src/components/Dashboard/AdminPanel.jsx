@@ -3,16 +3,22 @@ import './AdminPanel.scss';
 import css from './dashboard.module.scss';
 import AMobNav from './AMobNav';
 
+import {useSelector,useDispatch} from 'react-redux';
+import {getAdminOrdersAsync} from '../../asyncActions/admin/adminOrderAction';
+import { getAdminUsersAsync } from '../../asyncActions/admin/adminUserAction';
+import { getAdminProductAsync } from '../../asyncActions/admin/adminProductAction';
+
 import {getProductsAsync} from '../../asyncActions/productAction';
 
 import { Link,NavLink } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 const AdminPanel = () => {
 
   const dispatch=useDispatch();
   useEffect((e)=>{
-    dispatch(getProductsAsync())
+    dispatch(getAdminOrdersAsync());
+    dispatch(getAdminUsersAsync());
+    dispatch(getAdminProductAsync());
   },[])
 
   const linkStyle={textDecoration: 'none',width:'80%'}
