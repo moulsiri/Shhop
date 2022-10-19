@@ -2,6 +2,8 @@ import User from '../models/userModel.js';
 import {sendToken} from '../utils/jwtToken.js'
 import crypto from 'crypto';
 import { nanoid } from 'nanoid';
+import cloudinary from 'cloudinary';
+import { dataUri } from '../utils/convertToURI.js';
 //Register a User
 export const registerUser=async(req,res,next)=>{
     try{
@@ -181,6 +183,20 @@ export const updateAvatarByLink=async (req,res,next)=>{
         })
     }
 }
+//user avtar upload
+export const uploadAvatarByFile=async(req,res,next)=>{
+    try{
+        // console.log(req.files)
+        let data=dataUri(req.files);
+        let cloudData=await cloudinary.v2.uploader.upload(data)
+        const {public_id,url}=cloudData;
+        res.status(200).json({message:'chl raha hai',public_id,url})
+
+
+    }catch(err){
+
+    }
+}
 
 //update userdetails 
 export const updateDetails=async (req,res,next)=>{
@@ -297,3 +313,4 @@ export const deleteUser=async(req,res,next)=>{
     }
 
 }
+

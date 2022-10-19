@@ -1,6 +1,12 @@
 import {useState,useEffect} from 'react';
 import {NumericFormat} from "react-number-format";
+import {useDispatch} from 'react-redux';
+import { updateOrderStatusAsync } from '../../../asyncActions/admin/adminOrderAction';
+import {useAlert} from 'react-alert';
 
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -33,6 +39,28 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 
 const AdminOrderTable = ({rows}) => {
+  const dispatch=useDispatch();
+  const [status,setStatus]=useState(null);
+  const [anchorEl, setAnchorEl]=useState(null);
+  const [selectedId,setId]=useState(null);
+
+  const open=Boolean(anchorEl);
+  const handleSelection=(e,id)=>{
+    setAnchorEl(e.currentTarget);
+    setId(id);
+  }
+  const handleClose=(e,rndm)=>{
+    if(selectedId && !rndm){
+      // console.log(e.target.innerText);
+      dispatch(updateOrderStatusAsync(selectedId,e.target.innerText))
+    }
+    setAnchorEl(null)
+    setId(null);
+    
+  }
+
+
+
   return (
     <TableContainer component={Paper}>
     <Table sx={{ minWidth: 500 }} aria-label="customized table">
@@ -57,7 +85,31 @@ const AdminOrderTable = ({rows}) => {
             </StyledTableCell>
             <StyledTableCell align="right">{row.createdAt}</StyledTableCell>
             <StyledTableCell align="right">{row.Qty}</StyledTableCell>
-            <StyledTableCell align="right">{row.orderStatus}</StyledTableCell>  
+            <StyledTableCell align="right">
+            <Button
+        id="change-status"
+        aria-controls={open ? 'change-status' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={(e)=>handleSelection(e,row.id)}
+      >
+        {row.orderStatus}
+            </Button>
+             <Menu
+      // sx={{boxShadow:'0 0 10px red'}}
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={(e)=>{handleClose(e,'surface')}}
+        MenuListProps={{
+          'aria-labelledby': 'change-status',
+        }}
+      >
+        <MenuItem onClick={(e)=>{handleClose(e,row.id)}}>Placed</MenuItem>
+        <MenuItem onClick={(e)=>{handleClose(e,row.id)}}>Shipped</MenuItem>
+        <MenuItem onClick={(e)=>{handleClose(e,row.id)}}>Delivered</MenuItem>
+             </Menu>
+            </StyledTableCell>  
             <StyledTableCell align="right"> <NumericFormat
     value={row.totalPrice}
     displayType={"text"}

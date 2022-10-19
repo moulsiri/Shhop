@@ -2,8 +2,10 @@ import { useState } from 'react';
 import css from '../styles/Elements.module.scss';
 import  '../styles/MainElements.scss';
 import { useSelector,useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {addToTheCart, removeFromTheCart} from '../../../features/cartSlice';
 import ReactStars from 'react-rating-stars-component';
+import { Skeleton } from '@mui/material';
 
 const options={
     edit:false,
@@ -16,6 +18,7 @@ const options={
 }
 const ProductCard = ({data}) => {
     const dispatch=useDispatch();
+    const {loading}=useSelector(state=>state.products)
     const {theme}=useSelector(state=>state.themeControl)
     const {cart} =useSelector(state=>state.cartData);
    const fTimeCart=(id,data)=>{
@@ -42,9 +45,13 @@ const ProductCard = ({data}) => {
 
    }
 
+   if(loading){
+    return <Skeleton variant="rounded" width={210} height={60} />
+   }
   return (
     <div className={css.card}>
-    <div className={css.cImg}>
+         <Link to={`product/details/${data?._id}`} className="linkStyle">
+          <div className={css.cImg}>
    {(!theme)? <div className={css.cOverly}></div>:""}
        
         <div className={css.cTag}>
@@ -52,6 +59,8 @@ const ProductCard = ({data}) => {
         </div>
         <img src={data?.image} alt=""/>
     </div>
+         </Link>
+   
     <div className={css.cHead}>
         <h1>{data?.name}</h1>
         <p>{data?.category} collection</p>

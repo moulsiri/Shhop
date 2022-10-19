@@ -12,7 +12,8 @@ import { registerUser,
         getAllUsers,
         getIndividualUser,
         updateUserRole,
-        deleteUser} from '../controllers/userController.js';
+        deleteUser,
+        uploadAvatarByFile} from '../controllers/userController.js';
         
 import { authorizeRoles, isAuthenticatedUser } from '../middleware/auth.js';
 const router=express.Router();
@@ -28,6 +29,7 @@ router.route('/update/avatarViaLink').put(isAuthenticatedUser,updateAvatarByLink
 router.route('/update/details').put(isAuthenticatedUser,updateDetails);
 router.route('/update/shipInfo').put(isAuthenticatedUser,updateShipInfo);
 
+router.route('/upload/avatar').put(isAuthenticatedUser,uploadAvatarByFile);
 
 
 router.route('/admin/allUsers').get(isAuthenticatedUser,authorizeRoles('admin'),getAllUsers);

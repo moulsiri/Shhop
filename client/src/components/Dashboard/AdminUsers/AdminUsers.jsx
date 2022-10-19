@@ -1,16 +1,51 @@
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, LinearProgress,Box } from '@mui/material';
 import {useEffect} from 'react'
 import { useSelector,useDispatch } from 'react-redux';
+import { AsyncClearStatus, getAdminUsersAsync } from '../../../asyncActions/admin/adminUserAction';
+
+import { useAlert } from 'react-alert';
+
+
 import AdminUserTable from './AdminUserTable';
 const AdminUsers = () => {
   const dispatch=useDispatch();
-  const {usersList,loading,success}=useSelector((s)=>s.adminUsers);
+  
+  const alert=useAlert();
+  const {usersList,loading,success,
+    updateLoading,
+    updateSuccess,
+  updateError,
+updateSuccessNote}=useSelector((s)=>s.adminUsers);
+
+useEffect((s)=>{
+if(updateSuccess){
+  alert.success(updateSuccessNote);
+  dispatch(getAdminUsersAsync());
+  dispatch(AsyncClearStatus());
+
+}
+if(updateError){
+  alert.error(updateError);
+  dispatch(AsyncClearStatus())
+}
+
+},[success,updateSuccess,updateError])
 
   return (
     <>
       <div id="aOrderHeader">
       <h1>All Users Details</h1>
     </div>
+    {
+      (updateLoading)
+      ?<Box sx={{ width: '100%',marginBottom:'.5em'}}>
+      <LinearProgress />
+    </Box>
+    :""
+    }
+
+
+
     {
       (!loading && success)
     ?<AdminUserTable rows={usersList}></AdminUserTable>

@@ -1,6 +1,19 @@
-import React from 'react'
+import {useState,useEffect} from 'react'
 import './about.scss';
+import axios from 'axios';
+
 const AboutPage = () => {
+  // const [img,setImg]=useState(null);
+  // useEffect((s)=>{
+  //   axios.get('https://images.unsplash.com/photo-1535957998253-26ae1ef29506?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=436&q=80')
+  //   .then((s)=>{
+  //     setImg(s.data);
+  //   }).catch((s)=>{
+  //     console.log(s);
+  //   })
+
+  // })
+
   return (
     <div id="aboutPage">
       <div id="alft">
@@ -39,7 +52,7 @@ phase of react js 😁. </h2>
 
         </div>
         <div id="frameImg">
-          <img src="https://images.unsplash.com/photo-1535957998253-26ae1ef29506?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=436&q=80" alt="" />
+          {/* <img src={imgLink} alt="" /> */}
 
         </div>
         <div id="greenShade"></div>

@@ -33,11 +33,13 @@ import Dashboard from './components/Dashboard/AdminDashboard/Dashboard';
 import AdminOrder from './components/Dashboard/AdminOrder/AdminOrder';
 import AdminUsers from './components/Dashboard/AdminUsers/AdminUsers';
 import AdminEditProduct from './components/Dashboard/AdminProducts/AdminEditProduct';
+import InternalServer from './components/utils/InternalServer';
+import ProductDetails from './components/ProductDetails/ProductDetails';
 
 
 
 function App() {
-  const {products,loading}=useSelector((store)=>store.products);
+  const {products,loading,error,success}=useSelector((store)=>store.products);
   const {user,isAuthenticated,admin}=useSelector((store)=>store.user);
   const {theme}=useSelector((store)=>store.themeControl);
   const MUItheme = createTheme({
@@ -66,6 +68,7 @@ function App() {
  
   useEffect((e)=>{
    store.dispatch(getUserDataAsync());
+   store.dispatch(getProductsAsync());
   },[])
   return (
     <div className="App">
@@ -74,9 +77,10 @@ function App() {
         <Routes>
         <Route exact path='/' element={<Hero></Hero>}>
              <Route index element={ <HomeLayout heading={`${(user)?`${user.username}!`:" "} have a good day`}
-                                                   cardData={!loading && products.map((elm)=><ProductCard key={elm._id} data={elm}/>)}
+                                                   cardData={products.map((elm)=><ProductCard key={elm._id} data={elm}/>)}
                                                    boxStyle={"grid"}
                                                    rightSide={<HomeElements/>}/>}/>
+            <Route path="product/details/:id" element={<ProductDetails/>}></Route>
              <Route path="cart" element={<CartPage/>}/>
              <Route path="browse" element={<BrowsePage/>}/>
              <Route path="trending" element={<TrendingPage/>}/>

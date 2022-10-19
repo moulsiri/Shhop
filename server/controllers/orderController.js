@@ -14,7 +14,7 @@ const order=await Order.create({
     orderItems,
     paymentInfo,
     user:req.user._id,
-    orderStatus:"Placed",
+    orderStatus:"Processing",
     deliveredAt:new Date(
       Date.now() + 10*24*60*60*1000
   ),

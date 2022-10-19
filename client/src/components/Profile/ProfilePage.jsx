@@ -1,21 +1,38 @@
-import {useState} from 'react';
+import {useState,useEffect} from 'react'
 import axios from 'axios';
+
 import {useSelector} from 'react-redux'
 import './Profile.scss'
 import EditDetails from './EditDetails';
 import ChangePassword from './ChangePassword';
 import ShipInfo from '../OrderPage/OrderElements/ShipInfo';
+
 const ProfilePage = () => {
+
+  const [img,setImg]=useState(null);
+
+
   const {user}=useSelector((s)=>s.user);
   const [detailModel,setDetailModel]=useState(false);
   const [chngPass,setChngPass]=useState(false);
-  // console.log(user);
+
+  // useEffect((s)=>{
+  //   axios.get('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1574&q=80')
+  //   .then((s)=>{
+  //     console.log(s);
+  //   })
+  //   .catch((s)=>{
+  //     console.log(s);
+  //   })
+  // })
+
+
   return (
       <div id="profile">
         <EditDetails open={detailModel} setOpen={setDetailModel}/>
         <ChangePassword open={chngPass} setOpen={setChngPass}></ChangePassword>
       <div id="pTop">
-        <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1574&q=80" alt="" />
+        {/* <img src={imgLink} alt="" /> */}
         <div id="orangeShade">
           <h1>Have an auspicious day!</h1>
         </div>

@@ -3,11 +3,15 @@ import express  from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
+import fileUploader from 'express-fileupload'
+
 import path, { dirname } from 'path';
 import * as url from 'url';
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+
 import connectDB from './database/connect.js';
+import connectCloud from './database/cloudinaryConnect.js';
 
 import productCard from './routes/getCards.js';
 import userRoute from './routes/userRouter.js';
@@ -21,6 +25,7 @@ if(process.env.NODE_ENV!=="PRODUCTION"){
     dotenv.config({path:'server/config/.env'});
 }
 
+app.use(fileUploader());
 app.use(cookieParser());
 app.use(cors());
 app.use(bodyParser.json({extended:true}));
@@ -46,6 +51,7 @@ const port=process.env.PORT || 3020;
 const start=async()=>{
     try{
         await connectDB(process.env.MONGO_URI);
+        await connectCloud();
         await app.listen(port,()=>console.log(`Server is listening to port no. ${port}`));
         createRaozrpayInstance();
 

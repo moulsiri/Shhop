@@ -6,6 +6,11 @@ const initialState={
     error:null,
     totalAmount:null,
     success:false,
+
+    updateLoading:false,
+    updateSuccess:false,
+    updateError:null,
+    updateSuccessNote:null
 }
 
 export const adminOrderSlice=createSlice({
@@ -29,6 +34,25 @@ export const adminOrderSlice=createSlice({
         clearErrors:(state)=>{
             state.loading=false;
             state.error=null;
+        },
+
+        updateOrderStatusRequest:(state,action)=>{
+            state.updateLoading=true
+        },
+        updateOrderStatusSuccess:(state,action)=>{
+            state.updateSuccess=true;
+            state.updateLoading=false;
+            state.updateSuccessNote=action.payload;
+        },
+        updateOrderStatusFail:(state,action)=>{
+            state.updateError=action.payload;
+            state.updateLoading=false;
+        },
+        clearUpdateError:(state,action)=>{
+            state.updateError=null;
+            state.updateSuccessNote=null;
+            state.loading=false;
+            state.updateSuccess=false;
         }
     }
 })
@@ -38,6 +62,11 @@ export const {
     getAdminOrderFail,
     getAdminOrders,
     getAdminOrderRequest,
-    clearErrors
+    clearErrors,
+
+    updateOrderStatusRequest,
+    updateOrderStatusSuccess,
+    updateOrderStatusFail,
+    clearUpdateError
 }=adminOrderSlice.actions;
 export default adminOrderSlice.reducer;

@@ -10,6 +10,7 @@ export const getProductsAsync=(page,range,category)=>async (dispatch,getState)=>
         dispatch(getProducts(d.data));
 
     }catch(err){
+        console.log(`error:${err.message}`)
         dispatch(getProductsFail(err.message));
     }
 

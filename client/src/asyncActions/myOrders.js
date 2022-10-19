@@ -14,6 +14,7 @@ export const fetchUserOrders=()=>async(dispatch)=>{
         dispatch(myOrderSuccess(d.data.data));
 
     }catch(err){
+        console.log(err.response)
        dispatch(myOrderFail(err.message))
     }
 

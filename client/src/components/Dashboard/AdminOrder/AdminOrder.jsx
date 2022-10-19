@@ -1,10 +1,15 @@
 import {useEffect,useState} from 'react'
 import {useSelector,useDispatch} from 'react-redux';
+import {AsyncClearUpdateErrors, getAdminOrdersAsync} from '../../../asyncActions/admin/adminOrderAction';
+
 
 import CircularProgress from '@mui/material/CircularProgress';
 
 import './AdminOrder.scss';
 import AdminOrderTable from './AdminOrderTable';
+import LinearProgress from '@mui/material/LinearProgress';
+import { Box } from '@mui/material';
+import { useAlert } from 'react-alert';
 
 function createData(
   id,
@@ -23,7 +28,10 @@ function createData(
       shippingInfo };
 }
 const AdminOrder = () => {
-  const {orders,loading,success}=useSelector((s)=>s.adminOrders);
+  const alert=useAlert();
+
+  const {orders,loading,success,updateLoading,updateSuccess,updateError,updateSuccessNote}=useSelector((s)=>s.adminOrders);
+  const oData=useSelector((s)=>s.adminOrders)
   const dispatch=useDispatch();
   const [row,setRow]=useState(null);
 
@@ -44,17 +52,48 @@ const AdminOrder = () => {
             city:elm.shippingInfo.city
           }
           ))
+          rows.sort((a,b)=>{
+            if(a.orderStatus!=="Delivered" && b.orderStatus==="Delivered"){
+              return -1;
+           }else if(a.orderStatus==="Delivered" && b.orderStatus!=="Delivered"){
+              return 1;
+           }else{
+              return new Date(b.createdAt.slice(0,10))-new Date(a.createdAt.slice(0,10))
+           }
+          })
+          
           setRow(rows);
       }
-  },[success])
+      // console.log(oData);
+  },[success,updateSuccess])
+  useEffect((e)=>{
+    if(updateSuccess){
+      alert.success(updateSuccessNote);
+      dispatch(getAdminOrdersAsync());
+      dispatch(AsyncClearUpdateErrors());
+
+    }
+    if(updateError){
+      alert.error(updateError)
+      dispatch(AsyncClearUpdateErrors());
+    }
+  },[updateSuccess,updateError])
 
 
   return (
     <>
     <div id="aOrderHeader">
       <h1>All Orders</h1>
-      
     </div>
+    {
+      (updateLoading)
+      ?<Box sx={{ width: '100%',marginBottom:'.5em'}}>
+      <LinearProgress />
+    </Box>
+      :""
+    }
+    
+
     {
       (!loading && success && row)
     ?<AdminOrderTable rows={row}></AdminOrderTable>

@@ -1,4 +1,10 @@
-import {useEffect} from 'react'
+import {useEffect,useState} from 'react'
+import {useSelector,useDispatch} from 'react-redux';
+import { updateUserRoleAsync } from '../../../asyncActions/admin/adminUserAction';
+
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -32,6 +38,30 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     },
   }));
 const AdminUserTable = ({rows}) => {
+  const dispatch=useDispatch();
+  const {user}=useSelector((s)=>s.user);
+  const [anchorEl, setAnchorEl]=useState(null);
+  const [details,setDetails]=useState(null);
+  const [selectedId,setId]=useState(null);
+  // console.log(user._id)
+  const open=Boolean(anchorEl);
+  const handleSelection=(e,data,id)=>{
+    setAnchorEl(e.currentTarget);
+    setDetails(data);
+    setId(id);
+  }
+  const handleClose=(e,rndm)=>{
+    if(selectedId && !rndm){
+      let tmp={...details,role:e.target.innerText}
+      dispatch(updateUserRoleAsync(selectedId,tmp))
+
+    }
+    setAnchorEl(null)
+    setDetails(null);
+    setId(null);
+    
+  }
+
   return (
     <TableContainer component={Paper}>
     <Table sx={{ minWidth: 500 }} aria-label="customized table">
@@ -56,7 +86,33 @@ const AdminUserTable = ({rows}) => {
             <StyledTableCell align="right">{row.name}</StyledTableCell>
             <StyledTableCell align="right">{row.username}</StyledTableCell>
             <StyledTableCell align="right">{row.email}</StyledTableCell>  
-            <StyledTableCell align="right">{row.role}</StyledTableCell>
+            <StyledTableCell align="right">
+            <Button
+        id="change-status"
+        aria-controls={open ? 'change-status' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        disabled={user._id===row._id?true:false}
+        onClick={(e)=>handleSelection(e,{name:row.name,
+                                         email:row.email},row._id)}
+      >
+         {row.role}
+            </Button>
+             <Menu
+      // sx={{boxShadow:'0 0 10px red'}}
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={(e)=>{handleClose(e,'surface')}}
+        MenuListProps={{
+          'aria-labelledby': 'change-status',
+        }}
+      >
+        <MenuItem onClick={(e)=>{handleClose(e)}}>admin</MenuItem>
+        <MenuItem onClick={(e)=>{handleClose(e)}}>user</MenuItem>
+             </Menu>
+              
+             </StyledTableCell>
           </StyledTableRow>
         ))}
       </TableBody>

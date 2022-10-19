@@ -19,12 +19,14 @@ export const productSlice=createSlice({
         getProducts:(state,action)=>{
             state.products=action.payload.products;
             state.loading=false;
+
             state.productsCount=action.payload.productsCount;
             state.resultPerPage=action.payload.resultPerPage;
             state.filteredProductsCount=action.payload.filteredProductsCount;
         },
         getProductsFail:(state,action)=>{
             state.loading=false;
+
             state.error=action.payload;
             state.products=[];
 
