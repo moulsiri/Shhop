@@ -4,6 +4,7 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import fileUploader from 'express-fileupload'
+import morgan from 'morgan';
 
 import path, { dirname } from 'path';
 import * as url from 'url';
@@ -31,6 +32,7 @@ app.use(cors());
 app.use(bodyParser.json({extended:true}));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.json());
+app.use(morgan('tiny'));
 
 app.use('/api/v1/products',productCard);
 app.use('/api/v1/user',userRoute);

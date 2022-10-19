@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import css from '../Order.module.scss';
 import {useSelector} from 'react-redux'
-import ShipFormModel from '../../utils/Models/ShipFormModel';
+import ShipFormModel from '../../utils/Forms/ShipFormModel';
 const ShipInfo = ({SubHeading}) => {
 
     const {user}=useSelector((e)=>e.user);

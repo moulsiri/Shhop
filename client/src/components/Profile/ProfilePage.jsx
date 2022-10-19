@@ -6,6 +6,7 @@ import './Profile.scss'
 import EditDetails from './EditDetails';
 import ChangePassword from './ChangePassword';
 import ShipInfo from '../OrderPage/OrderElements/ShipInfo';
+import UpdateAvatar from './UpdateAvatar';
 
 const ProfilePage = () => {
 
@@ -15,6 +16,7 @@ const ProfilePage = () => {
   const {user}=useSelector((s)=>s.user);
   const [detailModel,setDetailModel]=useState(false);
   const [chngPass,setChngPass]=useState(false);
+  const [updateAvatar,setUpdateAvatar]=useState(false);
 
   // useEffect((s)=>{
   //   axios.get('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1574&q=80')
@@ -29,6 +31,7 @@ const ProfilePage = () => {
 
   return (
       <div id="profile">
+        <UpdateAvatar open={updateAvatar} setOpen={setUpdateAvatar}></UpdateAvatar>
         <EditDetails open={detailModel} setOpen={setDetailModel}/>
         <ChangePassword open={chngPass} setOpen={setChngPass}></ChangePassword>
       <div id="pTop">
@@ -40,7 +43,7 @@ const ProfilePage = () => {
       <div id="picContainer">
      <div id="profilePic">
       <img src={user.avatar.url} alt="" />
-      <button id="changePicBtn">
+      <button id="changePicBtn" onClick={()=>{setUpdateAvatar(true)}}>
       <i className="ri-image-edit-fill"></i>
       </button>
      </div>

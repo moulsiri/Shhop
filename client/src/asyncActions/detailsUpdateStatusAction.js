@@ -47,6 +47,18 @@ export const updateShippingInfo=(data)=>async (dispatch,getState)=>{
     }
 }
 
+export const uploadAvatarAsync=(data)=>async (dispatch,getState)=>{
+    try{
+        dispatch(updateRequest());
+        let fetch=await api.uploadAvatar(data);
+        console.log(fetch);
+
+
+    }catch(err){
+        console.log(err)
+    }
+}
+
    export const clearErrorAsync=(alert)=>(dispatch,getState)=>{
 
 
