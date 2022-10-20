@@ -1,7 +1,13 @@
 import {getAdminProductRequest,
     getAdminProductSuccess,
     getAdminProductFail,
-    clearErrors} from '../../features/admin/adminProductSlice';
+    clearErrors,
+
+
+    updateRequest,
+    updateSuccess,
+    updateError,
+    clearUpdateStatus} from '../../features/admin/adminProductSlice';
 
     import * as api from '../../api/admin';
 
@@ -20,10 +26,43 @@ export const getAdminProductAsync=()=>async (dispatch)=>{
 
 export const createNewProductAsync=(data)=>async (dispatch)=>{
     try{
+        dispatch(updateRequest())
       let fetch=await api.createProduct(data);
-      console.log(fetch);
+      dispatch(updateSuccess("new product is successfully created"))
     }
     catch(err){
         console.log(err)
+       dispatch(updateError(err.response.data.message||err.message))
     }
+}
+
+export const updateProductDetailsAsync=(id,data)=>async (dispatch)=>{
+    try{
+        dispatch(updateRequest())
+        let fetch=await api.updateProduct(id,data);
+        console.log(fetch);
+        dispatch(updateSuccess("Product Edited successfully"));
+    }catch(err){
+        console.log(err);
+        dispatch(updateError(err.response.data.message||err.message));
+
+    }
+}
+
+export const deleteProductCardAsync=(id,data)=>async (dispatch)=>{
+    try{
+        dispatch(updateRequest())
+        let fetch=await api.deleteProduct(id);
+        dispatch(updateSuccess("Product Deleted successfully"));
+    }catch(err){
+        console.log(err);
+        dispatch(updateError(err.response.data.message||err.message));
+
+    }
+
+}
+export const AsyncClearStatus=()=>async (dispatch)=>{
+    setTimeout((e)=>{
+        dispatch(clearUpdateStatus());
+    },2000)
 }

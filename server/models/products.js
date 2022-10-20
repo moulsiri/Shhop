@@ -32,6 +32,7 @@ const productSchema=new mongoose.Schema({
     type:String
   }
   ],
+
   Note:{
     type:String,
   },
@@ -44,7 +45,45 @@ const productSchema=new mongoose.Schema({
   createdAt:{
     type:Date,
     default:Date.now,
-  }
+  }, 
+   images:[
+    {
+      public_id:{
+        type:String,
+        required:true
+      },
+      url:{
+        type:String,
+        required:true
+      }
+    }
+  ],
+  ratings:{
+    type:Number,
+    default:0,
+  },
+  numOfReviews:{
+    type:Number,
+    default:0,
+  },
+  reviews:[
+    {
+      user:{
+        type:mongoose.Schema.ObjectId,
+        ref:'User',
+        required:true,
+      },
+      rating:{
+        type:Number,
+        required:true,
+      },
+      comment:{
+        type:String,
+        required:true,
+      },
+    }
+  ]
+
 
 })
 const ProductCard=mongoose.model('ProductCards',productSchema);

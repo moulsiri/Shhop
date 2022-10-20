@@ -1,26 +1,39 @@
 import { Avatar, Box, Button, Chip, CircularProgress, Paper, Rating, Skeleton } from '@mui/material';
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import {useSelector,useDispatch} from 'react-redux';
 import { useParams } from 'react-router-dom'
 import {getProductDetailsAsync} from '../../asyncActions/productDetailsAction';
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
-
+import Carousel from 'react-material-ui-carousel'
 
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack'
 import './productDetails.scss'
+import RatingModel from './RatingModel';
+
+
 
 const ProductDetails = () => {
     const {id}=useParams();
-    const {productDetails,
-        loading,success}=useSelector((e)=>e.productDetails)
+    const {productDetails,loading,success}=useSelector((e)=>e.productDetails)
     const dispatch=useDispatch();
+    const [rating,setRating]=useState(0);
+    const [ratingModel,setRatingModel]=useState(false)
 
     useEffect((s)=>{
          dispatch(getProductDetailsAsync(id))
-    },[])
-    
+    },[]);
+
+    const style={
+      position:"absolute",
+      width:"20vmax",
+      left:"50%",
+      transform:'translate(-50%,-50%)',
+      zIndex:99,
+      top:'50%'
+
+    }
 
   return (
     <div className='productDetails'>
@@ -29,11 +42,18 @@ const ProductDetails = () => {
            {
             (loading)
             ?<Skeleton variant="rounded" width={"90%"} height={'40vmax'} />
-        :<img src={productDetails?.image} alt="" />
+            :<img src={productDetails?.image} alt="" />
         
-        }
+           }
       
         </div>
+        {/* <Carousel sx={style}>
+          {
+            productDetails?.images.map((e)=><Paper key={e.public_id}>
+              <img src={e.url} alt="imge" width="100%"/>
+            </Paper>)
+          }
+        </Carousel> */}
        
       </div>
      
@@ -42,7 +62,7 @@ const ProductDetails = () => {
          <Stack direction="row" spacing={1}>
           {/* <Skeleton width={"90%"}/> */}
           {
-            productDetails?.tags.map((e,i)=> <Chip color='primary' label={e} />)
+            productDetails?.tags.map((e,i)=> <Chip key={i} color='primary' label={e} />)
           }
          </Stack>
 
@@ -50,8 +70,8 @@ const ProductDetails = () => {
          <Typography variant="subtitle2" component="h6" color="secondary">{productDetails?.category.toUpperCase()}</Typography>
          <Typography variant="body2" component="h2">{productDetails?.Note}</Typography>
          <Typography variant="h3" component="h1">{productDetails?.name.toUpperCase()}</Typography>
-         <Rating name="read-only" value={3.5} size="small" precision={0.5} readOnly />
-         <Typography variant="caption" component="p">(2 Reviews)</Typography>
+         <Rating name="read-only" value={productDetails?.ratings || 0} size="small" precision={0.5} readOnly />
+         <Typography variant="caption" component="p">({productDetails?.numOfReviews} Reviews)</Typography>
          {/* <Typography variant="h6" component="h6"><Skeleton></Skeleton></Typography>
          <Typography variant="subtitle2" component="h2"><Skeleton></Skeleton></Typography>
          <Typography variant="h3" component="h1"><Skeleton></Skeleton></Typography> */}
@@ -73,8 +93,10 @@ const ProductDetails = () => {
 
          </Paper>
          <Box sx={{display:'flex',alignItems:'center',justifyContent:"space-around"}} mt={4}>
-         <Rating name="no-value" value={null} size="large" />
-         <Button variant="contained" color="secondary" endIcon={<EditRoundedIcon />}>REVIEW PRODUCT</Button>
+         <Rating name="no-value" value={rating} size="large"  onChange={(event, newValue) => {
+             setRating(newValue);
+            }} />
+         <Button variant="contained" color="secondary" endIcon={<EditRoundedIcon />} onClick={()=>setRatingModel(true)}>REVIEW PRODUCT</Button>
 
          </Box>
         <Box sx={{}} mt={4}>
@@ -97,6 +119,7 @@ const ProductDetails = () => {
       
          </div>
       </div>
+      <RatingModel open={ratingModel} setOpen={setRatingModel} rating={rating} />
        
     </div>
   )

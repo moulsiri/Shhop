@@ -15,7 +15,8 @@ import Paper from '@mui/material/Paper';
 
 import { Link } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
-import { CircularProgress } from '@mui/material';
+import { Box, CircularProgress, LinearProgress } from '@mui/material';
+import { AsyncClearStatus, deleteProductCardAsync, getAdminProductAsync } from '../../../asyncActions/admin/adminProductAction';
 
 // import AdminProductModel from './AdminProductModel';
 
@@ -69,7 +70,8 @@ const AdminProducts = () => {
   const dispatch=useDispatch();
   const {products,
     loading,
-   productsCount}=useSelector((store)=>store.adminProducts);
+   productsCount,
+   updateLoading,updateSuccess,updateError,updateSuccessNote}=useSelector((store)=>store.adminProducts);
 
 
   let rows=[]
@@ -86,7 +88,22 @@ const AdminProducts = () => {
       ))
     // console.log(rows)
   }
- 
+  useEffect((e)=>{
+    if(updateSuccess){
+      alert(updateSuccessNote);
+      dispatch(getAdminProductAsync());
+        dispatch(AsyncClearStatus())
+
+    }
+    if(updateError){
+      alert(updateError)
+      dispatch(AsyncClearStatus())
+    }
+  },[updateSuccess,updateError])
+
+  const deleteProductHandler=(id)=>{
+    dispatch(deleteProductCardAsync(id));
+  }
 
   return (
     <>
@@ -95,6 +112,7 @@ const AdminProducts = () => {
       <h1>Product Lists</h1>
       <Link to="new"  style={linkStyle}><button>Create</button></Link>
     </div>
+    <Box sx={{ width: '100%',marginBottom:'.5em'}}>{updateLoading?<LinearProgress />:" "}</Box>
     {
       (loading
         ? <CircularProgress />
@@ -136,7 +154,7 @@ const AdminProducts = () => {
             <StyledTableCell align="right">{row.stock}</StyledTableCell>
             <StyledTableCell align="right">{row.createdAt}</StyledTableCell>
             <StyledTableCell align="right"><Link to={`${row.id}`} style={linkStyle}><i className="ri-edit-box-line adminPrductUpdate"></i></Link> </StyledTableCell>
-            <StyledTableCell align="right"><i className="ri-delete-bin-line adminProductDelete"></i></StyledTableCell>
+            <StyledTableCell align="right"><i className="ri-delete-bin-line adminProductDelete" onClick={()=>deleteProductHandler(row.id)}></i></StyledTableCell>
           </StyledTableRow>
         ))}
       </TableBody>

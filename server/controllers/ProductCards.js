@@ -55,35 +55,75 @@ export const getProductDetails=async(req,res)=>{
 
 }
 
+//create newReview or update the review
+export const createProductReview=async (req,res)=>{
+    try{
+        const {rating,comment,productId}=req.body;
+        const review={
+            user:req.user._id,
+            rating:Number(rating),
+            comment,
+        }
+        const product=await ProductCard.findById(productId);
+    
+        const isReviewed=product.reviews.find(
+            (rev)=>rev.user.toString()===req.user._id.toString()
+            );
+        if(isReviewed){
+            product.reviews.forEach((rev)=>{
+                if(rev.user.toString()===req.user._id.toString()){
+                    rev.rating=rating,
+                    rev.comment=comment;
+                }
+            })
+            product.numOfReviews=product.reviews.length;
+
+        }else{
+            product.reviews.push(review);
+            product.numOfReviews=product.reviews.length;
+        }
+        let avg=0;
+        product.reviews.forEach((rev)=>{
+            avg+=rev.rating;
+        })
+        product.ratings=avg/product.reviews.length;
+        await product.save({validateBeforeSave:false});
+
+        return  res.status(200).json({success:true,product})
+
+    }catch(err){
+        return res.status(404).json({message:err.message})
+    }
+}
 
 // Admin Routes 
 //create new Products
 export const createCard=async(req,res)=>{
     try{
-        let images=req.body.images;
-        if(images?.length!==0){
-              const imgLinks=[];
-             images.forEach(async(pic)=>{
-            // console.log(pic)
-            const data=await cloudinary.v2.uploader.upload(pic,{
-                folder: "products",
-            });
-            // imgLinks.push({public_id,url})
-            console.log(data)
-        })
-        // console.log(imgLinks)
+        let images=[];
+        if(typeof req.body.images==="string"){
+            images.push(req.body.images);
+        }else{
+            images=req.body.images;
         }
-      
-        // console.log(req.files);
-        // let {oldPrice,discount,tags}=req.body;
-        // let p=oldPrice-(oldPrice*(discount/100));
-        // let t=tags.split(" ");
-        // let data={...req.body,price:p,tags:t}
-        // let cData=await ProductCard.create(data)
-        res.status(200).json({message:"checking!"});
+         let {oldPrice,discount,tags}=req.body;
+         let p=oldPrice-(oldPrice*(discount/100));
+         let t=tags.split(" ");
+         const imgLinks=[];
+            for(let i=0;i<images.length;i++){
+                 const {public_id,url}=await cloudinary.v2.uploader.upload(images[i],{
+                        folder: "productsImages",
+                    });
+            imgLinks.push({public_id,url})
+
+            }  
+
+         let data={...req.body,price:p,tags:t,images:imgLinks}
+        let cData=await ProductCard.create(data)
+       return res.status(200).json({message:"checking!",cData});
 
     }catch(err){
-        res.status(409).json({message:err.message});
+       return res.status(409).json({message:err.message});
     }
 }
 
@@ -117,25 +157,50 @@ export const deleteCard=async(req,res)=>{
 //edit Product --admin
 export const updateProductDetails=async(req,res)=>{
     try{
-        let {id}=req.params;
-        let data=req.body;
-        let product=await ProductCard.findByIdAndUpdate(id,data,{new:true});
+        let product=await ProductCard.findById(req.params.id);
         if(!product){
-            return res.status(400).json({message:"product not found"});
+            return res.status(404).json({message:"product not found"});
         }
-        return res.status(200).json({success:true,product})
+         let t=req.body.tags.split(',')
+         req.body.tags=t;
 
+        // check for single and multiple images
+        let images=[];
+        if(typeof req.body.images==='string'){
+            images.push(req.body.images);
+        }else{
+            images=req.body.images;
+        }
+        console.log(images);
+        if(images!==undefined){
+            //deleting previous images from cloudinary
+            for(let i=0;i<product.images.length;i++){
+                await cloudinary.v2.uploader.destroy(product.images[i].public_id);
+            }
+
+            const imgLinks=[];
+            for(let i=0;i<images.length;i++){
+                const {public_id,url}=await cloudinary.v2.uploader.upload(images[i],{
+                    folder:'productsImages'
+                })
+                imgLinks.push({
+                    public_id,url
+                })
+            }
+            console.log(imgLinks);
+            req.body.images=imgLinks;
+        }
+        // console.log(req.body);
+        product=await ProductCard.findByIdAndUpdate(req.params.id,req.body,{
+            new:true,
+            runValidators:true,
+            useFindAndModify:false
+        })
+        return res.status(200).json({success:true});
 
     }catch(err){
        return res.status(404).json({success:false,
     message:err.message});
     }
 }
-export const uploadsImages=async(req,res)=>{
-    try{
-        
 
-    }catch(err){
-
-    }
-}

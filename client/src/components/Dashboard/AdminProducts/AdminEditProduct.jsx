@@ -6,9 +6,10 @@ import noCard from '../../../asset/noCard.png';
 
 import Box from '@mui/material/Box';
 import Backdrop from '@mui/material/Backdrop';
-import { CircularProgress, Modal } from '@mui/material';
+import { CircularProgress, LinearProgress, Modal } from '@mui/material';
 import ProductEditForm from './ProductEditForm';
-
+// import {useAlert} from 'react-alert'
+import { AsyncClearStatus, getAdminProductAsync } from '../../../asyncActions/admin/adminProductAction';
 
 
 const style={
@@ -28,7 +29,9 @@ const style={
 }
 const AdminEditProduct = () => {
     const dispatch=useDispatch();
-    const {productDetails,loading,success} =useSelector((s)=>s.productDetails);
+    // const alert =useAlert();
+    const {updateLoading,updateSuccess,updateError,updateSuccessNote}=useSelector((s)=>s.adminProducts)
+    const {productDetails,loading,success,} =useSelector((s)=>s.productDetails);
     const [details,setDetails]=useState(null);
 
     const Navigate=useNavigate();
@@ -48,6 +51,7 @@ const AdminEditProduct = () => {
           image:"",
           Note:"",
           description:"",
+          images:[]
       })
       }else{
         dispatch(getProductDetailsAsync(id));
@@ -56,20 +60,36 @@ const AdminEditProduct = () => {
         }
       }
     },[success])
+
+    useEffect((e)=>{
+      if(updateSuccess){
+        alert(updateSuccessNote)
+        dispatch(getAdminProductAsync());
+        dispatch(AsyncClearStatus())
+        Navigate(-1)
+      }
+      if(updateError){
+        alert(updateError);
+        dispatch(AsyncClearStatus());
+      }
+    },[updateSuccess,updateError])
   return (
     <>
     <Modal
     sx={{display:'flex',
          justifyContent:'center',
          alignItems:'center'}}
-    open={true}
-    onClose={()=>{Navigate(-1)}}>
+         open={true}
+         onClose={()=>{Navigate(-1)}}>
+
       <Box sx={style}>
+      {(updateLoading)?<CircularProgress />:""}
+
       {
         (id==='new' && details)
-        ?<><h1>create new card!</h1> <ProductEditForm details={details} 
+        ?<><ProductEditForm details={details} 
         work={'create'}
-        setDetail={setDetails}/></>
+        setDetails={setDetails}/></>
         :(loading)
         ?<CircularProgress/>
         :(success && details)
@@ -77,6 +97,9 @@ const AdminEditProduct = () => {
         :<img src={noCard} width="90%"/>
 
       }
+      {(updateLoading)?<CircularProgress />:""}
+      
+
         </Box>
     </Modal>
     </>

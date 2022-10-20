@@ -5,6 +5,11 @@ const initialState={
     error:null,
     productsCount:null,
     success:false,
+
+    updateLoading:false,
+    updateSuccess:false,
+    updateError:null,
+    updateSuccessNote:null
 }
 
 
@@ -28,6 +33,25 @@ export const adminProductSlice=createSlice({
         clearErrors:(state)=>{
             state.loading=false;
             state.error=null;
+        },
+
+        updateRequest:(state,action)=>{
+            state.updateLoading=true;
+        },
+        updateSuccess:(state,action)=>{
+            state.updateSuccess=true;
+            state.updateLoading=false;
+            state.updateSuccessNote=action.payload;
+        },
+        updateError:(state,action)=>{
+            state.updateError=action.payload;
+            state.updateLoading=false;
+        },
+        clearUpdateStatus:(state,action)=>{
+            state.updateError=null;
+            state.updateSuccessNote=null;
+            state.loading=false;
+            state.updateSuccess=null;
         }
     }
 })
@@ -36,5 +60,10 @@ export const adminProductSlice=createSlice({
 export const {getAdminProductRequest,
               getAdminProductSuccess,
               getAdminProductFail,
-              clearErrors }=adminProductSlice.actions;
+              clearErrors,
+            
+              updateRequest,
+              updateSuccess,
+              updateError,
+              clearUpdateStatus}=adminProductSlice.actions;
 export default adminProductSlice.reducer;

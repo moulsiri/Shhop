@@ -4,7 +4,8 @@ import axios from 'axios';
 // to creat new product 
 export const createProduct=(data)=>axios.post('/api/v1/products',data);
 export const getAdminProducts=()=>axios.get('/api/v1/products/admin/allProducts');
-
+export const updateProduct=(id,data)=>axios.put(`/api/v1/products/admin/update/${id}`,data);
+export const deleteProduct=(id)=>axios.delete(`/api/v1/products/admin/delete/${id}`);
 
 
 //orders

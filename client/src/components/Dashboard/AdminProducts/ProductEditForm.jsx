@@ -9,7 +9,7 @@ import Chip from '@mui/material/Chip';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 import {useSelector,useDispatch} from 'react-redux';
-import { createNewProductAsync } from '../../../asyncActions/admin/adminProductAction';
+import { createNewProductAsync, updateProductDetailsAsync } from '../../../asyncActions/admin/adminProductAction';
 
 
 const ProductEditForm = ({details,work,setDetails}) => {
@@ -20,17 +20,31 @@ const ProductEditForm = ({details,work,setDetails}) => {
     const [images,setImages]=useState([]);
     const [previewImg,setPreviewImage]=useState([]);
     const getValues=(e)=>{
+      if(e.target.name==='tags'){
+        console.log(e.target.value.split(" "));
+      }
       setDetails({...details,[e.target.name]:e.target.name==='tags'?e.target.value.split(" "):e.target.value});
     }
     const submitDetails=()=>{
       let form=new FormData();
-      for(let i in details){
-        form.set(i,details[i])
+      let data={...details};
+        delete data._id;
+        delete data.images;
+
+      for(let i in data){
+        form.set(i,data[i])
       }
       images.forEach((s)=>{
         form.append("images",s)
       })
-      dispatch(createNewProductAsync(form));
+      // for(let i of form.entries()){
+      //   console.log(i)
+      // }
+      if(work==='create'){
+        dispatch(createNewProductAsync(form));
+      }else{
+        dispatch(updateProductDetailsAsync(details._id,form));
+      }
     }
     const productImagesHandler=(e)=>{
        const files=Array.from(e.target.files);
@@ -40,7 +54,6 @@ const ProductEditForm = ({details,work,setDetails}) => {
           if (reader.readyState === 2) {
             setPreviewImage((old) => [...old, reader.result]);
             setImages([...images,reader.result])
-            setDetails({...details,['images']:[...images]});
           }
         };
           reader.readAsDataURL(file);
@@ -87,6 +100,7 @@ const ProductEditForm = ({details,work,setDetails}) => {
     <MenuItem value={'beauty'}>beauty</MenuItem>
     <MenuItem value={'groceries'}>groceries</MenuItem>
     <MenuItem value={'fashion'}>fashion</MenuItem>
+    <MenuItem value={'electronics'}>electronics</MenuItem>
   </Select>
      </FormControl>
           </div>

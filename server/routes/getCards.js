@@ -1,10 +1,12 @@
 import express from 'express';
-import { createCard, deleteCard, getCards, getProductDetails, getProductsAdmin, updateProductDetails } from '../controllers/ProductCards.js';
+import { createCard, createProductReview, deleteCard, getCards, getProductDetails, getProductsAdmin, updateProductDetails } from '../controllers/ProductCards.js';
 import { authorizeRoles, isAuthenticatedUser } from '../middleware/auth.js';
 
 const router=express.Router();
 router.get('/', getCards);
 router.get('/details/:id',getProductDetails);
+
+router.put('/create/review',isAuthenticatedUser,createProductReview);
 
 //admin routes
 router.post('/',isAuthenticatedUser,authorizeRoles("admin"),createCard);
