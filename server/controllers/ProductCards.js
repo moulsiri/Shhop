@@ -2,6 +2,8 @@ import ProductCard from "../models/products.js";
 import mongoose from "mongoose";
 import {nanoid} from 'nanoid';
 import ApiFeatures from "../utils/apiFeatures.js";
+
+import cloudinary from 'cloudinary';
 // import { json } from "body-parser";
 
 export const getCards=async (req,res)=>{
@@ -58,13 +60,27 @@ export const getProductDetails=async(req,res)=>{
 //create new Products
 export const createCard=async(req,res)=>{
     try{
-        // console.log(req.body);
-        let {oldPrice,discount,tags}=req.body;
-        let p=oldPrice-(oldPrice*(discount/100));
-        let t=tags.split(" ");
-        let data={...req.body,price:p,tags:t}
-        let cData=await ProductCard.create(data)
-        res.status(200).json(cData);
+        let images=req.body.images;
+        if(images?.length!==0){
+              const imgLinks=[];
+             images.forEach(async(pic)=>{
+            // console.log(pic)
+            const data=await cloudinary.v2.uploader.upload(pic,{
+                folder: "products",
+            });
+            // imgLinks.push({public_id,url})
+            console.log(data)
+        })
+        // console.log(imgLinks)
+        }
+      
+        // console.log(req.files);
+        // let {oldPrice,discount,tags}=req.body;
+        // let p=oldPrice-(oldPrice*(discount/100));
+        // let t=tags.split(" ");
+        // let data={...req.body,price:p,tags:t}
+        // let cData=await ProductCard.create(data)
+        res.status(200).json({message:"checking!"});
 
     }catch(err){
         res.status(409).json({message:err.message});
@@ -115,4 +131,11 @@ export const updateProductDetails=async(req,res)=>{
     message:err.message});
     }
 }
+export const uploadsImages=async(req,res)=>{
+    try{
+        
 
+    }catch(err){
+
+    }
+}

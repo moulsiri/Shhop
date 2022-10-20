@@ -43,7 +43,7 @@ const NavBar = () => {
     <div id={css.nlft}>
      <Link to="/" style={{textDecoration: 'none'}}><h3 className={css.logo}>Shhop<span>.</span></h3></Link>
         <div className={css.nLinks}>
-            <NavLink to="/" style={({isActive})=>({borderBottom:isActive?'1px solid #E26849':'none'})}>Home</NavLink>
+            <NavLink to="/" style={({isActive})=>({borderBottom:!isActive?'1px solid #E26849':'none'})}>Home</NavLink>
             <NavLink to="/browse" style={({isActive})=>({borderBottom:isActive?'1px solid #E26849':'none'})}>Browse</NavLink>
             <NavLink to="/trending" style={({isActive})=>({borderBottom:isActive?'1px solid #E26849':'none'})}>Trending</NavLink>
             <NavLink to="/about" style={({isActive})=>({borderBottom:isActive?'1px solid #E26849':'none'})}>About</NavLink>

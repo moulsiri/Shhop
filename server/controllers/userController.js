@@ -186,14 +186,31 @@ export const updateAvatarByLink=async (req,res,next)=>{
 //user avtar upload
 export const uploadAvatarByFile=async(req,res,next)=>{
     try{
-        // console.log(req.files)
-        let data=dataUri(req.files);
+        console.log(req.files)
+        if(req.files){
+             let data=dataUri(req.files);
         let cloudData=await cloudinary.v2.uploader.upload(data)
         const {public_id,url}=cloudData;
-        res.status(200).json({message:'chl raha hai',public_id,url})
+        let user=await User.findById(req.user.id)
+        user.avatar={
+            public_id,url
+        }
+        await user.save()
+        res.status(200).json({success:true}) 
+        }else{
+            res.status(404).json({message:'file ni mili'})
+        }
+        // if(!req.body){
+        //     return res.status(400).json({message:'Please provide an image'})
+        // }
+        // let cloudData=await cloudinary.v2.uploader.upload(req.body.avatar);
+        // res.status(200).json({mssage:'upload ho gya',cloudData});
+      
 
 
     }catch(err){
+        console.log(err);
+        res.status(400).json({message:err.message})
 
     }
 }

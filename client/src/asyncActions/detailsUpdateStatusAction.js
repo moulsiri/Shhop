@@ -6,7 +6,6 @@ import {
 } from '../features/DetailsUpdate';
 
 import * as api from '../api/updateDetails';
-import { compareSync } from 'bcryptjs';
 
 export const updateUserDetails=(data)=>async (dispatch,getState)=>{
     try{
@@ -50,13 +49,29 @@ export const updateShippingInfo=(data)=>async (dispatch,getState)=>{
 export const uploadAvatarAsync=(data)=>async (dispatch,getState)=>{
     try{
         dispatch(updateRequest());
+        console.log('hello')
         let fetch=await api.uploadAvatar(data);
-        console.log(fetch);
+        dispatch(updateSuccess("Avatar is successfully set!"))
 
 
     }catch(err){
-        console.log(err)
+        dispatch(updateFail(err.message));
     }
+}
+
+export const updloadAvatarViaLink=(data)=>async(dispatch)=>{
+    try{
+        dispatch(updateRequest());
+        console.log(data)
+        let fetch=await api.updloadAvatarViaLink(data);
+        console.log(fetch)
+        dispatch(updateSuccess("Avatar is successfully set!"))
+        console.log('endddddddddd')
+
+    }catch(err){
+        dispatch(updateFail(err.message));
+    }
+
 }
 
    export const clearErrorAsync=(alert)=>(dispatch,getState)=>{

@@ -1,17 +1,50 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 
 import './adminProduct.scss';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { Avatar, Button, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { Avatar, Button, FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
 import Chip from '@mui/material/Chip';
-const ProductEditForm = ({details,work,setDetail}) => {
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+
+import {useSelector,useDispatch} from 'react-redux';
+import { createNewProductAsync } from '../../../asyncActions/admin/adminProductAction';
+
+
+const ProductEditForm = ({details,work,setDetails}) => {
+    const dispatch=useDispatch();
+
+
+
+    const [images,setImages]=useState([]);
+    const [previewImg,setPreviewImage]=useState([]);
     const getValues=(e)=>{
-      setDetail({...details,[e.target.name]:e.target.name==='tags'?e.target.value.split(" "):e.target.value});
+      setDetails({...details,[e.target.name]:e.target.name==='tags'?e.target.value.split(" "):e.target.value});
     }
     const submitDetails=()=>{
-      console.log(details)
+      let form=new FormData();
+      for(let i in details){
+        form.set(i,details[i])
+      }
+      images.forEach((s)=>{
+        form.append("images",s)
+      })
+      dispatch(createNewProductAsync(form));
+    }
+    const productImagesHandler=(e)=>{
+       const files=Array.from(e.target.files);
+       files.forEach((file)=>{
+        const reader = new FileReader();
+        reader.onload = () => {
+          if (reader.readyState === 2) {
+            setPreviewImage((old) => [...old, reader.result]);
+            setImages([...images,reader.result])
+            setDetails({...details,['images']:[...images]});
+          }
+        };
+          reader.readAsDataURL(file);
+       })
     }
 
     
@@ -28,6 +61,7 @@ const ProductEditForm = ({details,work,setDetail}) => {
         <Avatar alt={details.name} src={details.image} sx={{ width: 100, height: 100,marginRight:'1em' }} />
           <div>
             <TextField 
+      
      id="name" 
      label="name" 
      size="small"
@@ -35,9 +69,9 @@ const ProductEditForm = ({details,work,setDetail}) => {
      onChange={getValues}
      name="name"
      value={details.name}
-     sx={{paddingBottom:'1em'}} />
+     sx={{paddingBottom:'1em',width:"100%"}} />
      
-     <FormControl sx={{ m: 1,width:'60%' }}>
+     <FormControl sx={{width:'100%' }}>
      <InputLabel id={'category'}>category</InputLabel>
       <Select
     labelId="demo-simple-select-label"
@@ -68,7 +102,7 @@ const ProductEditForm = ({details,work,setDetail}) => {
      name="oldPrice"
      size="small"
      value={details.oldPrice}
-     sx={{paddingBottom:'1em',margin:'1em'}} />
+     sx={{paddingBottom:'1em',flexBasis:'30%'}} />
          <TextField 
      id="discount" 
      label="discount" 
@@ -77,7 +111,7 @@ const ProductEditForm = ({details,work,setDetail}) => {
      name="discount"
      size="small"
      value={details.discount}
-     sx={{paddingBottom:'1em',margin:'1em'}} />
+     sx={{paddingBottom:'1em',flexBasis:'30%'}} />
      
 <TextField 
      id="Stock" 
@@ -87,7 +121,7 @@ const ProductEditForm = ({details,work,setDetail}) => {
      name="Stock"
      size="small"
      value={details.Stock}
-     sx={{paddingBottom:'1em',margin:'1em'}} />
+     sx={{paddingBottom:'1em',flexBasis:'30%'}} />
      </div>
     
     <TextField 
@@ -98,7 +132,7 @@ const ProductEditForm = ({details,work,setDetail}) => {
      name="Note"
      size="small"
      value={details.Note}
-     sx={{paddingBottom:'1em'}} />
+     sx={{paddingBottom:'1em',width:"90%"}} />
      <TextField
           label="Description"
           multiline
@@ -106,7 +140,7 @@ const ProductEditForm = ({details,work,setDetail}) => {
           name="description"
           value={details.description}
           onChange={getValues}
-          sx={{paddingBottom:'1em'}}
+          sx={{paddingBottom:'1em',width:"90%"}}
         />
        
         <TextField 
@@ -117,6 +151,7 @@ const ProductEditForm = ({details,work,setDetail}) => {
      name="image"
      size="small"
      value={details.image}
+     sx={{paddingBottom:'1em',width:"90%"}}
       />
       <div className="pElm">
         <TextField
@@ -125,7 +160,7 @@ const ProductEditForm = ({details,work,setDetail}) => {
           onChange={getValues}
           size="small"
           value={details.tags.join(" ")}
-          sx={{width:'50%'}}
+          sx={{width:'30%'}}
         />
         <div id="pTags">
           {
@@ -138,12 +173,23 @@ const ProductEditForm = ({details,work,setDetail}) => {
      
 
         </div>
-        
-
-
-
+        <div className="pImgs">
+        <Button sx={{marginBottom:"1em"}} variant="contained" component="label" endIcon={<CloudUploadIcon  />}>
+          Upload
+          <input hidden accept="image/*" type="file"  name="images"
+            onChange={productImagesHandler} />
+        </Button>
+        <Grid container spacing={2}>
+          {
+            previewImg?.map((img,i)=><Grid key={i} item >
+            <Avatar alt="Remy Sharp" src={img} />
+            </Grid>)
+          }
+  
+      </Grid>
+        </div>
       </div>
-     <Button variant="contained" color="secondary" style={{marginTop:"1em"}} onClick={submitDetails}>Submit</Button>
+      <Button variant="contained" color="secondary" style={{marginTop:"1em"}} onClick={submitDetails}>Submit</Button>
     
     </>
   )

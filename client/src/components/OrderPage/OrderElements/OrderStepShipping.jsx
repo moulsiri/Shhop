@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearErrorAsync } from '../../../asyncActions/detailsUpdateStatusAction';
 import { getUserDataAsync } from '../../../asyncActions/userAction';
 import { updateStatusReset } from '../../../features/DetailsUpdate';
-import ShipForm from '../../utils/Models/ShipForm';
+import ShipForm from '../../utils/Forms/ShipForm';
 import {useAlert} from 'react-alert'
 import { OrderClearErrorAsync } from '../../../asyncActions/paymentAction';
 import { useNavigate } from 'react-router-dom';

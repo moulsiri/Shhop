@@ -17,3 +17,13 @@ export const getAdminProductAsync=()=>async (dispatch)=>{
      dispatch(getAdminProductFail(err.message));
     }
 }
+
+export const createNewProductAsync=(data)=>async (dispatch)=>{
+    try{
+      let fetch=await api.createProduct(data);
+      console.log(fetch);
+    }
+    catch(err){
+        console.log(err)
+    }
+}

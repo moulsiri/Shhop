@@ -6,7 +6,7 @@ import noCard from '../../../asset/noCard.png';
 
 import Box from '@mui/material/Box';
 import Backdrop from '@mui/material/Backdrop';
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, Modal } from '@mui/material';
 import ProductEditForm from './ProductEditForm';
 
 
@@ -58,12 +58,12 @@ const AdminEditProduct = () => {
     },[success])
   return (
     <>
-    <Backdrop
+    <Modal
     sx={{display:'flex',
          justifyContent:'center',
          alignItems:'center'}}
     open={true}
-    onClick={()=>{Navigate(-1)}}>
+    onClose={()=>{Navigate(-1)}}>
       <Box sx={style}>
       {
         (id==='new' && details)
@@ -78,7 +78,7 @@ const AdminEditProduct = () => {
 
       }
         </Box>
-    </Backdrop>
+    </Modal>
     </>
   )
 }

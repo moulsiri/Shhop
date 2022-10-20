@@ -50,6 +50,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    // background-color: red;
 
 
 }
@@ -59,16 +60,23 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    // background-color: yellow;
 }
 .pElm{
     width:100%;
     display: flex;
     margin-top: 1em;
     align-items: center;
+    justify-content: space-between;
+    padding: 0 1em;
+    // background-color: rgba(0, 0, 255, 0.438);
+    div{
+    //    background-color: rgba(255, 0, 0, 0.39);
+    }
 }
 
 #pTags{
-    width: 60%;
+    width: 70%;
     height: 10vh;
     flex-wrap: wrap;
     display: flex;
@@ -76,5 +84,15 @@
     flex-direction: row-reverse;
     align-items: center;
     justify-content: space-around;
-    gap:5px
+    gap:5px;
+    padding:.5em;
+}
+
+.pImgs{
+    width: 100%;
+    // background-color: yellow;
+    display: flex;
+    margin-top: 1em;
+    flex-direction: column;
+
 }

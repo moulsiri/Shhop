@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import UploadImg from '../utils/Forms/UploadImg';
+import { CircularProgress, LinearProgress } from '@mui/material';
+import { useSelector,useDispatch } from 'react-redux';
+import { useAlert } from 'react-alert';
+import { clearErrorAsync } from '../../asyncActions/detailsUpdateStatusAction';
+import { getUserDataAsync } from '../../asyncActions/userAction';
+import { updateStatusReset } from '../../features/DetailsUpdate';
 
-
-const style = {
+const UpdateAvatar = ({open,setOpen}) => {
+  const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
@@ -16,14 +22,14 @@ const style = {
     display:'flex',
     flexDirection:"column",
     alignItems:'center',
-  };
-const UpdateAvatar = ({open,setOpen}) => {
-  return (
+  };  
+    return (
     <Modal
     open={open}
     onClose={()=>{setOpen(!open)}}>
          <Box sx={style}>
             <UploadImg></UploadImg>
+            
         </Box>
     </Modal>
     
