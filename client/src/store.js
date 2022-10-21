@@ -10,10 +10,13 @@ import myOrderSlice from './features/myOrderSlice';
 import storage from 'redux-persist/lib/storage';
 import {persistReducer,persistStore} from 'redux-persist';
 import thunk from 'redux-thunk';
+
 import  adminProductSlice from './features/admin/adminProductSlice';
 import productDetailSlice from './features/productDetailSlice';
 import adminOrderSlice from './features/admin/adminOrderSlice';
 import adminUserSlice from './features/admin/adminUserSlice';
+
+import ReviewSlice from './features/productReviewSlice';
 
 const persistConfig={
     key:'root',
@@ -32,6 +35,7 @@ export const store=configureStore({
         detailsUpdateStatus:DetailsUpdate,
         myOrders:myOrderSlice,
         productDetails:productDetailSlice,
+        productReview:ReviewSlice,
 
         adminProducts:adminProductSlice,
         adminOrders:adminOrderSlice,

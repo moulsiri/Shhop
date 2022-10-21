@@ -30,6 +30,7 @@ const ProductEditForm = ({details,work,setDetails}) => {
       let data={...details};
         delete data._id;
         delete data.images;
+        delete data.reviews;
 
       for(let i in data){
         form.set(i,data[i])

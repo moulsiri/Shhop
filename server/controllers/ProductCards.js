@@ -95,6 +95,25 @@ export const createProductReview=async (req,res)=>{
         return res.status(404).json({message:err.message})
     }
 }
+//get all product reviews
+export const getPRoductReviews=async (req,res)=>{
+    try{
+        const product=await ProductCard.findById(req.query.id).populate({path:'reviews',populate:{
+            path:'user',
+            model:'User'
+        }})
+        if(!product){
+            return res.status(404).json({message:"Product not found"});
+        }
+        return res.status(200).json({
+            success:true,
+            data:product.reviews
+        })
+
+    }catch(err){
+       return res.status(404).json({message:err.message});
+    }
+}
 
 // Admin Routes 
 //create new Products

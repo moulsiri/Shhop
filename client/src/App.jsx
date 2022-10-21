@@ -5,7 +5,7 @@ import Register from './components/Auth/Register';
 import Hero from './components/Home/Hero';
 import {useSelector,useDispatch} from 'react-redux';
 import {getProductsAsync} from './asyncActions/productAction';
-import { getUserDataAsync } from './asyncActions/userAction';
+import { clearErrorAsync, getUserDataAsync } from './asyncActions/userAction';
 import CartPage from './components/Home/CartPage';
 import OrderPage from './components/OrderPage/OrderPage';
 import { transitions, positions, Provider as AlertProvider } from 'react-alert'
@@ -39,8 +39,8 @@ import ProductDetails from './components/ProductDetails/ProductDetails';
 
 
 function App() {
-  const {products,loading,error,success}=useSelector((store)=>store.products);
-  const {user,isAuthenticated,admin}=useSelector((store)=>store.user);
+  const {products}=useSelector((store)=>store.products);
+  const {user,isAuthenticated,admin,loading,success,error}=useSelector((store)=>store.user);
   const {theme}=useSelector((store)=>store.themeControl);
   const MUItheme = createTheme({
     palette: {
@@ -69,6 +69,9 @@ function App() {
   useEffect((e)=>{
    store.dispatch(getUserDataAsync());
    store.dispatch(getProductsAsync());
+   if(error){
+    dispatch(clearErrorAsync())
+   }
   },[])
   return (
     <div className="App">

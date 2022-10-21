@@ -5,22 +5,23 @@ import { useSelector,useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {addToTheCart, removeFromTheCart} from '../../../features/cartSlice';
 import ReactStars from 'react-rating-stars-component';
-import { Skeleton } from '@mui/material';
+import { Rating, Skeleton } from '@mui/material';
 
-const options={
-    edit:false,
-    color:'#d6ae2c8e',
-    activeColor:'#d6ae2c',
-    value:3.5,
-    isHalf:true,
-    size:10,
-
-}
 const ProductCard = ({data}) => {
     const dispatch=useDispatch();
     const {loading}=useSelector(state=>state.products)
     const {theme}=useSelector(state=>state.themeControl)
     const {cart} =useSelector(state=>state.cartData);
+    
+const options={
+    edit:false,
+    color:'#d6ae2c8e',
+    activeColor:'#d6ae2c',
+    value:data?.ratings  ,
+    isHalf:true,
+    size:10,
+
+}
    const fTimeCart=(id,data)=>{
     dispatch(addToTheCart({productId:id,Qty:1,productData:data,pTotal:data.price}));
    }

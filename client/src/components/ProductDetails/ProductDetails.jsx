@@ -11,19 +11,36 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack'
 import './productDetails.scss'
 import RatingModel from './RatingModel';
+import { getProductReviewsAsync } from '../../asyncActions/reviewAction';
 
 
 
 const ProductDetails = () => {
     const {id}=useParams();
+    const {user}=useSelector((s)=>s.user);
     const {productDetails,loading,success}=useSelector((e)=>e.productDetails)
+    const ReviewData=useSelector((s)=>s.productReview);
     const dispatch=useDispatch();
-    const [rating,setRating]=useState(0);
+    const [rating,setRating]=useState({
+      rating:0,
+      comment:""
+    });
     const [ratingModel,setRatingModel]=useState(false)
 
     useEffect((s)=>{
          dispatch(getProductDetailsAsync(id))
-    },[]);
+         dispatch(getProductReviewsAsync({id}));
+         if(ReviewData.success || ReviewData.updateSuccess ){
+          let elm=ReviewData.productReviews.find((elm)=>elm.user._id===user?._id)
+          if(elm){
+            setRating({
+              rating:elm.rating,
+              comment:elm.comment
+            })
+          }
+         }
+         
+    },[ReviewData.success,ReviewData.updateSuccess]);
 
     const style={
       position:"absolute",
@@ -93,23 +110,35 @@ const ProductDetails = () => {
 
          </Paper>
          <Box sx={{display:'flex',alignItems:'center',justifyContent:"space-around"}} mt={4}>
-         <Rating name="no-value" value={rating} size="large"  onChange={(event, newValue) => {
-             setRating(newValue);
+         <Rating name="no-value" value={rating.rating} size="large"  onChange={(event, newValue) => {
+             setRating({...rating,rating:newValue});
             }} />
          <Button variant="contained" color="secondary" endIcon={<EditRoundedIcon />} onClick={()=>setRatingModel(true)}>REVIEW PRODUCT</Button>
 
          </Box>
-        <Box sx={{}} mt={4}>
-          <Paper sx={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:"1em"}} elevation={3}>
-             <Avatar>H</Avatar>
-         <Box sx={{display:'flex',flexDirection:'column',marginLeft:'1em'}}>
-          <Typography variant="subtitle2" component="h3">Moulsiri Awasthi</Typography>
-          <Rating name="no-value" value={4} size="small" />
-          <Typography variant="caption" component='p'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, sunt?</Typography>
+         <Paper sx={{display:'flex',flexDirection:'column',alignItems:'center',padding:'1em 0',marginTop:'1em'}}
+           elevation={0}>
+            <Box sx={{display:'flex',flexDirection:'column',width:'80%'}}>
+         <Typography variant="subtitle2" component="h2">USER REVIEWS</Typography>
 
-         </Box>
-          </Paper>
+          {
+            (ReviewData && ReviewData.loading)
+            ?<Skeleton/>
+            :ReviewData?.productReviews.map((e)=> 
+            <Paper key={e?._id} sx={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:"1em",marginTop:'1em'}} elevation={3}>
+            <Avatar src={e.user.avatar.url} alt={e.user.username} sx={{ width: 56, height: 56 }}></Avatar>
+            <Box sx={{display:'flex',flexDirection:'column',marginLeft:'1em',width:"70%"}}>
+                <Typography variant="subtitle2" component="h3">{e.user.name}</Typography>
+                <Rating name="no-value" value={e.rating} size="small" />
+                <Typography variant="caption" component='p'>{e.comment}</Typography>
+
+           </Box>
+         </Paper>)
+          }
+         
         </Box>
+         </Paper>
+       
           
         
 
@@ -119,7 +148,7 @@ const ProductDetails = () => {
       
          </div>
       </div>
-      <RatingModel open={ratingModel} setOpen={setRatingModel} rating={rating} />
+      <RatingModel open={ratingModel} setOpen={setRatingModel} rating={rating}  setRating={setRating} />
        
     </div>
   )

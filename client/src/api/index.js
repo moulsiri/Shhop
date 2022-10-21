@@ -18,6 +18,11 @@ export const fetchProducts=(page=1,range=[0,25000],category=null)=>{
 //fetch single product
 export const fetchProductDetails=(id)=>axios.get(`/api/v1/products/details/${id}`);
 
+//fetch product reviews
+export const fetchProductReviews=(id)=>axios.get('/api/v1/products/reviews',{ params: id });
+//create review
+export const createReview=(data)=>axios.put('/api/v1/products/create/review',data);
+
 
 //getting user orders
 export const fetchMyOrders=()=>axios.get('/api/v1/order/userOrders')

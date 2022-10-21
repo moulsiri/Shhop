@@ -13,7 +13,7 @@
       
         #mainImg{
             width: 100%;
-            height:90vh;
+            min-height:inherit;
             @include flex(center,center);
 
             img{
@@ -36,9 +36,9 @@
         align-items: center;
         justify-content: center;
         #pDetails{
-            overflow: auto;
+            // overflow: auto;
             width: 100%;
-            height: 90vh;
+            min-height: inherit;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
