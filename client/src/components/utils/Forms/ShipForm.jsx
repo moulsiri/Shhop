@@ -17,7 +17,7 @@ import * as Yup from 'yup';
 import { statesName } from '../Json/StatesNames';
 import {useSelector,useDispatch} from 'react-redux';
 import { Alert, Checkbox, FormControlLabel } from '@mui/material';
-import { updateShippingInfo } from '../../../asyncActions/detailsUpdateStatusAction';
+import { updateShippingInfo } from '../../../features/detailsUpdate/userShipInfoUpdate';
 const ShipForm = ({shipData,setShipData}) => {
     const {user}=useSelector((s)=>s.user);
     const dispatch=useDispatch();

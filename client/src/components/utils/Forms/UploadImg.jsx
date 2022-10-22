@@ -4,7 +4,7 @@ import { Box } from '@mui/system'
 import React, { useState,useRef} from 'react'
 import LinkIcon from '@mui/icons-material/Link';
 import {useSelector,useDispatch} from 'react-redux'
-import { updloadAvatarViaLink, uploadAvatarAsync } from '../../../asyncActions/detailsUpdateStatusAction';
+import { updloadAvatarViaLink, uploadAvatarAsync } from '../../../features/detailsUpdate/userAvatarUpdate';
 const style={
   width: 500,
   marginTop:'1em',
@@ -58,6 +58,8 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 }));
 
 const UploadImg = () => {
+
+
   const fileForm=useRef(null);
   const dispatch=useDispatch();
   const [fileLink,setFileLink]=useState({

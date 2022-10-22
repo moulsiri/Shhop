@@ -6,11 +6,13 @@ import SignUp from './SignUp';
 import {useSelector,useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import { clearErrorAsync} from '../../asyncActions/userAction';
-import { useAlert } from 'react-alert';
+import { Box } from '@mui/system';
+import { LinearProgress } from '@mui/material';
+// import { useAlert } from 'react-alert';
 const Register = () => {
 
-  const alert=useAlert();
-  const {isAuthenticated,error}=useSelector((store)=>store.user)
+  // const alert=useAlert();
+  const {isAuthenticated,error,loading}=useSelector((store)=>store.user)
   const nevigate=useNavigate();
   const dispatch=useDispatch();
 
@@ -29,12 +31,14 @@ const Register = () => {
 
   useEffect((e)=>{
     if(isAuthenticated){
+      alert("Login Successful!")
       nevigate('/');
     }
     if(error){
-      alert.error(error);
+       alert(error)
       dispatch(clearErrorAsync())
     }
+    
   },[isAuthenticated,error])
 
 
@@ -53,7 +57,15 @@ const Register = () => {
     <div className={css.register}>
       <div className={css.overlay}>
         <div className={css.auth}>
-        <Link to="/" style={{textDecoration: 'none'}}><h3 className={css.logo}>Shhop<span>.</span></h3></Link>
+          {
+            (loading)
+            ?  <Box sx={{ width: '100%' }}>
+            <LinearProgress />
+            </Box>
+            :""
+          }
+      
+        <Link to="/" style={{textDecoration: 'none',marginTop:'2em'}}><h3 className={css.logo}>Shhop<span>.</span></h3></Link>
           {authElement}
         </div>
       </div> 

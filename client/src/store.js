@@ -4,19 +4,24 @@ import productSlice from './features/productSlice';
 import userAuth from './features/userAuth';
 import cartSlice from './features/cartSlice';
 import orderSlice from './features/OrderSLice';
-import DetailsUpdate from './features/DetailsUpdate';
 import myOrderSlice from './features/myOrderSlice';
 
 import storage from 'redux-persist/lib/storage';
 import {persistReducer,persistStore} from 'redux-persist';
 import thunk from 'redux-thunk';
 
-import  adminProductSlice from './features/admin/adminProductSlice';
+import adminProductSlice from './features/admin/adminProductSlice';
 import productDetailSlice from './features/productDetailSlice';
 import adminOrderSlice from './features/admin/adminOrderSlice';
 import adminUserSlice from './features/admin/adminUserSlice';
 
+import DetailsUpdate from './features/detailsUpdate/userDetailsUpdate';
+
+
 import ReviewSlice from './features/productReviewSlice';
+import userAvatarUpdate from './features/detailsUpdate/userAvatarUpdate';
+import userShipInfoUpdate from './features/detailsUpdate/userShipInfoUpdate';
+import userPasswordUpdate from './features/detailsUpdate/userPasswordUpdate';
 
 const persistConfig={
     key:'root',
@@ -32,14 +37,19 @@ export const store=configureStore({
         user:persistedReducer,
         cartData:cartSlice,
         orderData:orderSlice,
-        detailsUpdateStatus:DetailsUpdate,
         myOrders:myOrderSlice,
         productDetails:productDetailSlice,
         productReview:ReviewSlice,
 
         adminProducts:adminProductSlice,
         adminOrders:adminOrderSlice,
-        adminUsers:adminUserSlice
+        adminUsers:adminUserSlice,
+
+        userDetailsUpdate:DetailsUpdate,
+        userAvatarUpdate:userAvatarUpdate,
+        userShipInfoUpdate:userShipInfoUpdate,
+        userPasswordUpdate:userPasswordUpdate
+
     },
     middleware:[thunk]
 })

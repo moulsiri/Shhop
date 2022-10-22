@@ -5,7 +5,7 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { Button } from '@mui/material';
+import { Button, LinearProgress } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import FormHelperText from '@mui/material/FormHelperText';
@@ -15,11 +15,8 @@ import IconButton from '@mui/material/IconButton';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import { updatePassword } from '../../asyncActions/detailsUpdateStatusAction';
+import { clearErrorAsync, updatePassword } from '../../features/detailsUpdate/userPasswordUpdate';
 import { getUserDataAsync } from '../../asyncActions/userAction';
-import { useAlert } from 'react-alert';
-import { clearErrorAsync } from '../../asyncActions/detailsUpdateStatusAction';
-import { updateStatusReset } from '../../features/DetailsUpdate';
 
 const style = {
     position: 'absolute',
@@ -36,10 +33,9 @@ const style = {
   };
 
 const ChangePassword = ({open,setOpen}) => {
-    const alert=useAlert();
     const dispatch=useDispatch();
     //   const {user}=useSelector((e)=>e.user);
-      const {loading,success,error,successNote }=useSelector((e)=>e.detailsUpdateStatus)
+      const {loading,success,error,successNote }=useSelector((e)=>e.userPasswordUpdate)
       const [details,setDetail]=useState({
           oldPassword:"",
           newPassword:"",
@@ -50,15 +46,14 @@ const ChangePassword = ({open,setOpen}) => {
       useEffect((e)=>{
           if(success){
              dispatch(getUserDataAsync());
-             dispatch(updateStatusReset());
-           alert.success(successNote);
+             alert(successNote)
              setOpen(false);
           }
       },[success])
 
       useEffect((e)=>{
         if(error){
-          alert.error(error);
+          alert(error)
           dispatch(clearErrorAsync())
         }
       },[error])
@@ -76,6 +71,14 @@ const ChangePassword = ({open,setOpen}) => {
       open={open}
       onClose={()=>{setOpen(!open)}}>
        <Box sx={style}>
+
+       {
+            (loading)
+            ?  <Box sx={{ width: '100%',margin:'1em 0' }}>
+            <LinearProgress />
+            </Box>
+            :""
+          }
        <Typography id="modal-modal-title" variant="h6" component="h2" sx={{paddingBottom:'1em'}}
        color="secondary">
               Change Password here
@@ -124,25 +127,3 @@ export default ChangePassword
 
 
 
-{/* <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-<InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-<OutlinedInput
-  id="outlined-adornment-password"
-  // type={values.showPassword ? 'text' : 'password'}
-  // value={values.password}
-  // onChange={handleChange('password')}
-  endAdornment={
-    <InputAdornment position="end">
-      <IconButton
-        aria-label="toggle password visibility"
-      //   onClick={handleClickShowPassword}
-      //   onMouseDown={handleMouseDownPassword}
-        edge="end"
-      >
-        {values.showPassword ? <VisibilityOff /> : <Visibility />}
-      </IconButton>
-    </InputAdornment>
-  }
-  label="Password"
-/>
-</FormControl> */}

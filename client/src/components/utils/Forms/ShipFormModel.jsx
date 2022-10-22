@@ -6,11 +6,10 @@ import ShipForm from './ShipForm';
 
 import { useEffect } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
-import { clearErrorAsync } from '../../../asyncActions/detailsUpdateStatusAction';
-import { updateStatusReset } from '../../../features/DetailsUpdate';
 import { useAlert } from 'react-alert';
 import { getUserDataAsync } from '../../../asyncActions/userAction';
 import { CircularProgress } from '@mui/material';
+import { clearErrorAsync } from '../../../features/detailsUpdate/userShipInfoUpdate';
 const style = {
     position: 'absolute',
     top: '50%',
@@ -23,10 +22,9 @@ const style = {
     p: 4,
   };
 const ShipFormModel = ({open,setOpen}) => {
-  const {loading,success,error,successNote}=useSelector((s)=>s.detailsUpdateStatus);
+  const {loading,success,error,successNote}=useSelector((s)=>s.userShipInfoUpdate);
   const {user,isShipInfo}=useSelector((s)=>s.user);
   const dispatch=useDispatch();
-  const alert=useAlert();
   const [shipData,setShipData]=useState({
     address:'',
     city:'',
@@ -43,13 +41,12 @@ const ShipFormModel = ({open,setOpen}) => {
   useEffect((e)=>{
     if(success){
       dispatch(getUserDataAsync());
-      dispatch(updateStatusReset());
-      alert.success(successNote);
+      alert(successNote);
       setOpen(false);
    }
    if(error){
      dispatch(clearErrorAsync());
-     alert.error(error);
+     alert(error);
    }
 
   },[success,error,successNote])

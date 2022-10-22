@@ -5,13 +5,10 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { Button } from '@mui/material';
+import { Button, LinearProgress } from '@mui/material';
 
-import { updateUserDetails } from '../../asyncActions/detailsUpdateStatusAction';
 import { getUserDataAsync } from '../../asyncActions/userAction';
-import { useAlert } from 'react-alert';
-import { clearErrorAsync } from '../../asyncActions/detailsUpdateStatusAction';
-import { updateStatusReset } from '../../features/DetailsUpdate';
+import { updateUserDetails,clearErrorAsync } from '../../features/detailsUpdate/userDetailsUpdate';
 
 const style = {
     position: 'absolute',
@@ -27,10 +24,11 @@ const style = {
     alignItems:'center',
   };
 const EditDetails = ({open,setOpen}) => {
-  const alert=useAlert();
-  const dispatch=useDispatch();
+
+
+    const dispatch=useDispatch();
     const {user}=useSelector((e)=>e.user);
-    const {loading,success,error,successNote }=useSelector((e)=>e.detailsUpdateStatus)
+    const {loading,success,error,successNote }=useSelector((e)=>e.userDetailsUpdate)
     const [details,setDetail]=useState({
         username:user.username,
         email:user.email,
@@ -41,22 +39,15 @@ const EditDetails = ({open,setOpen}) => {
     useEffect((e)=>{
         if(success){
            dispatch(getUserDataAsync());
-           dispatch(updateStatusReset());
-           alert.success(successNote);
+           dispatch(clearErrorAsync());
+           alert("User details successfully edited");
            setOpen(false);
         }
         if(error){
+          alert(error)
           dispatch(clearErrorAsync());
-          alert.error(error);
         }
     },[success,error])
-
-    // useEffect((e)=>{
-    //   if(error){
-    //     alert.error(error);
-    //     dispatch(clearErrorAsync())
-    //   }
-    // },[error])
 
     const getValues=(e)=>{
       setDetail({...details,[e.target.name]:e.target.value});
@@ -70,6 +61,13 @@ const EditDetails = ({open,setOpen}) => {
     open={open}
     onClose={()=>{setOpen(!open)}}>
      <Box sx={style}>
+     {
+            (loading)
+            ?  <Box sx={{ width: '100%',margin:'1em 0' }}>
+            <LinearProgress />
+            </Box>
+            :""
+          }
      <Typography id="modal-modal-title" variant="h6" component="h2" sx={{paddingBottom:'1em'}}
      color="secondary">
             Edit user details

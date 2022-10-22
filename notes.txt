@@ -17,3 +17,6 @@ password encrypt kar rahe hain save hone se pahle
 
 ager product cart database base se delete hogya tb bhi cart m rahega agr added h toh .......:P yh bug h
 
+
+22/10/22  ---me
+Sum bugs related to the use of reducer are needed to be fixed😶
