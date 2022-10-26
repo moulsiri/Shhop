@@ -39,9 +39,9 @@ app.use('/api/v1/user',userRoute);
 app.use('/api/v1/order',orderRoute);
 app.use('/api/v1/payment',paymentRoute);
 
-app.get('/',(req,res)=>{
-    res.send('hello world!');
-})
+// app.get('/',(req,res)=>{
+//     res.send('hello world!');
+// })
 console.log(__dirname)
 app.use(express.static(path.join(__dirname,"../client/build")));
 
