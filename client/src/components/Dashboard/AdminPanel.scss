@@ -210,7 +210,10 @@
         h1{
             font-size: 3em;
             font-weight: 300;
-            color:colors(primText)
+            color:colors(primText);
+            @include mobile(813px){
+                font-size: 2em;
+            }
         }
     }
 }

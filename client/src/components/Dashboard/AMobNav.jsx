@@ -18,7 +18,7 @@ import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 
 export default function SwipeableTemporaryDrawer() {
   const [state, setState] = React.useState({
-    left: false,
+    Menu: false,
   });
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -68,7 +68,7 @@ export default function SwipeableTemporaryDrawer() {
 
   return (
     <div id="AdminMobNav">
-      {['left'].map((anchor) => (
+      {['Menu'].map((anchor) => (
         <React.Fragment key={anchor}>
           <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
           <SwipeableDrawer
