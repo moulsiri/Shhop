@@ -20,6 +20,7 @@ html,body{
     
     --actionClr1:#669C96;
     --actionClr2:#E26849;
+    --shade:rgba(0, 0, 0, 0.301);
 
 
 }
@@ -47,6 +48,7 @@ $colors:(
     'lightHover':var(--lightHover),
     'actionClr1':var(--actionClr1),
     'actionClr2':var(--actionClr2),
+    'shade':var(--shade)
     
 );
 @function colors($color){

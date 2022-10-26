@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import css from '../styles/Elements.module.scss';
-
+import { useParams } from 'react-router-dom';
 import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
 import Pagination from '@mui/material/Pagination';
@@ -19,10 +19,11 @@ const theme = createTheme({
 });
 
 const HomeElements = () => {
+  let {keyword}=useParams()
   const {products,resultPerPage,productsCount,filteredProductsCount,loading}=useSelector((store)=>store.products)
     const [currentPage,setCurrentPage]=useState(1);
-    const [range, setRange] = useState([0, 25000]);
-    const [categories,setCategories]=useState(["All","footwear","appliances","beauty","groceries","fashion","electronics"])
+    const [range, setRange] = useState([0, 75000]);
+    const [categories,setCategories]=useState(["All","footwear","stationary","beauty","groceries","fashion","electronics"])
     const [category,setCategory]=useState(null);
     const dispatch=useDispatch();
     const handleRange = (event, newValue) => {
@@ -33,8 +34,8 @@ const HomeElements = () => {
         setCurrentPage(page);
     }
     useEffect((e)=>{
-    dispatch(getProductsAsync(currentPage,range,category));
-    },[currentPage,range,category])
+    dispatch(getProductsAsync(currentPage,range,category,keyword));
+    },[currentPage,range,category,keyword])
   return (
     <>
     <div className={css.blank}></div>
@@ -49,7 +50,7 @@ const HomeElements = () => {
         getAriaLabel={() => 'Price Range'}
         value={range}
         min={0}
-        max={25000}
+        max={75000}
         onChange={handleRange}
         valueLabelDisplay="auto"
       />

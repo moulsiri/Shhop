@@ -5,27 +5,51 @@
     min-height: 90vh;
     padding-top: 10vh;
     // background-color: yellow;
+    margin-bottom: 2em;
     display: flex;
     #pdLft{
         width: 60%;
-        min-height: inherit;
+        min-height:inherit;
         position: relative;
       
-        #mainImg{
-            width: 100%;
-            min-height:inherit;
+        .mainImg{
+            height:100vh;
             @include flex(center,center);
+            position: fixed;
+            z-index: 999;
+            width: 60%;
+            overflow: hidden;
+            transition: width cubic-bezier(0.075, 0.82, 0.165, 1) 1s;
 
+            #imgContainer{
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top:0;
+                left: 0;
+                @include mobile(813px){
+                    padding-left: 10vw;
+                }
+            }
             img{
                 width:100%;
             height:100%;
-            object-fit: cover;
-            object-position: bottom;
+            object-fit:cover;
+            object-position: center;
+        
+            }
+            @include mobile(813px){
+                position: initial;  
+            width: 100%;
+            height: 50vh;
+
             }
         }
         @include mobile(813px){
             width: 100%;
             padding-left: 10vw;
+            min-height: 30vh;
+
             
         }
     }
@@ -64,4 +88,49 @@
 
     }
 
+}
+#pOvly{
+    width:100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.548);
+    position: absolute;
+    top:0;
+    left: 0;
+    @include mobile(813px){
+        left: 10vw;
+        width: 90vw;
+    }
+
+}
+#pBack{
+    padding: .5em;
+    font-size: 1em;
+    color: #fff;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.247);
+    position: absolute;
+    cursor: pointer;
+    z-index: 99;
+    top:20px;
+    left:20px;
+    overflow: hidden;
+    &::after{
+      content: "";
+      position: absolute;
+      top:0;
+      left:-100%;
+      width:100%;
+      height:100%;
+      background-color: colors(actionClr2);
+      z-index: -1;
+      transition: cubic-bezier(0.075, 0.82, 0.165, 1) 1s;
+    }
+    &:hover::after{
+        left: 0;
+    }
+    @include mobile(813px){
+        left:85%;
+
+        
+    }
 }

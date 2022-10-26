@@ -23,9 +23,23 @@ const ProfilePage = () => {
 
   return (
       <div id="profile">
-        <UpdateAvatar open={updateAvatar} setOpen={setUpdateAvatar}></UpdateAvatar>
-        <EditDetails open={detailModel} setOpen={setDetailModel}/>
-        <ChangePassword open={chngPass} setOpen={setChngPass}></ChangePassword>
+        {
+          (updateAvatar)
+        ? <UpdateAvatar open={updateAvatar} setOpen={setUpdateAvatar}></UpdateAvatar>
+        :""
+
+        }
+        {
+          (detailModel)
+        ? <EditDetails open={detailModel} setOpen={setDetailModel}/>
+        : ""
+      
+        }
+        {
+          (chngPass)
+        ? <ChangePassword open={chngPass} setOpen={setChngPass}></ChangePassword>
+        :""
+        }
       <div id="pTop">
         {/* <img src={imgLink} alt="" /> */}
         <div id="orangeShade">

@@ -20,9 +20,6 @@ const ProductEditForm = ({details,work,setDetails}) => {
     const [images,setImages]=useState([]);
     const [previewImg,setPreviewImage]=useState([]);
     const getValues=(e)=>{
-      if(e.target.name==='tags'){
-        console.log(e.target.value.split(" "));
-      }
       setDetails({...details,[e.target.name]:e.target.name==='tags'?e.target.value.split(" "):e.target.value});
     }
     const submitDetails=()=>{
@@ -97,7 +94,7 @@ const ProductEditForm = ({details,work,setDetails}) => {
     size="small"
   >
     <MenuItem value={'footwear'}>footwear</MenuItem>
-    <MenuItem value={'appliances'}>appliances</MenuItem>
+    <MenuItem value={'stationary'}>stationary</MenuItem>
     <MenuItem value={'beauty'}>beauty</MenuItem>
     <MenuItem value={'groceries'}>groceries</MenuItem>
     <MenuItem value={'fashion'}>fashion</MenuItem>

@@ -9,6 +9,7 @@ import ProductCard from '../Elements/MainElements/ProductCard';
 import HomeElements from '../Elements/MainElements/HomeElements';
 import Footer from '../Footer.jsx/Footer';
 import MobileNav from '../NavBar/MobileNav';
+import { Box, Hidden, LinearProgress } from '@mui/material';
 
 
 
@@ -22,6 +23,19 @@ const Hero = () => {
   
     <NavBar></NavBar>
     <MobileNav/>
+    {
+      (loading)? <Box sx={{width:'100%',
+    position:"absolute",
+    top:'10vh',
+    zIndex:'99',
+    backgroundColor:'yellow',
+    }}><LinearProgress x={{
+    position:"absolute",
+    bottom:0,
+    }} color="primary"/></Box>
+    :""
+    }
+   
     <Outlet/>
     <Footer/>
     

@@ -23,4 +23,7 @@
         color:colors(primText);
         font-weight: 500;
     }
+    @include mobile(813px){
+        padding-left: 10vw;
+    }
 }

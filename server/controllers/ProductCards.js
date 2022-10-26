@@ -137,9 +137,10 @@ export const createCard=async(req,res)=>{
 
             }  
 
-         let data={...req.body,price:p,tags:t,images:imgLinks}
+         let  createdBy=req.user.id;
+         let data={...req.body,price:p,tags:t,images:imgLinks,createdBy}
         let cData=await ProductCard.create(data)
-       return res.status(200).json({message:"checking!",cData});
+       return res.status(200).json({message:"checking!",data});
 
     }catch(err){
        return res.status(409).json({message:err.message});

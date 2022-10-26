@@ -39,7 +39,7 @@ const NavBar = () => {
             <MenuPanel setMToggle={setMToggle}/>
         </Box>
     </Modal>
-        <nav>
+    <nav>
     <div id={css.nlft}>
      <Link to="/" style={{textDecoration: 'none'}}><h3 className={css.logo}>Shhop<span>.</span></h3></Link>
         <div className={css.nLinks}>

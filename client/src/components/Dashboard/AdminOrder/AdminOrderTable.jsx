@@ -51,7 +51,6 @@ const AdminOrderTable = ({rows}) => {
   }
   const handleClose=(e,rndm)=>{
     if(selectedId && !rndm){
-      // console.log(e.target.innerText);
       dispatch(updateOrderStatusAsync(selectedId,e.target.innerText))
     }
     setAnchorEl(null)
@@ -105,9 +104,9 @@ const AdminOrderTable = ({rows}) => {
           'aria-labelledby': 'change-status',
         }}
       >
-        <MenuItem onClick={(e)=>{handleClose(e,row.id)}}>Placed</MenuItem>
-        <MenuItem onClick={(e)=>{handleClose(e,row.id)}}>Shipped</MenuItem>
-        <MenuItem onClick={(e)=>{handleClose(e,row.id)}}>Delivered</MenuItem>
+        <MenuItem onClick={(e)=>{handleClose(e)}}>Confirmed</MenuItem>
+        <MenuItem onClick={(e)=>{handleClose(e)}}>Shipped</MenuItem>
+        <MenuItem onClick={(e)=>{handleClose(e)}}>Delivered</MenuItem>
              </Menu>
             </StyledTableCell>  
             <StyledTableCell align="right"> <NumericFormat

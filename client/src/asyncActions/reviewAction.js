@@ -26,9 +26,11 @@ try{
 export const addReviewAsync=(data)=>async (dispatch)=>{
     try{
         dispatch(addReviewRequest())
-         api.createReview(data);
+         let fetch=await api.createReview(data);
          dispatch(addReviewSuccess())
+        //  console.log('hlllo')
     }catch(err){
+        // console.log('heeel')
         dispatch(addReviewFail(err.response.data.message));
     }
 }

@@ -2,10 +2,10 @@ import { getProducts,getProductsRequest,getProductsFail } from '../features/prod
 
 import * as api from '../api/index'
 
-export const getProductsAsync=(page,range,category)=>async (dispatch,getState)=>{
+export const getProductsAsync=(page,range,category,keyword)=>async (dispatch,getState)=>{
     try{
         dispatch(getProductsRequest());
-        let d=await api.fetchProducts(page,range,category);
+        let d=await api.fetchProducts(page,range,category,keyword);
         // console.log(d)
         dispatch(getProducts(d.data));
 

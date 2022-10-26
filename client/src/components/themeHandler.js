@@ -30,5 +30,9 @@ export const themeHandler=(themeFlag)=>{
       "--lightHover",
       themeFlag===true ? "#f0f3f0":"#212121"
     );
+    root?.style.setProperty(
+      "--shade",
+      themeFlag===true ?"rgba(255, 255, 255, 0.37)":"rgba(0, 0, 0, 0.301)"
+    );
 
 }

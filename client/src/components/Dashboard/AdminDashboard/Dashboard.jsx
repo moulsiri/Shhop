@@ -28,11 +28,14 @@ const Dashboard = () => {
       let hash={}
        orderData.orders.forEach((e)=>{
         let tmp=e.createdAt.slice(0,10);
-       if( hash[tmp]){
+        if(Object.keys(hash).length<=5){
+           if( hash[tmp]){
         hash[tmp]++;
         }else{
           hash[tmp]=1;
         }
+        }
+      
        })
        let graphData=[];
        graphData=Object.keys(hash).map((e)=>{
@@ -41,7 +44,7 @@ const Dashboard = () => {
        graphData.unshift(["Date","No. of Orders"])
        setGraphData(graphData);
     }
-  },[orderData.success])
+  },[orderData])
 
   return (
     <div className='dashboard'>
@@ -56,6 +59,22 @@ const Dashboard = () => {
     thousandSeparator={true}
     prefix={"Rs "}
     className="numFormat"/>
+      </div>
+      <div id="fullTally">
+        <div className="fTElm">
+          <h3>Total No. of Products</h3>
+          <h1>{productData.productsCount}</h1>
+        </div>
+        <div className="fTElm">
+          <h3>Total No. of Orders</h3>
+          <h1>{orderData?.orders.length}</h1>
+
+        </div>
+        <div className="fTElm">
+          <h3>Total No. of Users</h3>
+          <h1>{userData?.usersCount}</h1>
+
+        </div>
       </div>
       
       {

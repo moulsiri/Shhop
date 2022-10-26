@@ -64,7 +64,7 @@ const options={
    
     <div className={css.cHead}>
         <h1>{data?.name}</h1>
-        <p>{data?.category} collection</p>
+        <p>{data?.category.slice(0,9)} collection</p>
        
         <div className={css.cStar}>
         <ReactStars {...options}/>

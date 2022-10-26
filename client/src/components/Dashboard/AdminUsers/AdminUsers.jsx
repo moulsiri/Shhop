@@ -10,7 +10,7 @@ import AdminUserTable from './AdminUserTable';
 const AdminUsers = () => {
   const dispatch=useDispatch();
   
-  const alert=useAlert();
+  // const alert=useAlert();
   const {usersList,loading,success,
     updateLoading,
     updateSuccess,
@@ -19,13 +19,13 @@ updateSuccessNote}=useSelector((s)=>s.adminUsers);
 
 useEffect((s)=>{
 if(updateSuccess){
-  alert.success(updateSuccessNote);
+  alert(updateSuccessNote);
   dispatch(getAdminUsersAsync());
   dispatch(AsyncClearStatus());
 
 }
 if(updateError){
-  alert.error(updateError);
+  alert(updateError);
   dispatch(AsyncClearStatus())
 }
 

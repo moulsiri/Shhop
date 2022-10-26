@@ -1,24 +1,23 @@
 import {configureStore} from '@reduxjs/toolkit';
+import storage from 'redux-persist/lib/storage';
+import {persistReducer,persistStore} from 'redux-persist';
+import thunk from 'redux-thunk';
+
 import themeSlice from './features/themeSlice';
 import productSlice from './features/productSlice';
 import userAuth from './features/userAuth';
 import cartSlice from './features/cartSlice';
 import orderSlice from './features/OrderSLice';
 import myOrderSlice from './features/myOrderSlice';
-
-import storage from 'redux-persist/lib/storage';
-import {persistReducer,persistStore} from 'redux-persist';
-import thunk from 'redux-thunk';
+import productDetailSlice from './features/productDetailSlice';
+import ReviewSlice from './features/productReviewSlice';
 
 import adminProductSlice from './features/admin/adminProductSlice';
-import productDetailSlice from './features/productDetailSlice';
 import adminOrderSlice from './features/admin/adminOrderSlice';
 import adminUserSlice from './features/admin/adminUserSlice';
 
+
 import DetailsUpdate from './features/detailsUpdate/userDetailsUpdate';
-
-
-import ReviewSlice from './features/productReviewSlice';
 import userAvatarUpdate from './features/detailsUpdate/userAvatarUpdate';
 import userShipInfoUpdate from './features/detailsUpdate/userShipInfoUpdate';
 import userPasswordUpdate from './features/detailsUpdate/userPasswordUpdate';

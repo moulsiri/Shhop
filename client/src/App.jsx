@@ -84,6 +84,10 @@ function App() {
                                                    boxStyle={"grid"}
                                                    rightSide={<HomeElements/>}/>}/>
             <Route path="product/details/:id" element={<ProductDetails/>}></Route>
+            <Route path="products/:keyword" element={<HomeLayout heading={`${(user)?`${user.username}!`:" "} have a good day`}
+                                                   cardData={products.map((elm)=><ProductCard key={elm._id} data={elm}/>)}
+                                                   boxStyle={"grid"}
+                                                   rightSide={<HomeElements/>}/>}></Route>
              <Route path="cart" element={<CartPage/>}/>
              <Route path="browse" element={<BrowsePage/>}/>
              <Route path="trending" element={<TrendingPage/>}/>

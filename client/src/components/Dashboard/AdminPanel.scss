@@ -192,3 +192,25 @@
     color:colors(secText);
     letter-spacing: .1em;
 }
+#fullTally{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 1em 0;
+
+    .fTElm{
+        width: 30%;
+        background-color: colors(card);
+        padding: 1em;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.089);
+        h3{
+            color:colors(actionClr2);
+            // letter-spacing: .1em;
+        }
+        h1{
+            font-size: 3em;
+            font-weight: 300;
+            color:colors(primText)
+        }
+    }
+}

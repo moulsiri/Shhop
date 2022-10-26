@@ -28,7 +28,7 @@ function createData(
       shippingInfo };
 }
 const AdminOrder = () => {
-  const alert=useAlert();
+  // const alert=useAlert();
 
   const {orders,loading,success,updateLoading,updateSuccess,updateError,updateSuccessNote}=useSelector((s)=>s.adminOrders);
   const oData=useSelector((s)=>s.adminOrders)
@@ -68,13 +68,13 @@ const AdminOrder = () => {
   },[success,updateSuccess])
   useEffect((e)=>{
     if(updateSuccess){
-      alert.success(updateSuccessNote);
+      alert(updateSuccessNote);
       dispatch(getAdminOrdersAsync());
       dispatch(AsyncClearUpdateErrors());
 
     }
     if(updateError){
-      alert.error(updateError)
+      alert(updateError)
       dispatch(AsyncClearUpdateErrors());
     }
   },[updateSuccess,updateError])

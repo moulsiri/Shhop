@@ -5,15 +5,7 @@ import React, { useState,useRef} from 'react'
 import LinkIcon from '@mui/icons-material/Link';
 import {useSelector,useDispatch} from 'react-redux'
 import { updloadAvatarViaLink, uploadAvatarAsync } from '../../../features/detailsUpdate/userAvatarUpdate';
-const style={
-  width: 500,
-  marginTop:'1em',
-  display:'flex',
-  justifyContent:'space-between',
-  alignItems:'center',
 
-
-}
 
 const AntSwitch = styled(Switch)(({ theme }) => ({
   width: 28,
@@ -59,6 +51,7 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 
 const UploadImg = () => {
 
+  let mediaQuery = window.matchMedia("(min-width: 813px)");
 
   const fileForm=useRef(null);
   const dispatch=useDispatch();
@@ -85,6 +78,17 @@ const UploadImg = () => {
         fileForm?.current.dispatchEvent(
             new Event("submit", { cancelable: true, bubbles: true })
           );
+    }
+
+    const style={
+      width: 500,
+      marginTop:'1em',
+      display:'flex',
+      justifyContent:'space-between',
+      alignItems:'center',
+      flexDirection:(mediaQuery)?'column':'row'
+    
+    
     }
   return (
     <>

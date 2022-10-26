@@ -4,20 +4,23 @@ import { useSelector,useDispatch } from 'react-redux';
 import {addToTheCart, removeFromTheCart} from "../../../features/cartSlice";
 import ReactStars from 'react-rating-stars-component';
 
-const options={
-    edit:false,
-    color:'#d6ae2c8e',
-    activeColor:'#d6ae2c',
-    value:3.5,
-    isHalf:true,
 
-}
 const CartCard = ({data}) => {
+   
     const {ProductData,Qty}=data;
     const {image,name,price,description,category}=ProductData;
     const dispatch=useDispatch();
     const {cart} =useSelector(state=>state.cartData);
-    const {theme}=useSelector(state=>state.themeControl)
+    const {theme}=useSelector(state=>state.themeControl);
+    const options={
+        edit:false,
+        color:'#d6ae2c8e',
+        activeColor:'#d6ae2c',
+        value:ProductData?.ratings,
+        isHalf:true,
+        size:10
+    
+    }
     const increaseQty=(id,d)=>{
         let prevQty=cart.find((elm)=>elm.productId===id).Qty
         prevQty++
@@ -54,7 +57,7 @@ const CartCard = ({data}) => {
                                 <ReactStars {...options}/>
 
                                 </div>
-                                <p>1 Review</p>
+                                <p>{ProductData?.numOfReviews} Review</p>
                             </div>
                         </div>
                        
