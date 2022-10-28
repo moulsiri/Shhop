@@ -22,7 +22,7 @@ const ProductDetails = () => {
   let mediaQuery = window.matchMedia("(max-width: 813px)");
 const handleScroll = () => {
     const position = window.pageYOffset;
-    let parameter=scrollRef.current.offsetHeight-499;
+    let parameter=scrollRef.current.offsetHeight-520;
     if(position>parameter){
       setScrollFlag(true)
     }else{
@@ -110,7 +110,7 @@ const handleScroll = () => {
       <div id="pdLft">
      
 
-        <div className="mainImg" style={(!mediaQuery)?{position:(scrollFlag?'initial':'fixed'),
+        <div className="mainImg" style={(!mediaQuery.matches)?{position:(scrollFlag?'initial':'fixed'),
       width:(scrollFlag?'100%':'60%')}:{}}>
       
            {
