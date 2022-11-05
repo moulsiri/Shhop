@@ -42,7 +42,7 @@ app.use('/api/v1/payment',paymentRoute);
 // app.get('/',(req,res)=>{
 //     res.send('hello world!');
 // })
-console.log(__dirname)
+// console.log(__dirname)
 app.use(express.static(path.join(__dirname,"../client/build")));
 
 app.get("*",(req,res)=>{

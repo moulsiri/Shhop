@@ -29,6 +29,9 @@ nav{
             span{
                 color:var(--actionClr2)
             }
+            @include mobile(300px){
+                font-size: 1.5em;
+            }
         }
         .nLinks{
             a{
@@ -83,10 +86,17 @@ nav{
                     color:colors(secText);
                     letter-spacing: 1px;
                     font-size: .8em;
+                    @include mobile(300px){
+                        font-size: .6em;
+                    }
                 }
+               
             }
             @include mobile(813px){
               width: 50%;
+            }
+            @include mobile(300px){
+                font-size: 8px;
             }
           
 
@@ -102,6 +112,9 @@ nav{
                 color:colors(primText);
                 font-size: 1.3em;
             }
+            @include mobile(813px){
+                display: none;
+            }
         }
         .signBtn{
             padding:.5em 1em;
@@ -116,13 +129,16 @@ nav{
                 text-decoration: none;
             }
             cursor: pointer;
+            // @include mobile(813px){
+            //     display: none;
+            // }
             @include mobile(700px){
                 // padding:.5em .5em;
                 font-size: .8em;
             }
             @include mobile(450px){
                 // padding:.5em .5em;
-                width: 25%;
+                width: 35%;
 
             }
         }
@@ -147,6 +163,9 @@ nav{
                     font-size: .6em;
                 }
             }
+            @include mobile(813px){
+                display: none
+            }
         }
         .user{
             @include flex(space-between,end);
@@ -169,6 +188,8 @@ nav{
                 position:relative;
                 height: inherit;
                 padding-bottom: .5em;
+            // background-color: red;
+
                 h4{
                     position:absolute;
                     font-weight: 600;
@@ -184,12 +205,17 @@ nav{
                     color:colors(secText);
 
                 }
+                
             }
             @include mobile(1100px){
                 width: 30%;
             }
             @include mobile(813px){
-                display: none;
+                width: 40%;
+                @include flex(space-between,center);
+            }
+            @include mobile(300px){
+                font-size: 8px;
             }
 
         }
@@ -205,7 +231,7 @@ nav{
             width: 50%;
         }
         @include mobile(813px){
-            width: 90%;
+            width: 80%;
         }
 
 

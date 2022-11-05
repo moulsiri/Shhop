@@ -30,7 +30,7 @@ const User = ({user,mToggle,setMToggle}) => {
                 <h3>{user?.name?.split(" ")[0]}</h3>
             </div>
         </div>
-        <i className="ri-menu-fold-line" id={css.menu} onClick={()=>{setMToggle(true)}} ></i>
+        {/* <i className="ri-menu-fold-line" id={css.menu} onClick={()=>{setMToggle(true)}} ></i> */}
         
 
    </>
