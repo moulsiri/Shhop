@@ -1,5 +1,5 @@
 # Welcome Shhop react app!
-Designed and developed by me✨
+MERN Project Designed and developed by me✨
 ## Technology used
 React JS, Node JS, MondoDB , Material UI, sass
 
