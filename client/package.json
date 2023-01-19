@@ -1,8 +1,13 @@
 {
   "name": "client",
   "version": "0.1.0",
+  "homepage": "https://moulsiri.github.io/Shhop-react-app/",
   "private": true,
+<<<<<<< HEAD
   "proxy": "http://localhost:3020/",
+=======
+  "proxy": "https://localhost:3020/",
+>>>>>>> 66bd69ed4ff145bae607f4981bb55d2a9e1e4c32
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -39,6 +44,8 @@
     "yup": "^0.32.11"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
