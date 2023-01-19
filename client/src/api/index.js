@@ -1,7 +1,7 @@
 import { keyframes } from '@emotion/react';
 import axios from 'axios';
 // const url="http://localhost:3020/api/v1";
-
+// axios.defaults.baseURL='https://shhop-api.onrender.com/'
 var headers = new Headers();
 headers.append('Content-Type', 'application/json');
 headers.append('Accept', 'application/json');
