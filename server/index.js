@@ -22,9 +22,9 @@ import { createRaozrpayInstance} from './controllers/paymentController.js'
 
 const app=express();
 
-// if(process.env.NODE_ENV!=="PRODUCTION"){
-    dotenv.config({path:'server/config/.env'});
-// }
+if(process.env.NODE_ENV!=="PRODUCTION"){
+    dotenv.config({path:'server/config/.env'}); 
+}
 
 app.use(fileUploader());
 app.use(cookieParser());
@@ -52,9 +52,17 @@ app.get("*",(req,res)=>{
 const port=process.env.PORT || 3020;
 const start=async()=>{
     try{
+<<<<<<< HEAD
         // console.log(process.env.MONGO_URI)
         // console.log(process.env.MONGO_URI)
  
+=======
+<<<<<<< HEAD
+        // console.log(process.env.MONGO_URI)
+=======
+        console.log(process.env.MONGO_URI)
+>>>>>>> 66bd69ed4ff145bae607f4981bb55d2a9e1e4c32
+>>>>>>> 580aff4e1fdbce64d814ebfc3e773c1e5090be40
         await connectDB(process.env.MONGO_URI);
         await connectCloud();
         await app.listen(port,()=>console.log(`Server is listening to port no. ${port}`));
