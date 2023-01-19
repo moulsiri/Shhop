@@ -11,6 +11,7 @@ import OrderPage from './components/OrderPage/OrderPage';
 import { transitions, positions, Provider as AlertProvider } from 'react-alert'
 import AlertTemplate from 'react-alert-template-mui'
 import { createTheme, ThemeProvider} from '@mui/material/styles';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 import HomeLayout from './components/Elements/MainElements/HomeLayout';
@@ -73,6 +74,8 @@ function App() {
     dispatch(clearErrorAsync())
    }
   },[])
+  
+  if(products){
   return (
     <div className="App">
         <ThemeProvider theme={MUItheme}>
@@ -119,6 +122,13 @@ function App() {
       {/* <button onClick={()=>{ dispatch(getProductsAsync());}}>clickME</button> */}
     </div>
   );
+  }else{
+  return (
+  <div>
+    <CircularProgress color="secondary" />
+    </div>
+  )
+}
 }
 
 export default App;

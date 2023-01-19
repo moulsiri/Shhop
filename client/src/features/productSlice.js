@@ -17,7 +17,7 @@ export const productSlice=createSlice({
             state.error=null;
         },
         getProducts:(state,action)=>{
-            state.products=action.payload.products;
+            state.products=action.payload.products||[];
             state.loading=false;
 
             state.productsCount=action.payload.productsCount;
